@@ -15,8 +15,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'id',
+        'name',
+        'email',
+        'password',
+        'username',
+        'role'
     ];
+
+    protected $keyType = 'string';
+
+    public $incrementing = false;
 
     /**
      * The attributes that should be hidden for arrays.
@@ -24,6 +33,22 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token'
     ];
+
+    public function userInfo() {
+        if ($this->role == 'administrator') {
+            return $this->hasOne('App\Administrator');
+        }
+
+        if ($this->role == 'partner') {
+            return $this->hasOne('App\Partner');
+        }
+
+        if ($this->role == 'student') {
+            return $this->hasOne('App\Student');
+        }
+
+        return false;
+    }
 }
