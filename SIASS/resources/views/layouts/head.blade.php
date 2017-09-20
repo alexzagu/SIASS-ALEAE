@@ -3,4 +3,5 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
+@yield('custom_css')
 <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>

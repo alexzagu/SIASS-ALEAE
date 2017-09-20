@@ -5,7 +5,7 @@
         <title>@yield('title')</title>
     </head>
     <body>
-        @include('layouts.navbar')
+        @yield('navbar')
 
         <div class="container">
             @yield('content')
