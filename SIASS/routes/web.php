@@ -11,6 +11,16 @@
 |
 */
 
+
+//Main home page
 Route::get('/', 'HomeController@index');
-Route::get('/login', 'Auth\LoginController@index');
-Route::post('/login', 'Auth\LoginController@login');
+
+//Login
+Route::get('/login', 'Auth\LoginController@showLoginForm');
+Route::post('/login', 'Auth\LoginController@login')->name('login');
+
+//Logout
+Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+
+//User home page
+Route::get('/home', 'UserController@index');
