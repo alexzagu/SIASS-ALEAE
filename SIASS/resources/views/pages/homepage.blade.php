@@ -2,6 +2,10 @@
 
 @section('title', 'SIASS - Homepage')
 
+@section('navbar')
+    @include('layouts.navbar')
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-md-12">
