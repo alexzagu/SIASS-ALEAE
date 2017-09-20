@@ -36,7 +36,24 @@ class User extends Authenticatable
         'password', 'remember_token'
     ];
 
-    public function userInfo() {
+
+    public function isAdmin()
+    {
+        return $this->role == 'administrator';
+    }
+
+    public function isPartner()
+    {
+        return $this->role == 'partner';
+    }
+
+    public function isStudent()
+    {
+        return $this->role == 'student';
+    }
+
+    public function userInfo()
+    {
         if ($this->role == 'administrator') {
             return $this->hasOne('App\Administrator');
         }

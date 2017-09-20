@@ -22,5 +22,15 @@ Route::post('/login', 'Auth\LoginController@login')->name('login');
 //Logout
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
-//User home page
-Route::get('/home', 'UserController@index');
+//User redirection and validation
+Route::get('/user', 'UserController@index');
+
+//Admin routes
+Route::get('admin/home', 'AdministratorController@index');
+//------------
+
+//Partner routes
+//------------
+
+//Student routes
+//------------

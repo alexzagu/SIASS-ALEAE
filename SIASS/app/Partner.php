@@ -26,4 +26,8 @@ class Partner extends Model
     public function user() {
         return $this->belongsTo('App\User');
     }
+
+    public function socialServices() {
+        return $this->hasMany('App\SocialService');
+    }
 }

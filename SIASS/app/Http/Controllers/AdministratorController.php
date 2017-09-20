@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class AdministratorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +18,10 @@ class AdministratorController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+        $userInfo = $user->userInfo;
+
+        return view('pages.admin.home')->with(['user' => $user, 'userInfo' => $userInfo]);
     }
 
     /**

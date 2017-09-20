@@ -6,26 +6,23 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('auth');
     }
 
     public function index() {
         $user = auth()->user();
 
-        return view('pages.user.home')->with(compact('user'));
-    }
-
-    public function showUserRegistrationForm() {
-        $user = auth()->user();
-
-        if ($user->role == 'administrator') {
-
+        if ($user->isAdmin()) {
+            return redirect('/admin/home');
         }
 
-        if ($user->role == 'partner') {
+        if ($user->isPartner()) {
+            return redirect('/partner/home');
+        }
 
+        if ($user->isStudent()) {
+            return redirect('/student/home');
         }
     }
 }
