@@ -38,15 +38,12 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function index(Request $request) {
+    public function showLoginForm()
+    {
         return view('pages.login');
     }
 
-    public function login(Request $request)
-    {
-        $user_id = $request->get('inputUsername', '');
-        $password = $request->get('inputPassword', '');
-
-        return view('pages.homepage');
+    public function username() {
+        return 'username';
     }
 }
