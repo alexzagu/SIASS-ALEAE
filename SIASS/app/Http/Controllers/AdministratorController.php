@@ -18,10 +18,10 @@ class AdministratorController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
-        $userInfo = $user->userInfo;
+        $userAuth = auth()->user();
+        $admin = $userAuth->userInfo;
 
-        return view('pages.user.home')->with(['user' => $user, 'userInfo' => $userInfo]);
+        return view('pages.user.home')->with(['user' => $userAuth, 'admin' => $admin]);
     }
 
     /**
