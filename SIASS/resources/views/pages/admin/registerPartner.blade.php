@@ -45,7 +45,7 @@
         </div>
 
         <div class="form-group">
-            <button style="cursor:pointer" type="submit" class="btn btn-primary">Submit</button>
+            <button style="cursor:pointer" type="submit" class="btn btn-primary">Registrar socio</button>
         </div>
     </form>
 @endsection

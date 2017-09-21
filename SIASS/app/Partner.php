@@ -28,8 +28,6 @@ class Partner extends Model
     }
 
     public function socialServices() {
-        return $this->hasMany('App\SocialService');
+        return $this->hasMany('App\SocialService', 'partner_id');
     }
-
-    public $timestamps = false;
 }
