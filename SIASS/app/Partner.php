@@ -30,4 +30,6 @@ class Partner extends Model
     public function socialServices() {
         return $this->hasMany('App\SocialService');
     }
+
+    public $timestamps = false;
 }
