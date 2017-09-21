@@ -15,7 +15,7 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@if(auth()->user()){{ $user->name }}@else Usuario @endif<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@if(auth()->user()){{ auth()->user()->name }}@else Usuario @endif<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         @if (auth()->user())
                             <li>

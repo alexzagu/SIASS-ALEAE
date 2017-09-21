@@ -1,14 +1,14 @@
 @extends('layouts.master')
 
-@if($user->role == 'administrator')
-    @section('title', 'SIASS - Admin')
+@if($user->isAdmin())
+    @section('title', 'SIASS - Administrador')
 @endif
 
-@if($user->role == 'partner')
+@if($user->isPartner())
     @section('title', 'SIASS - Socio')
 @endif
 
-@if($user->role == 'student')
+@if($user->isStudent())
     @section('title', 'SIASS - Alumno')
 @endif
 
@@ -19,7 +19,8 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <p>Tu perfil de usuario es de tipo: {{ $user->role }}</p>
+            <h1>{{ $user->role }}</h1>
+            <p>Tu perfil de usuario es de tipo {{ $user->role }}</p>
         </div>
     </div>
 @endsection
