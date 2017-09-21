@@ -16,7 +16,10 @@ class PartnerController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+        $userInfo = $user->userInfo;
+
+        return view('pages.user.home')->with(['user' => $user, 'userInfo' => $userInfo]);
     }
 
     /**
@@ -68,8 +71,21 @@ class PartnerController extends Controller
         $userPartner -> registeredBy = $userAdmin->id;
         $userPartner -> save();
 
+        if ($user && $userPartner) {
+            return redirect('/admin/home')->with('register-success',
+                'El usuario se ha registrado correctamente con los siguientes datos: username:'.$username." password: ".$request->password);
+        } else {
 
-       return redirect('/admin/home');
+            if ($user) {
+                $user->delete();
+            }
+
+            if ($userPartner) {
+                $userPartner->delete();
+            }
+
+            return redirect('/admin/home')->with('register-fail', 'Ha habido un error al registrar al socio. Favor de intentar más tarde.');
+        }
     }
 
     /**

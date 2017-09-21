@@ -27,12 +27,14 @@ Route::get('/user', 'UserController@index');
 
 //Admin routes
 Route::get('admin/home', 'AdministratorController@index');
-
 Route::get('/admin/register-partner', 'PartnerController@create');
 Route::post('/admin/register-partner', 'PartnerController@store')->name('register-partner');
 //------------
 
 //Partner routes
+Route::get('partner/home', 'PartnerController@index');
+Route::get('partner/register-social-service', 'SocialServiceController@create');
+Route::post('partner/register-social-service', 'SocialServiceController@store')->name('register-social-service');
 //------------
 
 //Student routes

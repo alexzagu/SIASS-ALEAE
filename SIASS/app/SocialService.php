@@ -34,4 +34,6 @@ class SocialService extends Model
     public function partner() {
         $this->belongsTo('App\Partner');
     }
+
+    public $timestamps = false;
 }
