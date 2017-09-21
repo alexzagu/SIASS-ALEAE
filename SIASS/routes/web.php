@@ -36,4 +36,5 @@ Route::post('/admin/register-partner', 'PartnerController@store')->name('registe
 //------------
 
 //Student routes
+Route::get('student/home', 'StudentController@index');
 //------------
