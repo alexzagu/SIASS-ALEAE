@@ -33,4 +33,5 @@ Route::get('admin/home', 'AdministratorController@index');
 //------------
 
 //Student routes
+Route::get('student/home', 'StudentController@index');
 //------------

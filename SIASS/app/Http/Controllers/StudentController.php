@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -13,7 +14,10 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $userAuth = auth()->user();
+        $student = DB::table('students')->where('user_id', $userAuth->id)->first();
+
+        return View("pages.student.home")->with(['user'=>$userAuth])->with(['student'=>$student]);
     }
 
     /**
