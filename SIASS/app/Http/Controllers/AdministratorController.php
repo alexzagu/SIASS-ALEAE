@@ -21,7 +21,7 @@ class AdministratorController extends Controller
         $user = auth()->user();
         $userInfo = $user->userInfo;
 
-        return view('pages.admin.home')->with(['user' => $user, 'userInfo' => $userInfo]);
+        return view('pages.user.home')->with(['user' => $user, 'userInfo' => $userInfo]);
     }
 
     /**
