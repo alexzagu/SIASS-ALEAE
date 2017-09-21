@@ -19,11 +19,34 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <h1>{{ $user->role }}</h1>
-            <p>Tu perfil de usuario es de tipo {{ $user->role }}</p>
 
             @if($user->isAdmin())
-                <a href="/admin/register-partner" type="button" class="btn btn-default navbar-btn">Registrar un nuevo socio en el sistema</a>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 ">
+
+                            <h2>Informacion del Admininstrador</h2>
+                            <div class="table-responsive">
+                                <table style="width:100%" class="table">
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Correo Electronico</th>
+                                        <th>Departamento</th>
+                                        <th>Teléfono</th>
+                                        <th>Extensión</th>
+                                    </tr>
+                                    <tr>
+                                        <th>{{$user->name}}</th>
+                                        <th>{{$user->email}}</th>
+                                        <th>{{$admin->department}}</th>
+                                        <th>{{$admin->phone}}</th>
+                                        <th>{{$admin->phoneExtension}}</th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endif
 
             @if($user->isPartner())
