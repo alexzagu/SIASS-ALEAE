@@ -46,6 +46,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p>
+                                <a class="btn btn-primary btn-lg" href="http://127.0.0.1:8000/admin/register-partner" role="button">
+                                    Registrar socio
+                                </a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             @endif
 
