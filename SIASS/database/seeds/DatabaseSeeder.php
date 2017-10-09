@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Period;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,8 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
-
+        //User seeder---------------------------------------------
         for ($i = 1; $i <= 12; $i++) {
 
             if ($i % 3 == 0) {
@@ -99,7 +99,36 @@ class DatabaseSeeder extends Seeder
                     ]);
                     break;
             }
-
         }
+        //User seeder---------------------------------------------
+
+        //Period seeder---------------------------------
+        $year = date('Y');
+
+        for ($i = 11; $i < 14; $i++) {
+
+            $period = "";
+
+            switch ($i) {
+                case 11:
+                    $period = 'Enero - Mayo';
+                    $period_key = 11;
+                    break;
+                case 12:
+                    $period = 'Verano';
+                    $period_key = 12;
+                    break;
+                case 13:
+                    $period = 'Agosto - Diciembre';
+                    $period_key = 13;
+                    break;
+            }
+
+            Period::create([
+                'id' => $year . $period_key,
+                'name' => $period . ' ' . $year
+            ]);
+        }
+        //Period seeder---------------------------------
     }
 }
