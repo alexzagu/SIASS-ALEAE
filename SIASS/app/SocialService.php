@@ -36,4 +36,20 @@ class SocialService extends Model
     }
 
     public $timestamps = false;
+
+    public function sensibilization() {
+        $this->has('App\Sensibilization');
+    }
+
+    public function comprehension() {
+        $this->has('App\Comprehension');
+    }
+
+    public function action() {
+        $this->has('App\Action');
+    }
+
+    public function transformation() {
+        $this->has('App\Transformation');
+    }
 }
