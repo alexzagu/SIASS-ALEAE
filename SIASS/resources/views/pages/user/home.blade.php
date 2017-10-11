@@ -50,7 +50,12 @@
                         <div class="col-md-4">
                             <p>
                                 <a class="btn btn-primary btn-lg" href="http://127.0.0.1:8000/admin/register-partner" role="button">
-                                    Registrar socio
+                                    Registrar Socio Formador
+                                </a>
+                            </p>
+                            <p>
+                                <a class="btn btn-primary btn-lg" href="http://127.0.0.1:8000/admin/register-social-service" role="button">
+                                    Registrar un nuevo proyecto social
                                 </a>
                             </p>
                         </div>
@@ -59,7 +64,9 @@
             @endif
 
             @if($user->isPartner())
-                <a href="/partner/register-social-service" type="button" class="btn btn-default navbar-btn">Registrar un nuevo servicio social</a>
+                <a href="/partner/register-social-service" type="button" class="btn btn-primary btn-lg">
+                    Registrar un nuevo proyecto social
+                </a>
                 <br>
                 <h1>Mis servicios sociales</h1>
 

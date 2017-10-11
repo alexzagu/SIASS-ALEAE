@@ -29,6 +29,8 @@ Route::get('/user', 'UserController@index');
 Route::get('admin/home', 'AdministratorController@index');
 Route::get('/admin/register-partner', 'PartnerController@create');
 Route::post('/admin/register-partner', 'PartnerController@store')->name('register-partner');
+Route::get('admin/register-social-service', 'SocialServiceController@create');
+Route::post('admin/register-social-service', 'SocialServiceController@store')->name('register-social-service');
 //------------
 
 //Partner routes

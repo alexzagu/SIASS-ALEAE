@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <h2>Registro de Socio</h2>
+    <h2>Registro de Socio Formador</h2>
     <form method="POST" action="{{ route('register-partner') }}">
         {{ csrf_field() }}
         <div class="form-group">
