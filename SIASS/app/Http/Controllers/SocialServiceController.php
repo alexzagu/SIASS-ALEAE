@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\SocialService;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\User;
 
 class SocialServiceController extends Controller
 {
@@ -31,7 +34,13 @@ class SocialServiceController extends Controller
      */
     public function create()
     {
-        return view('pages.partner.registerSocialService');
+        $user = Auth::user();
+        $partners = DB::table('users')
+            ->join('partners', 'users.id', '=', 'partners.user_id')
+            ->select('users.*', 'partners.partnerName')
+            ->get();
+        return view('pages.partner.registerSocialService')->with(['user' => $user, 'partners' => $partners]);
+
     }
 
     /**
@@ -46,9 +55,15 @@ class SocialServiceController extends Controller
 
         $id = str_random(10);
 
+        $partnerid = $user -> id;
+
+        if($user->isAdmin()){
+            $partnerid = $request->get('partner_id');
+        }
+
         $socialService = SocialService::create([
             'id' => $id,
-            'partner_id' => $user->id,
+            'partner_id' => $partnerid,
             'name' => $request->name,
             'description' => $request->description,
             'totalHours' => $request->totalHours,
@@ -65,11 +80,21 @@ class SocialServiceController extends Controller
             'campus' => $request->campus
         ]);
 
-        if ($socialService) {
-            return redirect('/partner/home')->with('register-success', 'Se ha registrado el nuevo servicio social con éxito');
-        } else {
-            return redirect('/partner/home')->with('register-fail', 'Ha ocurrido un error al registrar el servicio social. Favor de intentar de nuevo');
+        if ($user->isAdmin()){
+            if ($socialService) {
+                return redirect('admin/home')->with('register-success', 'Se ha registrado el nuevo servicio social con éxito');
+            } else {
+                return redirect('admin/home')->with('register-fail', 'Ha ocurrido un error al registrar el servicio social. Favor de intentar de nuevo');
+            }
         }
+        else{
+            if ($socialService) {
+                return redirect('/partner/home')->with('register-success', 'Se ha registrado el nuevo servicio social con éxito');
+            } else {
+                return redirect('/partner/home')->with('register-fail', 'Ha ocurrido un error al registrar el servicio social. Favor de intentar de nuevo');
+            }
+        }
+
     }
 
     /**
