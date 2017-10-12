@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use App\Partner;
+use App\Period;
+use App\Sensibilization;
 
 class SocialServiceController extends Controller
 {
@@ -34,12 +37,17 @@ class SocialServiceController extends Controller
      */
     public function create()
     {
-        $user = Auth::user();
-        $partners = DB::table('users')
-            ->join('partners', 'users.id', '=', 'partners.user_id')
-            ->select('users.*', 'partners.partnerName')
-            ->get();
-        return view('pages.partner.registerSocialService')->with(['user' => $user, 'partners' => $partners]);
+        $user = auth()->user();
+
+        //$partners = DB::table('users')
+            //->join('partners', 'users.id', '=', 'partners.user_id')
+            //->select('users.*', 'partners.partnerName')
+            //->get();
+
+        $partners = Partner::all();
+        $periods = Period::orderBy('id', 'desc')->get();
+
+        return view('pages.partner.registerSocialService')->with(['user' => $user, 'partners' => $partners, 'periods' => $periods]);
 
     }
 
@@ -53,9 +61,34 @@ class SocialServiceController extends Controller
     {
         $user = auth()->user();
 
-        $id = str_random(10);
+        $id = str_random(11);
 
         $partnerid = $user -> id;
+
+        $sensibilization = $request->sensibilization;
+
+        if ($sensibilization == null) {
+            return redirect()->back()->withInput()->withErrors(['no_competence_selected' => 'Necesita seleccionar al menos una competencia']);
+        }
+
+        $ethical_recognition = false;
+        $empathy = false;
+        $moral_judgement = false;
+
+        foreach($sensibilization as $selected) {
+            switch ($selected) {
+                case 'ethical_recognition':
+                    $ethical_recognition = true;
+                    break;
+                case 'empathy':
+                    $empathy = true;
+                    break;
+                case 'moral_judgement':
+                    $moral_judgement = true;
+                    break;
+            }
+        }
+
 
         if($user->isAdmin()){
             $partnerid = $request->get('partner_id');
@@ -80,15 +113,22 @@ class SocialServiceController extends Controller
             'campus' => $request->campus
         ]);
 
+        $sensibilizationRecord = Sensibilization::create([
+                'social_service_id' => $socialService->id,
+                'ethical_recognition' => $ethical_recognition,
+                'empathy' => $empathy,
+                'moral_judgement' => $moral_judgement
+        ]);
+
         if ($user->isAdmin()){
-            if ($socialService) {
+            if ($socialService && $sensibilizationRecord) {
                 return redirect('admin/home')->with('register-success', 'Se ha registrado el nuevo servicio social con éxito');
             } else {
                 return redirect('admin/home')->with('register-fail', 'Ha ocurrido un error al registrar el servicio social. Favor de intentar de nuevo');
             }
         }
         else{
-            if ($socialService) {
+            if ($socialService && $sensibilizationRecord) {
                 return redirect('/partner/home')->with('register-success', 'Se ha registrado el nuevo servicio social con éxito');
             } else {
                 return redirect('/partner/home')->with('register-fail', 'Ha ocurrido un error al registrar el servicio social. Favor de intentar de nuevo');
