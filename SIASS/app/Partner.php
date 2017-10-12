@@ -14,7 +14,8 @@ class Partner extends Model
         'managerName',
         'managerMail',
         'managerPhone',
-        'registeredBy'
+        'registeredBy',
+        'defaultPasswordChanged'
     ];
 
     protected $primaryKey = 'user_id';

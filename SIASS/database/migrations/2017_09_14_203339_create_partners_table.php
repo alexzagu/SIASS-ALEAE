@@ -22,6 +22,7 @@ class CreatePartnersTable extends Migration
             $table->string('managerMail');
             $table->string('managerPhone');
             $table->string('registeredBy');
+            $table->string('defaultPasswordChanged');
         });
 
         Schema::table('partners', function($table) {

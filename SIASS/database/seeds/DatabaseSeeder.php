@@ -77,7 +77,8 @@ class DatabaseSeeder extends Seeder
                         'managerName' => $user->name,
                         'managerMail' => $user->email,
                         'managerPhone' => '12345678',
-                        'registeredBy' => $registeredBy
+                        'registeredBy' => $registeredBy,
+                        'defaultPasswordChanged' => 0
                     ]);
                     break;
                 case 'student':
