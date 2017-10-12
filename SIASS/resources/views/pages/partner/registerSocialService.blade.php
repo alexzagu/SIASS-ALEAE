@@ -9,6 +9,11 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
+            @if($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="alert-danger">{{ $error }}</div>
+                @endforeach
+            @endif
             <form action="{{ route('register-social-service') }}" method="POST">
                 {{ csrf_field() }}
                 @if($user->isAdmin())
@@ -16,7 +21,7 @@
                         <label for="nameField">Nombre del Socio Formador</label>
                         <select class="form-control" name="partner_id">
                             @foreach($partners as $partner)
-                                <option value="{{$partner->id}}">{{$partner->partnerName}}-{{$partner->id}}</option>
+                                <option value="{{$partner->user->id}}">{{$partner->partnerName}}-{{$partner->user->id}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -79,9 +84,37 @@
                         <option value="Profesionalismo Cívico">Profesionalismo Cívico</option>
                     </select>
                 </div>
+                <fieldset class="form-group">
+                    <legend>Competencias de Sensibilización</legend>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="sensibilization[]" value="ethical_recognition">
+                            Reconocimiento ético
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="sensibilization[]" value="empathy">
+                            Empatía
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline disabled">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="sensibilization[]" value="moral_judgement">
+                            Juicio moral
+                        </label>
+                    </div>
+                    <!--legend>Competencias de Comprensión</legend>
+                    <legend>Competencias de Acción</legend>
+                    <legend>Competencias de Transformación</legend-->
+                </fieldset>
                 <div class="form-group">
                     <label for="periodField">Período del Proyecto Social</label>
-                    <input name="period" type="text" class="form-control" id="periodField" placeholder="201711">
+                    <select class="form-control" name="period">
+                        @foreach($periods as $period)
+                            <option value="{{ $period->id }}">{{ $period->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="campusField">Campus donde se realiza el Proyecto Social</label>
