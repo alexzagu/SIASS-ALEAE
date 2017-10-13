@@ -46,6 +46,27 @@ class AdministratorController extends Controller
     }
 
     /**
+     * Show the form for registering a student to a social service.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createStudentToSocialServiceRegistrationForm()
+    {
+        return view('pages.admin.registerStudentToSocialService');
+    }
+
+    /**
+     * Create a new StudentService object and store it.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeStudentServiceObject(Request $request)
+    {
+
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
