@@ -49,12 +49,12 @@
                     <div class="row">
                         <div class="col-md-4">
                             <p>
-                                <a class="btn btn-primary btn-lg" href="http://127.0.0.1:8000/admin/register-partner" role="button">
+                                <a class="btn btn-primary btn-lg" href="/admin/register-partner" role="button">
                                     Registrar Socio Formador
                                 </a>
                             </p>
                             <p>
-                                <a class="btn btn-primary btn-lg" href="http://127.0.0.1:8000/admin/register-social-service" role="button">
+                                <a class="btn btn-primary btn-lg" href="/admin/register-social-service" role="button">
                                     Registrar un nuevo proyecto social
                                 </a>
                             </p>

@@ -52,6 +52,21 @@ class SocialServiceController extends Controller
     }
 
     /**
+     * Confirms the information passed on the create form before creating a new entry en database
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
+    public function confirm(Request $request) {
+
+        $user = auth()->user();
+        $input = $request->all();
+
+        return view('pages.user.confirmSocialService')->with(['user' => $user, 'input' => $input]);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -59,6 +74,11 @@ class SocialServiceController extends Controller
      */
     public function store(Request $request)
     {
+
+        if ($request->edit) {
+            return redirect('admin/register-social-service')->withInput();
+        }
+
         $user = auth()->user();
 
         $id = str_random(11);
@@ -77,13 +97,13 @@ class SocialServiceController extends Controller
 
         foreach($sensibilization as $selected) {
             switch ($selected) {
-                case 'ethical_recognition':
+                case 'Reconocimiento ético':
                     $ethical_recognition = true;
                     break;
-                case 'empathy':
+                case 'Empatía':
                     $empathy = true;
                     break;
-                case 'moral_judgement':
+                case 'Juicio moral':
                     $moral_judgement = true;
                     break;
             }
