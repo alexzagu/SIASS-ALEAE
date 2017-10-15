@@ -34,7 +34,7 @@ class Student extends Model
     }
 
     public function studentServices() {
-        return $this->hasMany('App\StudentService');
+        return $this->hasMany('App\StudentService', 'user_id');
     }
 
     public $timestamps = false;

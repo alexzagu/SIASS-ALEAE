@@ -29,6 +29,6 @@ class StudentService extends Model
     }
 
     public function socialService() {
-        return $this->belongsTo('App\SocialService');
+        return $this->belongsTo('App\SocialService', 'service_id');
     }
 }
