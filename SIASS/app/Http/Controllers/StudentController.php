@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,10 +18,10 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $userAuth = auth()->user();
-        $student = $userAuth->userInfo;
+        $user = auth()->user();
+        $userInfo = $user->userInfo;
 
-        return View("pages.user.home")->with(['user'=>$userAuth])->with(['student'=>$student]);
+        return view('pages.user.home')->with(['user' => $user, 'userInfo' => $userInfo]);
     }
 
     /**
