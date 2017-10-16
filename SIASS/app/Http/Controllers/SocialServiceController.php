@@ -63,7 +63,13 @@ class SocialServiceController extends Controller
         $user = auth()->user();
         $input = $request->all();
 
-        return view('pages.user.confirmSocialService')->with(['user' => $user, 'input' => $input]);
+        $sensibilization = $request->sensibilization;
+
+        if ($sensibilization == null) {
+            return redirect()->back()->withInput()->withErrors(['no_competence_selected' => 'Necesita seleccionar al menos una competencia']);
+        } else {
+            return view('pages.user.confirmSocialService')->with(['user' => $user, 'input' => $input]);
+        }
     }
 
     /**
@@ -74,6 +80,7 @@ class SocialServiceController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
 
         if ($request->edit) {
             return redirect('admin/register-social-service')->withInput();
@@ -86,10 +93,6 @@ class SocialServiceController extends Controller
         $partnerid = $user -> id;
 
         $sensibilization = $request->sensibilization;
-
-        if ($sensibilization == null) {
-            return redirect()->back()->withInput()->withErrors(['no_competence_selected' => 'Necesita seleccionar al menos una competencia']);
-        }
 
         $ethical_recognition = false;
         $empathy = false;

@@ -10,7 +10,9 @@
     <div class="row">
         <div class="col-md-12">
             @include('layouts.errors')
-            {{ $sensibilization = old('sensibilization') }}
+
+            <?php $sensibilization = old('sensibilization'); ?>
+
             <h2>Forma de registro de un nuevo Proyecto Social</h2>
             <form action="{{ route('confirm-social-service') }}" method="POST">
                 {{ csrf_field() }}
