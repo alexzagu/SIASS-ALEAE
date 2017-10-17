@@ -67,7 +67,7 @@
                 <a href="/partner/register-social-service" type="button" class="btn btn-primary btn-lg">
                     Registrar un nuevo proyecto social
                 </a>
-                <br>
+                <br><br>
                 <h1>Mis servicios sociales</h1>
 
                 <div class="table-responsive">
@@ -274,6 +274,19 @@
                     {{ session('register-fail') }}
                 </div>
             @endif
+
+            @if (session('default-password-changed-success'))
+                <div class="alert alert-success">
+                    {{ session('default-password-changed-success') }}
+                </div>
+            @endif
+
+            @if (session('default-password-changed-fail'))
+                <div class="alert alert-danger">
+                    {{ session('default-password-changed-fail') }}
+                </div>
+            @endif
+
         </div>
     </div>
 @endsection

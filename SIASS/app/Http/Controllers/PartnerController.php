@@ -19,7 +19,14 @@ class PartnerController extends Controller
         $user = auth()->user();
         $userInfo = $user->userInfo;
 
-        return view('pages.user.home')->with(['user' => $user, 'userInfo' => $userInfo]);
+        $defaultPasswordChanged = $userInfo->defaultPasswordChanged;
+
+        if ($defaultPasswordChanged == 0) {
+            return view('pages.partner.changeDefaultPassword')->with(['user' => $user, 'userInfo' => $userInfo]);
+        }
+        else {
+            return view('pages.user.home')->with(['user' => $user, 'userInfo' => $userInfo]);
+        }
     }
 
     /**
@@ -96,6 +103,64 @@ class PartnerController extends Controller
     public function createStudentToSocialServiceRegistrationForm()
     {
         return view('pages.partner.registerStudentToSocialService');
+    }
+
+    /**
+     * Show the form for changing a Partner's default password
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function changeDefaultPasswordForm()
+    {
+        return view('pages.partner.changeDefaultPassword');
+    }
+
+    /**
+     * Changes a Partner's default password
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function changeDefaultPassword(Request $request)
+    {
+
+        $newPassword = $request->newPassword;
+        $newPasswordConfirm = $request->newPasswordConfirm;
+
+        $uppercase = preg_match('@[A-ZÑ]@', $newPassword);
+        $lowercase = preg_match('@[a-zñ]@', $newPassword);
+        $number    = preg_match('@[0-9]@', $newPassword);
+        $special_char = preg_match('@[_.,!#$%]@', $newPassword);
+
+        if(!$uppercase || !$lowercase || !$number || !$special_char || strlen($newPassword) < 8) {
+            // The new password doesn't respect the format
+            return redirect('/partner/change-default-password')->with('default-password-changed-fail',
+                'Error al intentar cambiar la contraseña default. La contraseña no respeta el formato establecido.');
+        }
+        else if (strcmp($newPassword, $newPasswordConfirm) != 0) {
+            // Passwords are not the same
+            return redirect('/partner/change-default-password')->with('default-password-changed-fail',
+                'Error al intentar cambiar la contraseña default. Las contraseñas no coinciden; deben ser las mismas');
+        }
+        else {
+            //Everything cool, proceed to store the password
+
+            $partnerId = Auth::User()->id;
+
+            //We need to use it as user to change the password
+            $user = User::find($partnerId);
+            $user->password = bcrypt($newPassword);
+            $user->save();
+
+            //Then, we need to use it as a partner to change de defaultPasswordChanged field
+            $partner = Partner::find($partnerId);
+            $partner->defaultPasswordChanged = 1;
+            $partner->save();
+
+            return redirect('/partner/home')->with('default-password-changed-success',
+                'La contraseña default se ha cambiado correctamente');
+        }
+
     }
 
     /**
