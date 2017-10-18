@@ -50,6 +50,9 @@ Route::post('partner/register-social-service', 'SocialServiceController@store')-
 
 Route::get('partner/register-student-to-social-service', 'PartnerController@createStudentToSocialServiceRegistrationForm');
 Route::post('partner/register-student-to-social-service', 'PartnerController@storeStudentServiceObject')->name('partner-registers-student-service');
+
+Route::get('partner/change-default-password', 'PartnerController@changeDefaultPasswordForm');
+Route::post('partner/change-default-password', 'PartnerController@changeDefaultPassword')->name('partner-changes-default-password');
 //------------
 
 //Student routes
