@@ -145,16 +145,16 @@ class SocialServiceController extends Controller
 
         if ($user->isAdmin()){
             if ($socialService && $sensibilizationRecord) {
-                return redirect('admin/home')->with('register-success', 'Se ha registrado el nuevo servicio social con éxito');
+                return redirect('admin/home')->with('success', 'Se ha registrado el nuevo servicio social con éxito');
             } else {
-                return redirect('admin/home')->with('register-fail', 'Ha ocurrido un error al registrar el servicio social. Favor de intentar de nuevo');
+                return redirect('admin/home')->with('fail', 'Ha ocurrido un error al registrar el servicio social. Favor de intentar de nuevo');
             }
         }
         else{
             if ($socialService && $sensibilizationRecord) {
-                return redirect('/partner/home')->with('register-success', 'Se ha registrado el nuevo servicio social con éxito');
+                return redirect('/partner/home')->with('success', 'Se ha registrado el nuevo servicio social con éxito');
             } else {
-                return redirect('/partner/home')->with('register-fail', 'Ha ocurrido un error al registrar el servicio social. Favor de intentar de nuevo');
+                return redirect('/partner/home')->with('fail', 'Ha ocurrido un error al registrar el servicio social. Favor de intentar de nuevo');
             }
         }
 
