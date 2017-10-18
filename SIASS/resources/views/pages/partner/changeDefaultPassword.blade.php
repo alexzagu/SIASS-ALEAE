@@ -31,11 +31,4 @@
             </form>
         </div>
     </div>
-
-    @if (session('default-password-changed-fail'))
-        <div class="alert alert-danger">
-            {{ session('default-password-changed-fail') }}
-        </div>
-    @endif
-
 @endsection

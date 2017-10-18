@@ -58,43 +58,63 @@
                                     Registrar un nuevo proyecto social
                                 </a>
                             </p>
+                            <p>
+                                <a class="btn btn-primary btn-lg" href="/admin/register-student-to-social-service" role="button">
+                                    Registrar estudiante a servicio social
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
             @endif
 
             @if($user->isPartner())
-                <a href="/partner/register-social-service" type="button" class="btn btn-primary btn-lg">
-                    Registrar un nuevo proyecto social
-                </a>
-                <br><br>
-                <h1>Mis servicios sociales</h1>
-
-                <div class="table-responsive">
-                    <table class="table">
-                        <tr>
-                            <th>Clave de servicio social</th>
-                            <th>Nombre de servicio social</th>
-                            <th>Total de horas para acreditar</th>
-                            <th>Cupo total de estudiantes</th>
-                            <th>Cupo actual de estudiantes</th>
-                            <th>Fecha de inicio</th>
-                            <th>Fecha de terminación</th>
-                            <th>Campus</th>
-                        </tr>
-                        @foreach($user->userInfo->socialServices as $socialService)
-                            <tr>
-                                <td>{{ $socialService->id }}</td>
-                                <td>{{ $socialService->name }}</td>
-                                <td>{{ $socialService->totalHours }}</td>
-                                <td>{{ $socialService->capability }}</td>
-                                <td>{{ $socialService->currentCapability }}</td>
-                                <td>{{ Carbon\Carbon::parse($socialService->startDate)->format('d F Y') }}</td>
-                                <td>{{ Carbon\Carbon::parse($socialService->endDate)->format('d F Y') }}</td>
-                                <td>{{ $socialService->campus }}</td>
-                            </tr>
-                        @endforeach
-                    </table>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <h2>Mis servicios sociales</h2>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th>Clave de servicio social</th>
+                                        <th>Nombre de servicio social</th>
+                                        <th>Total de horas para acreditar</th>
+                                        <th>Cupo total de estudiantes</th>
+                                        <th>Cupo actual de estudiantes</th>
+                                        <th>Fecha de inicio</th>
+                                        <th>Fecha de terminación</th>
+                                        <th>Campus</th>
+                                    </tr>
+                                    @foreach($user->userInfo->socialServices as $socialService)
+                                        <tr>
+                                            <td>{{ $socialService->id }}</td>
+                                            <td>{{ $socialService->name }}</td>
+                                            <td>{{ $socialService->totalHours }}</td>
+                                            <td>{{ $socialService->capability }}</td>
+                                            <td>{{ $socialService->currentCapability }}</td>
+                                            <td>{{ Carbon\Carbon::parse($socialService->startDate)->format('d F Y') }}</td>
+                                            <td>{{ Carbon\Carbon::parse($socialService->endDate)->format('d F Y') }}</td>
+                                            <td>{{ $socialService->campus }}</td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p>
+                                <a href="/partner/register-social-service" type="button" class="btn btn-primary btn-lg">
+                                    Registrar un nuevo proyecto social
+                                </a>
+                            </p>
+                            <p>
+                                <a class="btn btn-primary btn-lg" href="/partner/register-student-to-social-service" role="button">
+                                    Registrar estudiante a servicio social
+                                </a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             @endif
 
@@ -262,31 +282,6 @@
                     </div>
                 </div>
             @endif
-
-            @if (session('register-success'))
-                <div class="alert alert-success">
-                    {{ session('register-success') }}
-                </div>
-            @endif
-
-            @if (session('register-fail'))
-                <div class="alert alert-danger">
-                    {{ session('register-fail') }}
-                </div>
-            @endif
-
-            @if (session('default-password-changed-success'))
-                <div class="alert alert-success">
-                    {{ session('default-password-changed-success') }}
-                </div>
-            @endif
-
-            @if (session('default-password-changed-fail'))
-                <div class="alert alert-danger">
-                    {{ session('default-password-changed-fail') }}
-                </div>
-            @endif
-
         </div>
     </div>
 @endsection
