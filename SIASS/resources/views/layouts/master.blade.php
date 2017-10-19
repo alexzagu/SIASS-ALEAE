@@ -8,6 +8,21 @@
         @yield('navbar')
 
         <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if (session('fail'))
+                        <div class="alert alert-danger">
+                            {{ session('fail') }}
+                        </div>
+                    @endif
+                </div>
+            </div>
             @yield('content')
         </div>
 

@@ -58,43 +58,63 @@
                                     Registrar un nuevo proyecto social
                                 </a>
                             </p>
+                            <p>
+                                <a class="btn btn-primary btn-lg" href="/admin/register-student-to-social-service" role="button">
+                                    Registrar estudiante a servicio social
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
             @endif
 
             @if($user->isPartner())
-                <a href="/partner/register-social-service" type="button" class="btn btn-primary btn-lg">
-                    Registrar un nuevo proyecto social
-                </a>
-                <br><br>
-                <h1>Mis servicios sociales</h1>
-
-                <div class="table-responsive">
-                    <table class="table">
-                        <tr>
-                            <th>Clave de servicio social</th>
-                            <th>Nombre de servicio social</th>
-                            <th>Total de horas para acreditar</th>
-                            <th>Cupo total de estudiantes</th>
-                            <th>Cupo actual de estudiantes</th>
-                            <th>Fecha de inicio</th>
-                            <th>Fecha de terminación</th>
-                            <th>Campus</th>
-                        </tr>
-                        @foreach($user->userInfo->socialServices as $socialService)
-                            <tr>
-                                <td>{{ $socialService->id }}</td>
-                                <td>{{ $socialService->name }}</td>
-                                <td>{{ $socialService->totalHours }}</td>
-                                <td>{{ $socialService->capability }}</td>
-                                <td>{{ $socialService->currentCapability }}</td>
-                                <td>{{ Carbon\Carbon::parse($socialService->startDate)->format('d F Y') }}</td>
-                                <td>{{ Carbon\Carbon::parse($socialService->endDate)->format('d F Y') }}</td>
-                                <td>{{ $socialService->campus }}</td>
-                            </tr>
-                        @endforeach
-                    </table>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <h2>Mis servicios sociales</h2>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th>Clave de servicio social</th>
+                                        <th>Nombre de servicio social</th>
+                                        <th>Total de horas para acreditar</th>
+                                        <th>Cupo total de estudiantes</th>
+                                        <th>Cupo actual de estudiantes</th>
+                                        <th>Fecha de inicio</th>
+                                        <th>Fecha de terminación</th>
+                                        <th>Campus</th>
+                                    </tr>
+                                    @foreach($user->userInfo->socialServices as $socialService)
+                                        <tr>
+                                            <td>{{ $socialService->id }}</td>
+                                            <td>{{ $socialService->name }}</td>
+                                            <td>{{ $socialService->totalHours }}</td>
+                                            <td>{{ $socialService->capability }}</td>
+                                            <td>{{ $socialService->currentCapability }}</td>
+                                            <td>{{ Carbon\Carbon::parse($socialService->startDate)->format('d F Y') }}</td>
+                                            <td>{{ Carbon\Carbon::parse($socialService->endDate)->format('d F Y') }}</td>
+                                            <td>{{ $socialService->campus }}</td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p>
+                                <a href="/partner/register-social-service" type="button" class="btn btn-primary btn-lg">
+                                    Registrar un nuevo proyecto social
+                                </a>
+                            </p>
+                            <p>
+                                <a class="btn btn-primary btn-lg" href="/partner/register-student-to-social-service" role="button">
+                                    Registrar estudiante a servicio social
+                                </a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             @endif
 
@@ -103,14 +123,10 @@
                     <div class="row">
                         <div class="col-md-12 ">
 
-                            <h2>Historial</h2>
-
                             <div class="table-responsive">
                                 <table style="width:100%" class="table table-bordered">
-                                    <tr class="bg-primary">
-                                        <th colspan="5">Historial del Alumno en Servicio Social</th>
-                                    </tr>
-                                    <tr class="bg-info">
+                                    <h2>Historial del Alumno en Servicio Social</h2>
+                                    <tr>
                                         <th>Matricula</th>
                                         <th>Nombre</th>
                                         <th>Carrera</th>
@@ -129,10 +145,8 @@
 
                             <div class="table-responsive">
                                 <table style="width:100%" class="table table-bordered">
+                                    <h2>Información del Alumno</h2>
                                     <tr class="bg-primary">
-                                        <th colspan="5">Información del Alumno</th>
-                                    </tr>
-                                    <tr class="bg-info">
                                         <th>Unidades Acreditadas</th>
                                         <th>Correo</th>
                                         <th>Campus</th>
@@ -169,10 +183,8 @@
 
                             <div class="table-responsive">
                                 <table style="width:100%" class="table table-bordered">
+                                    <h2>Reporte de Experiencias Ciudadanas (REC)</h2>
                                     <tr class="bg-primary">
-                                        <th colspan="4">Reporte de Experiencias Ciudadanas (REC)</th>
-                                    </tr>
-                                    <tr class="bg-info">
                                         <th>Periodo</th>
                                         <th>Fecha de Envío</th>
                                         <th>Fecha de Aplicación</th>
@@ -191,10 +203,8 @@
 
                             <div class="table-responsive">
                                 <table style="width:100%" class="table table-bordered">
+                                    <h2>Taller de Inducción</h2>
                                     <tr class="bg-primary">
-                                        <th colspan="6">Taller de Inducción</th>
-                                    </tr>
-                                    <tr class="bg-info">
                                         <th>Grupo</th>
                                         <th>Periodo</th>
                                         <th>Fecha Taller</th>
@@ -262,31 +272,6 @@
                     </div>
                 </div>
             @endif
-
-            @if (session('register-success'))
-                <div class="alert alert-success">
-                    {{ session('register-success') }}
-                </div>
-            @endif
-
-            @if (session('register-fail'))
-                <div class="alert alert-danger">
-                    {{ session('register-fail') }}
-                </div>
-            @endif
-
-            @if (session('default-password-changed-success'))
-                <div class="alert alert-success">
-                    {{ session('default-password-changed-success') }}
-                </div>
-            @endif
-
-            @if (session('default-password-changed-fail'))
-                <div class="alert alert-danger">
-                    {{ session('default-password-changed-fail') }}
-                </div>
-            @endif
-
         </div>
     </div>
 @endsection
