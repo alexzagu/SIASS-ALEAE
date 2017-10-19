@@ -123,14 +123,10 @@
                     <div class="row">
                         <div class="col-md-12 ">
 
-                            <h2>Historial</h2>
-
                             <div class="table-responsive">
                                 <table style="width:100%" class="table table-bordered">
-                                    <tr class="bg-primary">
-                                        <th colspan="5">Historial del Alumno en Servicio Social</th>
-                                    </tr>
-                                    <tr class="bg-info">
+                                    <h2>Historial del Alumno en Servicio Social</h2>
+                                    <tr>
                                         <th>Matricula</th>
                                         <th>Nombre</th>
                                         <th>Carrera</th>
@@ -149,10 +145,8 @@
 
                             <div class="table-responsive">
                                 <table style="width:100%" class="table table-bordered">
+                                    <h2>Información del Alumno</h2>
                                     <tr class="bg-primary">
-                                        <th colspan="5">Información del Alumno</th>
-                                    </tr>
-                                    <tr class="bg-info">
                                         <th>Unidades Acreditadas</th>
                                         <th>Correo</th>
                                         <th>Campus</th>
@@ -189,10 +183,8 @@
 
                             <div class="table-responsive">
                                 <table style="width:100%" class="table table-bordered">
+                                    <h2>Reporte de Experiencias Ciudadanas (REC)</h2>
                                     <tr class="bg-primary">
-                                        <th colspan="4">Reporte de Experiencias Ciudadanas (REC)</th>
-                                    </tr>
-                                    <tr class="bg-info">
                                         <th>Periodo</th>
                                         <th>Fecha de Envío</th>
                                         <th>Fecha de Aplicación</th>
@@ -211,10 +203,8 @@
 
                             <div class="table-responsive">
                                 <table style="width:100%" class="table table-bordered">
+                                    <h2>Taller de Inducción</h2>
                                     <tr class="bg-primary">
-                                        <th colspan="6">Taller de Inducción</th>
-                                    </tr>
-                                    <tr class="bg-info">
                                         <th>Grupo</th>
                                         <th>Periodo</th>
                                         <th>Fecha Taller</th>

@@ -73,3 +73,8 @@ body > .container {
 .form-signin .form-signin-warning {
     color: #e26130;
 }
+
+.table-bordered th{
+    background: #428BCA;
+    color: #FFFFFF;
+}
