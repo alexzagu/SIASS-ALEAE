@@ -77,7 +77,7 @@
                                 <table class="table">
                                     <tr>
                                         <th>Clave de servicio social</th>
-                                        <th>Nombre de servicio social</th>
+                                        <th>Nombre del servicio social</th>
                                         <th>Total de horas para acreditar</th>
                                         <th>Cupo total de estudiantes</th>
                                         <th>Cupo actual de estudiantes</th>
@@ -185,7 +185,7 @@
                                 <table style="width:100%" class="table table-bordered">
                                     <h2>Reporte de Experiencias Ciudadanas (REC)</h2>
                                     <tr class="bg-primary">
-                                        <th>Periodo</th>
+                                        <th>Perígit odo</th>
                                         <th>Fecha de Envío</th>
                                         <th>Fecha de Aplicación</th>
                                         <th>Estatus</th>
