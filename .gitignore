@@ -20,7 +20,3 @@ Homestead.json
 .rocketeer/
 
 .DS_Store
-
-SIASS/composer.lock
-SIASS/package-lock.json
-SIASS/package.json
