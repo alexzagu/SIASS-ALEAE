@@ -28,6 +28,12 @@ class CreateStudentsTable extends Migration
             $table->string('campus');
             $table->string('mainPhone');
             $table->string('secondaryPhone');
+            $table->dateTime('introductionCouseStart');
+            $table->dateTime('introductionCourseEnd');
+            $table->boolean('introductionCourseCertified');
+            $table->dateTime('recCourseStars');
+            $table->dateTime('recCourseUpload');
+            $table->boolean('recCourseCertified');
         });
 
         Schema::table('students', function($table) {

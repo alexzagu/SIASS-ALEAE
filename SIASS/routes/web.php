@@ -40,6 +40,9 @@ Route::post('admin/confirm-social-service', 'SocialServiceController@confirm')->
 
 Route::get('admin/register-student-to-social-service', 'AdministratorController@createStudentToSocialServiceRegistrationForm');
 Route::post('admin/register-student-to-social-service', 'AdministratorController@storeStudentServiceObject')->name('admin-registers-student-service');
+
+Route::get('admin/certify-induction-rec', 'AdministratorController@certifyStudentInductionCourse');
+Route::put('admin/certify-induction-rec/{studentID}', 'StudentController@updateInductionRec')->name('certify-induction-rec');
 //------------
 
 //Partner routes

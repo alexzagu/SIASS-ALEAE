@@ -1,5 +1,5 @@
 @extends('layouts.master')
-{{ Carbon\Carbon::setLocale('mx') }}
+
 @if($user->isAdmin())
     @section('title', 'SIASS - Administrador')
 @endif
@@ -61,6 +61,11 @@
                             <p>
                                 <a class="btn btn-primary btn-lg" href="/admin/register-student-to-social-service" role="button">
                                     Registrar estudiante a servicio social
+                                </a>
+                            </p>
+                            <p>
+                                <a class="btn btn-primary btn-lg" href="/admin/certify-induction-rec" role="button">
+                                    Acreditar taller de inducción o REC de un alumno
                                 </a>
                             </p>
                         </div>
