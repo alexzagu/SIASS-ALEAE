@@ -1,5 +1,5 @@
 @extends('layouts.master')
-{{ Carbon\Carbon::setLocale('mx') }}
+
 @if($user->isAdmin())
     @section('title', 'SIASS - Administrador')
 @endif
@@ -63,6 +63,11 @@
                                     Registrar estudiante a servicio social
                                 </a>
                             </p>
+                            <p>
+                                <a class="btn btn-primary btn-lg" href="/admin/certify-induction-rec" role="button">
+                                    Acreditar taller de inducción o REC de un alumno
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -77,7 +82,7 @@
                                 <table class="table">
                                     <tr>
                                         <th>Clave de servicio social</th>
-                                        <th>Nombre de servicio social</th>
+                                        <th>Nombre del servicio social</th>
                                         <th>Total de horas para acreditar</th>
                                         <th>Cupo total de estudiantes</th>
                                         <th>Cupo actual de estudiantes</th>
@@ -185,7 +190,7 @@
                                 <table style="width:100%" class="table table-bordered">
                                     <h2>Reporte de Experiencias Ciudadanas (REC)</h2>
                                     <tr class="bg-primary">
-                                        <th>Periodo</th>
+                                        <th>Perígit odo</th>
                                         <th>Fecha de Envío</th>
                                         <th>Fecha de Aplicación</th>
                                         <th>Estatus</th>

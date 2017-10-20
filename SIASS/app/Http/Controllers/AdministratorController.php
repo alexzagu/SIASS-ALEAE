@@ -90,10 +90,10 @@ class AdministratorController extends Controller
                 ]);
 
                 if ($studentService) {
-                    return redirect('admin/home')->with('success', 'Se ha registrado el nuevo servicio estudiantil con éxito.');
+                    return redirect('admin/home')->with('success', 'Se registró el alumno al servicio social con éxito.');
                 }
                 else {
-                    return redirect('admin/home')->with('fail', 'Ha ocurrido un error al registrar el servicio estudiantil. Favor de intentar de nuevo');
+                    return redirect('admin/home')->with('fail', 'Ha ocurrido un error al registrar al alumno al servicio estudiantil. Favor de intentar de nuevo');
                 }
             }
             else {
@@ -102,6 +102,23 @@ class AdministratorController extends Controller
         }
         else {
             return redirect('admin/register-student-to-social-service')->withInput()->with('fail', 'Los dos campos deben ser llenados.');
+        }
+    }
+
+    public function certifyStudentInductionCourse(Request $request) {
+
+        $id = $request->user_id;
+
+        if ($id) {
+            $student = Student::find($id);
+
+            if ($student) {
+                return view('pages.admin.certifyInductionRec')->with(['student' => $student]);
+            } else {
+                return redirect()->back()->with(['fail' => 'No se ha encontrado registro de ningún alumno con la matrícula: '.$id.'. Favor de verificar la información e intentar de nuevo.']);
+            }
+        } else {
+            return view('pages.admin.certifyInductionRec');
         }
     }
 

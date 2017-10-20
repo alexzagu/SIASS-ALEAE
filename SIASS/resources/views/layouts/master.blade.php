@@ -1,4 +1,5 @@
 <!doctype html>
+{{ Carbon\Carbon::setLocale('mx') }}
 <html lang="{{ app()->getLocale() }}">
     <head>
         @include('layouts.head')
