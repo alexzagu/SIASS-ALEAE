@@ -90,10 +90,10 @@ class AdministratorController extends Controller
                 ]);
 
                 if ($studentService) {
-                    return redirect('admin/home')->with('success', 'Se ha registrado el nuevo servicio estudiantil con éxito.');
+                    return redirect('admin/home')->with('success', 'Se registró el alumno al servicio social con éxito.');
                 }
                 else {
-                    return redirect('admin/home')->with('fail', 'Ha ocurrido un error al registrar el servicio estudiantil. Favor de intentar de nuevo');
+                    return redirect('admin/home')->with('fail', 'Ha ocurrido un error al registrar al alumno al servicio estudiantil. Favor de intentar de nuevo');
                 }
             }
             else {
