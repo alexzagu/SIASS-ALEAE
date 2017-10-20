@@ -6,6 +6,9 @@ use App\Partner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Student;
+use App\SocialService;
+use App\StudentService;
 
 class PartnerController extends Controller
 {
@@ -79,7 +82,7 @@ class PartnerController extends Controller
         $userPartner -> save();
 
         if ($user && $userPartner) {
-            return redirect('/admin/home')->with('register-success',
+            return redirect('/admin/home')->with('success',
                 'El usuario se ha registrado correctamente con los siguientes datos: username:'.$username." password: ".$request->password);
         } else {
 
@@ -91,7 +94,7 @@ class PartnerController extends Controller
                 $userPartner->delete();
             }
 
-            return redirect('/admin/home')->with('register-fail', 'Ha habido un error al registrar al socio. Favor de intentar más tarde.');
+            return redirect('/admin/home')->with('fail', 'Ha habido un error al registrar al socio. Favor de intentar más tarde.');
         }
     }
 
@@ -134,12 +137,12 @@ class PartnerController extends Controller
 
         if(!$uppercase || !$lowercase || !$number || !$special_char || strlen($newPassword) < 8) {
             // The new password doesn't respect the format
-            return redirect('/partner/change-default-password')->with('default-password-changed-fail',
+            return redirect('/partner/change-default-password')->with('fail',
                 'Error al intentar cambiar la contraseña default. La contraseña no respeta el formato establecido.');
         }
         else if (strcmp($newPassword, $newPasswordConfirm) != 0) {
             // Passwords are not the same
-            return redirect('/partner/change-default-password')->with('default-password-changed-fail',
+            return redirect('/partner/change-default-password')->with('fail',
                 'Error al intentar cambiar la contraseña default. Las contraseñas no coinciden; deben ser las mismas');
         }
         else {
@@ -157,7 +160,7 @@ class PartnerController extends Controller
             $partner->defaultPasswordChanged = 1;
             $partner->save();
 
-            return redirect('/partner/home')->with('default-password-changed-success',
+            return redirect('/partner/home')->with('success',
                 'La contraseña default se ha cambiado correctamente');
         }
 
@@ -178,10 +181,18 @@ class PartnerController extends Controller
                 $student = Student::find($studentID);
                 $socialService = SocialService::find($socialServiceID);
                 if (!isset($student)) {
-                    return redirect('admin/register-student-to-social-service')->withInput()->with('fail', 'Alumno no existe.');
+                    return redirect('partner/register-student-to-social-service')->withInput()->with('fail', 'Alumno no existe.');
                 }
                 if (!isset($socialService)) {
-                    return redirect('admin/register-student-to-social-service')->withInput()->with('fail', 'Servicio Social no existe.');
+                    return redirect('partner/register-student-to-social-service')->withInput()->with('fail', 'Servicio Social no existe.');
+                }
+
+                if ($socialService->currentCapability >= $socialService->capability) {
+                    return redirect('partner/register-student-to-social-service')->withInput()->with('fail', 'El servicio está lleno.');
+                }
+
+                if (StudentService::where('user_id', $studentID)->where('service_id', $socialServiceID)->first()) {
+                    return redirect('partner/register-student-to-social-service')->withInput()->with('fail', 'El alumno ya está registrado.');
                 }
 
                 $studentService = StudentService::create([
@@ -195,18 +206,20 @@ class PartnerController extends Controller
                 ]);
 
                 if ($studentService) {
-                    return redirect('admin/home')->with('success', 'Se ha registrado el nuevo servicio estudiantil con éxito.');
+                    $socialService->currentCapability += 1;
+                    $socialService->save();
+                    return redirect('partner/home')->with('success', 'Se ha registrado el nuevo servicio estudiantil con éxito.');
                 }
                 else {
-                    return redirect('admin/home')->with('fail', 'Ha ocurrido un error al registrar el servicio estudiantil. Favor de intentar de nuevo');
+                    return redirect('partner/home')->with('fail', 'Ha ocurrido un error al registrar el servicio estudiantil. Favor de intentar de nuevo');
                 }
             }
             else {
-                return redirect('admin/register-student-to-social-service')->withInput()->with('fail', 'Formato de entrada erróneo.');
+                return redirect('partner/register-student-to-social-service')->withInput()->with('fail', 'Formato de entrada erróneo.');
             }
         }
         else {
-            return redirect('admin/register-student-to-social-service')->withInput()->with('fail', 'Los dos campos deben ser llenados.');
+            return redirect('partner/register-student-to-social-service')->withInput()->with('fail', 'Los dos campos deben ser llenados.');
         }
     }
 
