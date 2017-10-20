@@ -105,6 +105,23 @@ class AdministratorController extends Controller
         }
     }
 
+    public function certifyStudentInductionCourse(Request $request) {
+
+        $id = $request->user_id;
+
+        if ($id) {
+            $student = Student::find($id);
+
+            if ($student) {
+                return view('pages.admin.certifyInductionRec')->with(['student' => $student]);
+            } else {
+                return redirect()->back()->with(['fail' => 'No se ha encontrado registro de ningún alumno con la matrícula: '.$id.'. Favor de verificar la información e intentar de nuevo.']);
+            }
+        } else {
+            return view('pages.admin.certifyInductionRec');
+        }
+    }
+
     /**
      * Display the specified resource.
      *

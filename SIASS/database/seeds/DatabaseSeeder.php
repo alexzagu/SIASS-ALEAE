@@ -82,6 +82,10 @@ class DatabaseSeeder extends Seeder
                     ]);
                     break;
                 case 'student':
+
+                    $dateStart = now();
+                    $dateEnd = now()->add(new DateInterval('P7D'));
+
                     DB::table('students')->insert([
                         'user_id' => $user->id,
                         'major' => 'ITC',
@@ -96,7 +100,13 @@ class DatabaseSeeder extends Seeder
                         'certifiedUnits' => 560,
                         'campus' => 'Monterrey',
                         'mainPhone' => '12345678',
-                        'secondaryPhone' => '98765432'
+                        'secondaryPhone' => '98765432',
+                        'introductionCouseStart' => $dateStart,
+                        'introductionCourseEnd' => $dateEnd,
+                        'introductionCourseCertified' => false,
+                        'recCourseStars' => $dateStart,
+                        'recCourseUpload' => $dateEnd,
+                        'recCourseCertified' => false
                     ]);
                     break;
             }
