@@ -6,6 +6,10 @@
 
 @section('title', 'SIASS - Cambiar contraseña default')
 
+@section('custom_css')
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+@endsection
+
 @section('content')
 
     <div class="row">
@@ -15,14 +19,14 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="newPasswordField">Nueva Contraseña</label>
-                    <input name="newPassword" type="text" class="form-control" id="newPasswordField" placeholder="Contraseña.1234">
+                    <input name="newPassword" type="password" class="form-control" id="newPasswordField" placeholder="Contraseña.1234" data-toggle="password">
                     <small id="newPasswordHelp" class="form-text text-muted">
                         La contraseña debe de tener un mínimo de 8 caracteres y debe incluir al menos una letra mayúscula, una letra minúscula, un dígito y un caracter especial de los siguientes(_.,!#$%)
                     </small>
                 </div>
                 <div class="form-group">
                     <label for="newPasswordConfirmField">Confirmar Nueva Contraseña</label>
-                    <input name="newPasswordConfirm" type="text" class="form-control" id="newPasswordConfirmField" placeholder="Contraseña.1234">
+                    <input name="newPasswordConfirm" type="password" class="form-control" id="newPasswordConfirmField" data-toggle="password" placeholder="Contraseña.1234">
                     <small id="newPasswordConfirmHelp" class="form-text text-muted"></small>
                 </div>
                 <div class="form-group">
@@ -31,4 +35,10 @@
             </form>
         </div>
     </div>
+
+@endsection
+
+@section('custom_js')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-show-password/1.0.3/bootstrap-show-password.min.js"></script>
 @endsection
