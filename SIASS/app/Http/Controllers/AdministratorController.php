@@ -79,6 +79,14 @@ class AdministratorController extends Controller
                     return redirect('admin/register-student-to-social-service')->withInput()->with('fail', 'Servicio Social no existe.');
                 }
 
+                if ($socialService->currentCapability >= $socialService->capability) {
+                    return redirect('admin/register-student-to-social-service')->withInput()->with('fail', 'El servicio está lleno.');
+                }
+
+                if (StudentService::where('user_id', $studentID)->where('service_id', $socialServiceID)->first()) {
+                    return redirect('admin/register-student-to-social-service')->withInput()->with('fail', 'El alumno ya está registrado.');
+                }
+
                 $studentService = StudentService::create([
                     'id' => $studentID.$socialServiceID,
                     'user_id' => $studentID,
@@ -90,6 +98,8 @@ class AdministratorController extends Controller
                 ]);
 
                 if ($studentService) {
+                    $socialService->currentCapability += 1;
+                    $socialService->save();
                     return redirect('admin/home')->with('success', 'Se registró el alumno al servicio social con éxito.');
                 }
                 else {
