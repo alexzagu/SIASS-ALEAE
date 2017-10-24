@@ -11,6 +11,8 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap-sass');
+    require('jquery-ui-dist/jquery-ui.min');
+
 } catch (e) {}
 
 /**

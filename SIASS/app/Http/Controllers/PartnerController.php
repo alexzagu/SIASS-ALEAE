@@ -61,6 +61,10 @@ class PartnerController extends Controller
 
         $username = $id;
 
+        if ($request->password != $request->passwordConfirm) {
+            return redirect()->back()->with('fail', 'La contraseña no coincide con la confirmación, favor de verificarla e intentar de nuevo.')->withInput();
+        }
+
         $user = User::create([
             'id' => $id,
             'name' => $request->managerName,
@@ -79,6 +83,7 @@ class PartnerController extends Controller
         $userPartner -> managerMail = $request->managerMail;
         $userPartner -> managerPhone = $request->managerPhone;
         $userPartner -> registeredBy = $userAdmin->id;
+        $userPartner -> defaultPasswordChanged = false;
         $userPartner -> save();
 
         if ($user && $userPartner) {
