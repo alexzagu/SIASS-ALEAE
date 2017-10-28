@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\SocialService;
 use App\Student;
 use App\StudentService;
+use App\Partner;
 use Illuminate\Http\Request;
 
 class AdministratorController extends Controller
@@ -129,6 +130,23 @@ class AdministratorController extends Controller
             }
         } else {
             return view('pages.admin.certifyInductionRec');
+        }
+    }
+
+    public function updatePartnerForm(Request $request){
+
+        $id = $request->user_id;
+
+        if ($id) {
+            $partner = Partner::find($id);
+
+            if ($partner) {
+                return view('pages.admin.updatePartner')->with(['partner' => $partner]);
+            } else {
+                return redirect()->back()->with(['fail' => 'No se ha encontrado registro de ningún socio con la clave: '.$id.'. Favor de verificar la información e intentar de nuevo.']);
+            }
+        } else {
+            return view('pages.admin.updatePartner');
         }
     }
 

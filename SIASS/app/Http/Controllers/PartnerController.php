@@ -223,6 +223,35 @@ class PartnerController extends Controller
         }
     }
 
+    public function updatePartner(Request $request, $id) {
+
+        $partner = Partner::find($id);
+
+        $partnerName = $request->input('partnerName');
+        $partnerAddress = $request->input('partnerAddress');
+        $partnerEmail = $request->input('partnerEmail');
+        $managerName = $request->input('managerName');
+        $managerMail = $request->input('managerMail');
+        $managerPhone = $request->input('managerPhone');
+
+        $data = [
+            'partnerName' => $partnerName,
+            'partnerAddress' => $partnerAddress,
+            'partnerEmail' => $partnerEmail,
+            'managerName' => $managerName,
+            'managerMail' => $managerMail,
+            'managerPhone' => $managerPhone
+        ];
+
+        $updated = $partner->fill($data)->save();
+
+        if ($updated) {
+            return redirect()->back()->with(['success' => 'La información del socio '.$partner->partnerName.' ha sido actualizada con éxito.']);
+        } else {
+            return redirect()->back()->with(['fail' => 'La información del socio '.$partner->partnerName.' no ha sido actualizada con éxito. Favor de intentar más tarde.']);
+        }
+    }
+
     /**
      * Display the specified resource.
      *
