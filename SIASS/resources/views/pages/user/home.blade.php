@@ -68,6 +68,11 @@
                                     Acreditar taller de inducción o REC de un alumno
                                 </a>
                             </p>
+                            <p>
+                                <a class="btn btn-primary btn-lg" href="/admin/modify-partner" role="button">
+                                    Modificar información de un Socio Formador
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>

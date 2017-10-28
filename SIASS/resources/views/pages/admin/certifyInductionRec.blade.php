@@ -54,6 +54,6 @@
                     <button type="submit" class="btn btn-primary">Actualizar información</button>
                 </div>
             </form>
-            @endif
         </div>
+    @endif
 @endsection
