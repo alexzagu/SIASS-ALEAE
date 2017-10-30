@@ -46,6 +46,12 @@ Route::put('admin/certify-induction-rec/{studentID}', 'StudentController@updateI
 
 Route::get('admin/modify-partner', 'AdministratorController@updatePartnerForm');
 Route::put('admin/modify-partner/{partnerID}', 'PartnerController@updatePartner')->name('modify-partner');
+
+Route::get('admin/certify-student-hours', 'AdministratorController@createHoursCertificationForm');
+Route::post('admin/certify-student-hours', 'AdministratorController@certifyStudentHours')->name('admin-certifies-student-hours');
+
+Route::get('admin/filter-social-services', 'AdministratorController@filterSocialServices');
+Route::get('admin/filter-students', 'AdministratorController@filterStudents');
 //------------
 
 //Partner routes
@@ -59,6 +65,11 @@ Route::post('partner/register-student-to-social-service', 'PartnerController@sto
 
 Route::get('partner/change-default-password', 'PartnerController@changeDefaultPasswordForm');
 Route::post('partner/change-default-password', 'PartnerController@changeDefaultPassword')->name('partner-changes-default-password');
+
+Route::get('partner/certify-student-hours', 'PartnerController@createHoursCertificationForm');
+Route::post('partner/certify-student-hours', 'PartnerController@certifyStudentHours')->name('partner-certifies-student-hours');
+
+Route::get('partner/filter-students', 'PartnerController@filterStudents');
 //------------
 
 //Student routes

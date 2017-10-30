@@ -252,6 +252,41 @@ class PartnerController extends Controller
         }
     }
 
+    public function createHoursCertificationForm()
+    {
+        $user = auth()->user();
+
+        //$services = SocialService::select('id', 'name')->where('partner_id', $user->id);
+        $services = SocialService::select('id', 'name')->where('partner_id',
+            $user->id)->get();
+        //$services = SocialService::all();
+        return view('pages.partner.certifyStudentHours')->with(['user' => $user, 'services' => $services]);
+    }
+
+    public function filterStudents(Request $request)
+    {
+        $students = StudentService::select('id', 'studentName')->where('service_id',
+            $request->id)->get();
+        return response()->json($students);
+    }
+
+    public function certifyStudentHours(Request $request) {
+        $studentid = $request->studentId;
+        $hours = $request->certifiedHours;
+
+        $update = \DB::table('student_services')
+            ->where('id', $studentid)
+            ->update(['certifiedHours' => $hours]);
+
+        if ($update) {
+            return redirect('/partner/home')->with('register-success',
+                'Se han acreditado '.$hours." horas para el estudiante con matricula: ".$studentid);
+        } else {
+            return redirect('/partner/home')->with('register-fail', 'Ha habido un error al registrar las horas. Favor de intentar más tarde.');
+        }
+
+    }
+
     /**
      * Display the specified resource.
      *
