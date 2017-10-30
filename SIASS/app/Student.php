@@ -20,13 +20,7 @@ class Student extends Model
         'certifiedUnits',
         'campus',
         'mainPhone',
-        'secondaryPhone',
-        'introductionCouseStart',
-        'introductionCourseEnd',
-        'introductionCourseCertified',
-        'recCourseStars',
-        'recCourseUpload',
-        'recCourseCertified'
+        'secondaryPhone'
     ];
 
     protected $primaryKey = 'user_id';

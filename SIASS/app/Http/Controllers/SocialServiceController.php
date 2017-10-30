@@ -63,13 +63,7 @@ class SocialServiceController extends Controller
         $user = auth()->user();
         $input = $request->all();
 
-        $sensibilization = $request->sensibilization;
-
-        if ($sensibilization == null) {
-            return redirect()->back()->withInput()->withErrors(['no_competence_selected' => 'Necesita seleccionar al menos una competencia']);
-        } else {
-            return view('pages.user.confirmSocialService')->with(['user' => $user, 'input' => $input]);
-        }
+        return view('pages.user.confirmSocialService')->with(['user' => $user, 'input' => $input]);
     }
 
     /**
@@ -80,7 +74,6 @@ class SocialServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
 
         if ($request->edit) {
             return redirect('admin/register-social-service')->withInput();
@@ -93,6 +86,10 @@ class SocialServiceController extends Controller
         $partnerid = $user -> id;
 
         $sensibilization = $request->sensibilization;
+
+        if ($sensibilization == null) {
+            return redirect()->back()->withInput()->withErrors(['no_competence_selected' => 'Necesita seleccionar al menos una competencia']);
+        }
 
         $ethical_recognition = false;
         $empathy = false;
@@ -145,16 +142,16 @@ class SocialServiceController extends Controller
 
         if ($user->isAdmin()){
             if ($socialService && $sensibilizationRecord) {
-                return redirect('admin/home')->with('success', 'Se ha registrado el nuevo servicio social con éxito');
+                return redirect('admin/home')->with('register-success', 'Se ha registrado el nuevo servicio social con éxito');
             } else {
-                return redirect('admin/home')->with('fail', 'Ha ocurrido un error al registrar el servicio social. Favor de intentar de nuevo');
+                return redirect('admin/home')->with('register-fail', 'Ha ocurrido un error al registrar el servicio social. Favor de intentar de nuevo');
             }
         }
         else{
             if ($socialService && $sensibilizationRecord) {
-                return redirect('/partner/home')->with('success', 'Se ha registrado el nuevo servicio social con éxito');
+                return redirect('/partner/home')->with('register-success', 'Se ha registrado el nuevo servicio social con éxito');
             } else {
-                return redirect('/partner/home')->with('fail', 'Ha ocurrido un error al registrar el servicio social. Favor de intentar de nuevo');
+                return redirect('/partner/home')->with('register-fail', 'Ha ocurrido un error al registrar el servicio social. Favor de intentar de nuevo');
             }
         }
 
@@ -191,7 +188,7 @@ class SocialServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        //
     }
 
     /**

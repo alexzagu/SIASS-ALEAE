@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\SocialService;
-use App\Student;
-use App\StudentService;
-use App\Partner;
 use Illuminate\Http\Request;
 
 class AdministratorController extends Controller
@@ -67,87 +63,7 @@ class AdministratorController extends Controller
      */
     public function storeStudentServiceObject(Request $request)
     {
-        if ($request->filled('studentID') && $request->filled('socialServiceID')) {
-            $studentID = $request->studentID;
-            $socialServiceID = $request->socialServiceID;
-            if ($studentID[0] == 'A' && strlen($socialServiceID) == 11) {
-                $student = Student::find($studentID);
-                $socialService = SocialService::find($socialServiceID);
-                if (!isset($student)) {
-                    return redirect('admin/register-student-to-social-service')->withInput()->with('fail', 'Alumno no existe.');
-                }
-                if (!isset($socialService)) {
-                    return redirect('admin/register-student-to-social-service')->withInput()->with('fail', 'Servicio Social no existe.');
-                }
 
-                if ($socialService->currentCapability >= $socialService->capability) {
-                    return redirect('admin/register-student-to-social-service')->withInput()->with('fail', 'El servicio está lleno.');
-                }
-
-                if (StudentService::where('user_id', $studentID)->where('service_id', $socialServiceID)->first()) {
-                    return redirect('admin/register-student-to-social-service')->withInput()->with('fail', 'El alumno ya está registrado.');
-                }
-
-                $studentService = StudentService::create([
-                    'id' => $studentID.$socialServiceID,
-                    'user_id' => $studentID,
-                    'service_id' => $socialServiceID,
-                    'studentName' => $student->user->name,
-                    'certifiedHours' => 0,
-                    'status' => 'Registrado',
-                    'dischargeLetter' => ''
-                ]);
-
-                if ($studentService) {
-                    $socialService->currentCapability += 1;
-                    $socialService->save();
-                    return redirect('admin/home')->with('success', 'Se registró el alumno al servicio social con éxito.');
-                }
-                else {
-                    return redirect('admin/home')->with('fail', 'Ha ocurrido un error al registrar al alumno al servicio estudiantil. Favor de intentar de nuevo');
-                }
-            }
-            else {
-                return redirect('admin/register-student-to-social-service')->withInput()->with('fail', 'Formato de entrada erróneo.');
-            }
-        }
-        else {
-            return redirect('admin/register-student-to-social-service')->withInput()->with('fail', 'Los dos campos deben ser llenados.');
-        }
-    }
-
-    public function certifyStudentInductionCourse(Request $request) {
-
-        $id = $request->user_id;
-
-        if ($id) {
-            $student = Student::find($id);
-
-            if ($student) {
-                return view('pages.admin.certifyInductionRec')->with(['student' => $student]);
-            } else {
-                return redirect()->back()->with(['fail' => 'No se ha encontrado registro de ningún alumno con la matrícula: '.$id.'. Favor de verificar la información e intentar de nuevo.']);
-            }
-        } else {
-            return view('pages.admin.certifyInductionRec');
-        }
-    }
-
-    public function updatePartnerForm(Request $request){
-
-        $id = $request->user_id;
-
-        if ($id) {
-            $partner = Partner::find($id);
-
-            if ($partner) {
-                return view('pages.admin.updatePartner')->with(['partner' => $partner]);
-            } else {
-                return redirect()->back()->with(['fail' => 'No se ha encontrado registro de ningún socio con la clave: '.$id.'. Favor de verificar la información e intentar de nuevo.']);
-            }
-        } else {
-            return view('pages.admin.updatePartner');
-        }
     }
 
     /**

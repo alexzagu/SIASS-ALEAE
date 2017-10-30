@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Student;
 
 class StudentController extends Controller
 {
@@ -77,28 +76,7 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-    }
-
-    public function updateInductionRec(Request $request, $id) {
-
-        $student = Student::find($id);
-
-        $induction = $request->input('introductionCourseCertified')  == 'on'? 1 : 0;
-        $rec = $request->input('recCourseCertified') == 'on' ? 1 : 0;
-
-        $data = [
-            'recCourseCertified' => $rec,
-            'introductionCourseCertified' => $induction
-        ];
-
-        $updated = $student->fill($data)->save();
-
-        if ($updated) {
-            return redirect()->back()->with(['success' => 'La información del alumno '.$student->user->name.' ha sido actualizada con éxito.']);
-        } else {
-            return redirect()->back()->with(['fail' => 'La información del alumno '.$student->user->name.' no ha sido actualizada con éxito. Favor de intentar más tarde.']);
-        }
+        //
     }
 
     /**

@@ -40,12 +40,6 @@ Route::post('admin/confirm-social-service', 'SocialServiceController@confirm')->
 
 Route::get('admin/register-student-to-social-service', 'AdministratorController@createStudentToSocialServiceRegistrationForm');
 Route::post('admin/register-student-to-social-service', 'AdministratorController@storeStudentServiceObject')->name('admin-registers-student-service');
-
-Route::get('admin/certify-induction-rec', 'AdministratorController@certifyStudentInductionCourse');
-Route::put('admin/certify-induction-rec/{studentID}', 'StudentController@updateInductionRec')->name('certify-induction-rec');
-
-Route::get('admin/modify-partner', 'AdministratorController@updatePartnerForm');
-Route::put('admin/modify-partner/{partnerID}', 'PartnerController@updatePartner')->name('modify-partner');
 //------------
 
 //Partner routes
@@ -56,9 +50,6 @@ Route::post('partner/register-social-service', 'SocialServiceController@store')-
 
 Route::get('partner/register-student-to-social-service', 'PartnerController@createStudentToSocialServiceRegistrationForm');
 Route::post('partner/register-student-to-social-service', 'PartnerController@storeStudentServiceObject')->name('partner-registers-student-service');
-
-Route::get('partner/change-default-password', 'PartnerController@changeDefaultPasswordForm');
-Route::post('partner/change-default-password', 'PartnerController@changeDefaultPassword')->name('partner-changes-default-password');
 //------------
 
 //Student routes

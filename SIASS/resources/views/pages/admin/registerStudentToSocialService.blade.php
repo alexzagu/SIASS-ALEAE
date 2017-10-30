@@ -9,12 +9,11 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <h2>Registro de Estudiante a Servicio Social</h2>
             <form action="{{ route('admin-registers-student-service') }}" method="POST">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="studentIDField">Matrícula del Alumno</label>
-                    <input name="studentID" type="text" class="form-control" id="studentIDField" placeholder="Matrícula del Alumno">
+                    <input name="studentId" type="text" class="form-control" id="studentIDField" placeholder="Matrícula del Alumno">
                     <small id="studentIDHelp" class="form-text text-muted">Favor de escribir en el siguiente formato: A0XXXXXXX</small>
                 </div>
                 <div class="form-group">
