@@ -166,24 +166,24 @@ class AdministratorController extends Controller
 
     public function filterStudents(Request $request)
     {
-        $students = StudentService::select('id', 'studentName')->where('service_id',
+        $students = StudentService::select('id', 'user_id', 'studentName')->where('service_id',
             $request->id)->get();
         return response()->json($students);
     }
 
     public function certifyStudentHours(Request $request) {
-        $studentid = $request->studentId;
+        $studentserviceid = $request->studentId;
         $hours = $request->certifiedHours;
 
-        $update = \DB::table('student_services')
-            ->where('id', $studentid)
-            ->update(['certifiedHours' => $hours]);
+        $studentid = StudentService::select('user_id')->where('id', $studentserviceid)->first();
+
+        $update = StudentService::where('id', $studentserviceid)->update(['certifiedHours' => $hours]);
 
         if ($update) {
-            return redirect('/admin/home')->with('register-success',
-                'Se han acreditado '.$hours." horas para el estudiante con matricula: ".$studentid);
+            return redirect('/admin/home')->with('success',
+                'Se han acreditado '.$hours." horas para el estudiante con matricula: ".$studentid->user_id);
         } else {
-            return redirect('/admin/home')->with('register-fail', 'Ha habido un error al registrar las horas. Favor de intentar más tarde.');
+            return redirect('/admin/home')->with('fail', 'Ha habido un error al registrar las horas. Favor de intentar más tarde.');
         }
 
     }
