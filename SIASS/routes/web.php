@@ -40,6 +40,12 @@ Route::post('admin/confirm-social-service', 'SocialServiceController@confirm')->
 
 Route::get('admin/register-student-to-social-service', 'AdministratorController@createStudentToSocialServiceRegistrationForm');
 Route::post('admin/register-student-to-social-service', 'AdministratorController@storeStudentServiceObject')->name('admin-registers-student-service');
+
+Route::get('admin/certify-student-hours', 'AdministratorController@createHoursCertificationForm');
+Route::post('admin/certify-student-hours', 'AdministratorController@certifyStudentHours')->name('admin-certifies-student-hours');
+
+Route::get('admin/filter-social-services', 'AdministratorController@filterSocialServices');
+Route::get('admin/filter-students', 'AdministratorController@filterStudents');
 //------------
 
 //Partner routes
@@ -50,6 +56,11 @@ Route::post('partner/register-social-service', 'SocialServiceController@store')-
 
 Route::get('partner/register-student-to-social-service', 'PartnerController@createStudentToSocialServiceRegistrationForm');
 Route::post('partner/register-student-to-social-service', 'PartnerController@storeStudentServiceObject')->name('partner-registers-student-service');
+
+Route::get('partner/certify-student-hours', 'PartnerController@createHoursCertificationForm');
+Route::post('partner/certify-student-hours', 'PartnerController@certifyStudentHours')->name('partner-certifies-student-hours');
+
+Route::get('partner/filter-students', 'PartnerController@filterStudents');
 //------------
 
 //Student routes

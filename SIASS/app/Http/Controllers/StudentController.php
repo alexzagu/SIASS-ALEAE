@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\SocialService;
+use App\Student;
+use App\Partner;
+use App\StudentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -31,7 +35,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -89,4 +93,5 @@ class StudentController extends Controller
     {
         //
     }
+
 }
