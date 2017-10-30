@@ -36,11 +36,11 @@
                                         <th>Extensión</th>
                                     </tr>
                                     <tr>
-                                        <td>{{$user->name}}</td>
-                                        <td>{{$user->email}}</td>
-                                        <td>{{$admin->department}}</td>
-                                        <td>{{$admin->phone}}</td>
-                                        <td>{{$admin->phoneExtension}}</td>
+                                        <th>{{$user->name}}</th>
+                                        <th>{{$user->email}}</th>
+                                        <th>{{$admin->department}}</th>
+                                        <th>{{$admin->phone}}</th>
+                                        <th>{{$admin->phoneExtension}}</th>
                                     </tr>
                                 </table>
                             </div>
@@ -56,11 +56,6 @@
                             <p>
                                 <a class="btn btn-primary btn-lg" href="/admin/register-social-service" role="button">
                                     Registrar un nuevo proyecto social
-                                </a>
-                            </p>
-                            <p>
-                                <a class="btn btn-primary btn-lg" href="/admin/certify-student-hours" role="button">
-                                    Registrar horas acreditadas a alumno
                                 </a>
                             </p>
                         </div>
@@ -101,11 +96,6 @@
                         @endforeach
                     </table>
                 </div>
-                    <p>
-                        <a class="btn btn-primary btn-lg" href="/partner/certify-student-hours" role="button">
-                            Registrar horas acreditadas a alumno
-                        </a>
-                    </p>
             @endif
 
             @if($user->isStudent())

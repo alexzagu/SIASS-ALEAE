@@ -15,7 +15,7 @@
         </div>
 
         <div class="form-group">
-            <label for="partnerAddress">Dirección:</label>
+            <label for="partnerAddress">Dirreción:</label>
             <input type="text" class="form-control" id="partnerAddress" name="partnerAddress">
         </div>
 
