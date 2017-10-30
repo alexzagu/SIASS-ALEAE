@@ -46,30 +46,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <p>
-                                <a class="btn btn-primary btn-lg" href="/admin/register-partner" role="button">
-                                    Registrar Socio Formador
-                                </a>
-                            </p>
-                            <p>
-                                <a class="btn btn-primary btn-lg" href="/admin/register-social-service" role="button">
-                                    Registrar un nuevo proyecto social
-                                </a>
-                            </p>
-                            <p>
-                                <a class="btn btn-primary btn-lg" href="/admin/register-student-to-social-service" role="button">
-                                    Registrar estudiante a servicio social
-                                </a>
-                            </p>
-                            <p>
-                                <a class="btn btn-primary btn-lg" href="/admin/certify-induction-rec" role="button">
-                                    Acreditar taller de inducción o REC de un alumno
-                                </a>
-                            </p>
-                        </div>
-                    </div>
                 </div>
             @endif
 
@@ -81,6 +57,7 @@
                             <div class="table-responsive">
                                 <table class="table">
                                     <tr>
+                                        <th>Nombre institución</th>
                                         <th>Clave de servicio social</th>
                                         <th>Nombre del servicio social</th>
                                         <th>Total de horas para acreditar</th>
@@ -92,6 +69,7 @@
                                     </tr>
                                     @foreach($user->userInfo->socialServices as $socialService)
                                         <tr>
+                                            <td>{{ $user->userInfo->partnerName }}</td>
                                             <td>{{ $socialService->id }}</td>
                                             <td>{{ $socialService->name }}</td>
                                             <td>{{ $socialService->totalHours }}</td>
@@ -104,20 +82,6 @@
                                     @endforeach
                                 </table>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <p>
-                                <a href="/partner/register-social-service" type="button" class="btn btn-primary btn-lg">
-                                    Registrar un nuevo proyecto social
-                                </a>
-                            </p>
-                            <p>
-                                <a class="btn btn-primary btn-lg" href="/partner/register-student-to-social-service" role="button">
-                                    Registrar estudiante a servicio social
-                                </a>
-                            </p>
                         </div>
                     </div>
                 </div>

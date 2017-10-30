@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\SocialService;
 use App\Student;
 use App\StudentService;
+use App\Partner;
 use Illuminate\Http\Request;
 
 class AdministratorController extends Controller
@@ -130,6 +131,61 @@ class AdministratorController extends Controller
         } else {
             return view('pages.admin.certifyInductionRec');
         }
+    }
+
+    public function updatePartnerForm(Request $request){
+
+        $id = $request->user_id;
+
+        if ($id) {
+            $partner = Partner::find($id);
+
+            if ($partner) {
+                return view('pages.admin.updatePartner')->with(['partner' => $partner]);
+            } else {
+                return redirect()->back()->with(['fail' => 'No se ha encontrado registro de ningún socio con la clave: '.$id.'. Favor de verificar la información e intentar de nuevo.']);
+            }
+        } else {
+            return view('pages.admin.updatePartner');
+        }
+    }
+
+    public function createHoursCertificationForm()
+    {
+        $user = auth()->user();
+        $partners = Partner::all();
+        return view('pages.admin.certifyStudentHours')->with(['user' => $user, 'partners' => $partners]);
+    }
+
+    public function filterSocialServices(Request $request)
+    {
+        $services = SocialService::select('id', 'name')->where('partner_id',
+            $request->id)->get();
+        return response()->json($services);
+    }
+
+    public function filterStudents(Request $request)
+    {
+        $students = StudentService::select('id', 'studentName')->where('service_id',
+            $request->id)->get();
+        return response()->json($students);
+    }
+
+    public function certifyStudentHours(Request $request) {
+        $studentid = $request->studentId;
+        $hours = $request->certifiedHours;
+
+        $update = \DB::table('student_services')
+            ->where('id', $studentid)
+            ->update(['certifiedHours' => $hours]);
+
+        if ($update) {
+            return redirect('/admin/home')->with('register-success',
+                'Se han acreditado '.$hours." horas para el estudiante con matricula: ".$studentid);
+        } else {
+            return redirect('/admin/home')->with('register-fail', 'Ha habido un error al registrar las horas. Favor de intentar más tarde.');
+        }
+
     }
 
     /**
