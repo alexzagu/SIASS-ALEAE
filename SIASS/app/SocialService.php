@@ -32,7 +32,7 @@ class SocialService extends Model
     public $incrementing = false;
 
     public function partner() {
-        return $this->belongsTo('App\Partner');
+        return $this->belongsTo('App\Partner', 'partner_id', 'user_id');
     }
 
     public $timestamps = false;

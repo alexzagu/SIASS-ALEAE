@@ -26,6 +26,7 @@
                             <li><a href="/admin/register-student-to-social-service">Registrar a servicio social</a></li>
                             <li><a href="/admin/certify-induction-rec">Acreditar taller de inducción o de REC</a></li>
                             <li><a href="/admin/certify-student-hours">Acreditar horas a alumno</a></li>
+                            <li><a href="/admin/upload-discharge-letter">Registrar carta finiquito</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -40,7 +41,7 @@
                     <li class="active"><a href="/partner/register-student-to-social-service">Registrar estudiante a servicio social</a></li>
                     <li class="active"><a href="/partner/certify-student-hours">Acreditar horas a alumno</a></li>
                 @endif
-                <li class="dropdown">
+                <!--li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@if(auth()->user()){{ auth()->user()->name }}@else Usuario @endif<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         @if (auth()->user())
@@ -51,8 +52,16 @@
                             <li><a href="/login" type="button" class="btn btn-default navbar-btn">Login</a></li>
                         @endif
                     </ul>
-                </li>
+                </li-->
             </ul>
+            @if (auth()->user())
+                <form method="POST" action="{{ route('logout') }}" class="navbar-form navbar-right">
+                    {{ csrf_field() }}
+                    <button type="submit" class="btn btn-success">Logout</button>
+                </form>
+            @else
+                <p class="navbar-text navbar-right"><a href="/login" type="button" class="btn btn-default navbar-btn nav">Login</a></p>
+            @endif
         </div><!--/.nav-collapse -->
     </div>
 </nav>

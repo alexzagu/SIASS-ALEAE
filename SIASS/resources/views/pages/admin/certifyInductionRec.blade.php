@@ -53,7 +53,7 @@
                         <tr>
                             <td>{{ Carbon\Carbon::parse($student->introductionCouseStart)->format('d F Y') }}</td>
                             <td>{{ Carbon\Carbon::parse($student->introductionCouseEnd)->format('d F Y') }}</td>
-                            <td><input type="checkbox" name="introductionCourseCertified" {{ $student->introductionCourseCertified ? 'checked' : '' }}>{{ $student->introductionCourseCertified ? ' Acreditado' :  ' No acreditado' }}</td>
+                            <td><input type="checkbox" name="introductionCourseCertified" {{ $student->introductionCourseCertified ? 'checked' : '' }}> {{ $student->introductionCourseCertified ? ' Acreditado' :  ' No acreditado' }}</td>
                         </tr>
                     </table>
                     <h3>Reporte de Experiencias Ciudadanas (REC)</h3>
@@ -66,7 +66,7 @@
                         <tr>
                             <td>{{ Carbon\Carbon::parse($student->recCourseStars)->format('d F Y') }}</td>
                             <td>{{ Carbon\Carbon::parse($student->recCourseUpload)->format('d F Y') }}</td>
-                            <td><input type="checkbox" name="recCourseCertified" {{ $student->recCourseCertified ? 'checked' : '' }}>{{ $student->introductionCourseCertified ? ' Acreditado' :  ' No acreditado' }}</td>
+                            <td><input type="checkbox" name="recCourseCertified" {{ $student->recCourseCertified ? 'checked' : '' }}> {{ $student->introductionCourseCertified ? ' Acreditado' :  ' No acreditado' }}</td>
                         </tr>
                     </table>
                 </div>

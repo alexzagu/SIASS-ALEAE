@@ -52,6 +52,9 @@ Route::post('admin/certify-student-hours', 'AdministratorController@certifyStude
 
 Route::get('admin/filter-social-services', 'AdministratorController@filterSocialServices');
 Route::get('admin/filter-students', 'AdministratorController@filterStudents');
+
+Route::get('admin/upload-discharge-letter', 'AdministratorController@uploadDischargeLetter')->name('upload-discharge-letter');
+Route::post('admin/upload-discharge-letter', 'DischargeLetterController@store')->name('upload-discharge-letter');
 //------------
 
 //Partner routes
@@ -74,4 +77,9 @@ Route::get('partner/filter-students', 'PartnerController@filterStudents');
 
 //Student routes
 Route::get('student/home', 'StudentController@index');
+//------------
+
+//Discharge letter routes
+Route::get('letter/download/{file_name}', 'DischargeLetterController@download');
+Route::delete('letter/delete/{file_name}', 'DischargeLetterController@destroy')->name('delete-letter');
 //------------
