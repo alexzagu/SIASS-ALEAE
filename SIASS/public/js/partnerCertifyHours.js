@@ -13,9 +13,9 @@ $(document).ready(function(){
                 console.log(data);
                 console.log(data.length)
                 if(data.length <= 0) {
-                    op += '<option value="none">No Students Registered</option>'
+                    op += '<option value="none">No hay estudiantes registrados</option>'
                 }else{
-                    op += '<option value ="select" selected disabled>- Select Student -</option>';
+                    op += '<option value ="select" selected disabled>- Seleccionar estudiante -</option>';
                     for(var i=0; i < data.length; i++){
                         op += '<option value="' + data[i].id+'">'+data[i].studentName + ' - ' + data[i].id+'</option>'
                     }

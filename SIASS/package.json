@@ -22,6 +22,7 @@
     "bootstrap": "^4.0.0-beta",
     "bootstrap-show-password": "^1.1.1",
     "jquery": "^3.2.1",
+    "jquery-ui-dist": "^1.12.1",
     "popper.js": "^1.12.5"
   }
 }

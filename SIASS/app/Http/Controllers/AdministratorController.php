@@ -159,15 +159,13 @@ class AdministratorController extends Controller
 
     public function filterSocialServices(Request $request)
     {
-        $services = SocialService::select('id', 'name')->where('partner_id',
-            $request->id)->get();
+        $services = SocialService::select('id', 'name')->where('partner_id', $request->id)->get();
         return response()->json($services);
     }
 
     public function filterStudents(Request $request)
     {
-        $students = StudentService::select('id', 'user_id', 'studentName')->where('service_id',
-            $request->id)->get();
+        $students = StudentService::select('id', 'user_id', 'studentName')->where('service_id', $request->id)->get();
         return response()->json($students);
     }
 
@@ -186,6 +184,24 @@ class AdministratorController extends Controller
             return redirect('/admin/home')->with('fail', 'Ha habido un error al registrar las horas. Favor de intentar más tarde.');
         }
 
+    }
+
+    public function uploadDischargeLetter(Request $request) {
+
+        $id = $request->student_id;
+
+        if ($id) {
+            $student = Student::find($id);
+            $student_services = $student->studentServices;
+
+            if ($student) {
+                return view('pages.admin.uploadDischargeLetter')->with(['student' => $student, 'student_services' => $student_services]);
+            } else {
+                return redirect()->back()->with(['fail' => 'No se ha encontrado registro de ningún alumno con la matrícula: '.$id.'. Favor de verificar la información e intentar de nuevo.']);
+            }
+        } else {
+            return view('pages.admin.uploadDischargeLetter');
+        }
     }
 
     /**

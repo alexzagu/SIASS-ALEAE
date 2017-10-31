@@ -31,4 +31,8 @@ class StudentService extends Model
     public function socialService() {
         return $this->belongsTo('App\SocialService', 'service_id');
     }
+
+    public function discharge_letter() {
+        return $this->has('App\DischargeLetter');
+    }
 }

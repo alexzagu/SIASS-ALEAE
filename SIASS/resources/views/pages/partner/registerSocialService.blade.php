@@ -65,12 +65,12 @@
                     <div class="form-group">
                         <label for="startDateField">Fecha de inicio del Proyecto Social</label>
                         <p><small id="startdateHelp" class="form-text text-muted">Favor de escribir en el siguiente formato: DD-MM-YYYY</small></p>
-                        <input name="startDate" type="date" class="form-control" value="{{ old('startDate') }}" id="startDateField" placeholder="" aria-describedby="startdateHelp" required>
+                        <input name="startDate" type="date" class="form-control datepicker" value="{{ old('startDate') }}" id="startDateField" placeholder="" aria-describedby="startdateHelp" required>
                     </div>
                     <div class="form-group">
                         <label for="endDateField">Fecha de fin del Proyecto Social</label>
                         <p><small id="enddateHelp" class="form-text text-muted">Favor de escribir en el siguiente formato: DD-MM-YYYY</small></p>
-                        <input name="endDate" type="date" class="form-control" value="{{ old('endDate') }}" id="endDateField" placeholder="" aria-describedby="endateHelp" required>
+                        <input name="endDate" type="date" class="form-control datepicker" value="{{ old('endDate') }}" id="endDateField" placeholder="" aria-describedby="endateHelp" required>
                     </div>
                     <div class="form-group">
                         <label for="typeField">Causa social del proyecto</label>
