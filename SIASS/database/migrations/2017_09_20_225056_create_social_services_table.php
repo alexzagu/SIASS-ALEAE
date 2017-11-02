@@ -29,6 +29,7 @@ class CreateSocialServicesTable extends Migration
             $table->date('startDate');
             $table->date('endDate');
             $table->string('type');
+            $table->string('social_cause');
             $table->string('period');
             $table->string('campus');
         });
