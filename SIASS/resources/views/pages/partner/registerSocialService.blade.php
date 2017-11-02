@@ -75,16 +75,16 @@
                     <div class="form-group">
                         <label for="typeField">Causa social del proyecto</label>
                         <select class="form-control" id="typeField" name="type">
-                            <option value="Ciencia y Tecnología" @if(old('type') =="Ciencia y Tecnología") selected @endif>Ciencia y Tecnología</option>
-                            <option value="Desarrollo Integral" @if(old('type') == "Desarrollo Integral") selected @endif>Desarrollo Integral</option>
-                            <option value="Economía y Emprendimiento" @if(old('type') == "Economía y Emprendimiento") selected @endif>Economía y Emprendimiento</option>
-                            <option value="Educación" @if(old('type') == "Educación") selected @endif>Educación</option>
-                            <option value="Inclusión y Grupos Vulnerables" @if(old('type') == "Inclusión y Grupos Vulnerables") selected @endif>Inclusión y Grupos Vulnerables</option>
-                            <option value="Infraestructura" @if(old('type') == "Infraestructura") selected @endif>Infraestructura</option>
-                            <option value="Legalidad" @if(old('type') == "Legalidad") selected @endif>Legalidad</option>
-                            <option value="Medio Ambiente y Sustentabilidad" @if(old('type') == "Medio Ambiente y Sustentabilidad") selected @endif>Medio Ambiente y Sustentabilidad</option>
-                            <option value="Salud y Bienestar" @if(old('type') == "Salud y Bienestar") selected @endif>Salud y Bienestar</option>
-                            <option value="Profesionalismo Cívico" @if(old('type') == "Profesionalismo Cívico") selected @endif>Profesionalismo Cívico</option>
+                            <option value="Ciencia y Tecnología" @if(old('social_cause') =="Ciencia y Tecnología") selected @endif>Ciencia y Tecnología</option>
+                            <option value="Desarrollo Integral" @if(old('social_cause') == "Desarrollo Integral") selected @endif>Desarrollo Integral</option>
+                            <option value="Economía y Emprendimiento" @if(old('social_cause') == "Economía y Emprendimiento") selected @endif>Economía y Emprendimiento</option>
+                            <option value="Educación" @if(old('social_cause') == "Educación") selected @endif>Educación</option>
+                            <option value="Inclusión y Grupos Vulnerables" @if(old('social_cause') == "Inclusión y Grupos Vulnerables") selected @endif>Inclusión y Grupos Vulnerables</option>
+                            <option value="Infraestructura" @if(old('social_cause') == "Infraestructura") selected @endif>Infraestructura</option>
+                            <option value="Legalidad" @if(old('social_cause') == "Legalidad") selected @endif>Legalidad</option>
+                            <option value="Medio Ambiente y Sustentabilidad" @if(old('social_cause') == "Medio Ambiente y Sustentabilidad") selected @endif>Medio Ambiente y Sustentabilidad</option>
+                            <option value="Salud y Bienestar" @if(old('social_cause') == "Salud y Bienestar") selected @endif>Salud y Bienestar</option>
+                            <option value="Profesionalismo Cívico" @if(old('social_cause') == "Profesionalismo Cívico") selected @endif>Profesionalismo Cívico</option>
                         </select>
                     </div>
                     <fieldset class="form-group">

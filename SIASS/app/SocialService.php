@@ -25,6 +25,7 @@ class SocialService extends Model
         'startDate',
         'endDate',
         'type',
+        'social_cause',
         'period',
         'campus'
     ];
