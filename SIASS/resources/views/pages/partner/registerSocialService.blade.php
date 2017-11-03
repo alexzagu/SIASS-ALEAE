@@ -73,8 +73,8 @@
                         <input name="endDate" type="date" class="form-control datepicker" value="{{ old('endDate') }}" id="endDateField" placeholder="" aria-describedby="endateHelp" required>
                     </div>
                     <div class="form-group">
-                        <label for="typeField">Causa social del proyecto</label>
-                        <select class="form-control" id="typeField" name="type">
+                        <label for="social_cause">Causa social del proyecto</label>
+                        <select class="form-control" id="typeField" name="social_cause">
                             <option value="Ciencia y Tecnología" @if(old('social_cause') =="Ciencia y Tecnología") selected @endif>Ciencia y Tecnología</option>
                             <option value="Desarrollo Integral" @if(old('social_cause') == "Desarrollo Integral") selected @endif>Desarrollo Integral</option>
                             <option value="Economía y Emprendimiento" @if(old('social_cause') == "Economía y Emprendimiento") selected @endif>Economía y Emprendimiento</option>

@@ -70,6 +70,7 @@ class AdministratorController extends Controller
         if ($request->filled('studentID') && $request->filled('socialServiceID')) {
             $studentID = $request->studentID;
             $socialServiceID = $request->socialServiceID;
+            $socialService = SocialService::find($socialServiceID);
             if ($studentID[0] == 'A' && strlen($socialServiceID) == 11) {
                 $student = Student::find($studentID);
                 $socialService = SocialService::find($socialServiceID);
@@ -88,12 +89,14 @@ class AdministratorController extends Controller
                     return redirect('admin/register-student-to-social-service')->withInput()->with('fail', 'El alumno ya está registrado.');
                 }
 
+
                 $studentService = StudentService::create([
                     'id' => $studentID.$socialServiceID,
                     'user_id' => $studentID,
                     'service_id' => $socialServiceID,
                     'studentName' => $student->user->name,
                     'certifiedHours' => 0,
+                    'registeredHours' => $socialService->totalHours,
                     'status' => 'Registrado',
                     'dischargeLetter' => ''
                 ]);

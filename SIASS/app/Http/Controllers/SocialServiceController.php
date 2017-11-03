@@ -132,7 +132,7 @@ class SocialServiceController extends Controller
             'startDate' => $request->startDate,
             'endDate' => $request->endDate,
             'type' => 'SSC',
-            'social_cause' => $request->type,
+            'social_cause' => $request->social_cause,
             'period' => $request->period,
             'campus' => $request->campus
         ]);

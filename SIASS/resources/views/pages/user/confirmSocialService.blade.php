@@ -77,7 +77,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="typeField">Causa social del proyecto: {{ $input['social_cause'] }}</label>
+                        <label for="social_causeField">Causa social del proyecto: {{ $input['social_cause'] }}</label>
                         <input type="hidden" name="social_cause" value="{{ $input['social_cause'] }}">
                     </div>
 

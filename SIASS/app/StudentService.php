@@ -20,6 +20,7 @@ class StudentService extends Model
         'service_id',
         'studentName',
         'certifiedHours',
+        'registeredHours',
         'status',
         'dischargeLetter'
     ];
