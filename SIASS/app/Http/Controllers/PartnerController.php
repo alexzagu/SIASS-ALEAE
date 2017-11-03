@@ -276,18 +276,36 @@ class PartnerController extends Controller
     }
 
     public function certifyStudentHours(Request $request) {
-        $studentid = $request->studentId;
+        $studentserviceid = $request->studentId;
         $hours = $request->certifiedHours;
 
-        $update = \DB::table('student_services')
-            ->where('id', $studentid)
-            ->update(['certifiedHours' => $hours]);
+        $studentService = StudentService::find($studentserviceid);
 
-        if ($update) {
-            return redirect('/partner/home')->with('register-success',
+        $studentid = $studentService->user_id;
+        $serviceid = $studentService->service_id;
+
+        $studentService->CertifiedHours = $hours;
+
+        $socialService = SocialService::find($serviceid);
+        $student = Student::find($studentid);
+
+        if($socialService->type == 'ssc') {
+            $student->totalRegisteredHoursSSC -= $studentService->registeredHours;
+            $student->totalCertifiedHoursSSC += $hours;
+        }elseif ($socialService->type == 'ssp'){
+            $student->totalRegisteredHoursSSP -= $studentService->registeredHours;
+            $student->totalCertifiedHoursSSP += $hours;
+        }
+        $student->totalCertifiedHoursSS += $hours;
+        $studentService->registeredHours = 0;
+        $studentService->save();
+        $student->save();
+
+        if ($student) {
+            return redirect('/partner/home')->with('success',
                 'Se han acreditado '.$hours." horas para el estudiante con matricula: ".$studentid);
         } else {
-            return redirect('/partner/home')->with('register-fail', 'Ha habido un error al registrar las horas. Favor de intentar más tarde.');
+            return redirect('/partner/home')->with('fail', 'Ha habido un error al registrar las horas. Favor de intentar más tarde.');
         }
 
     }
