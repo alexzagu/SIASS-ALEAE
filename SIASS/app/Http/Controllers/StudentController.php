@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\StudentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Student;
@@ -21,8 +22,11 @@ class StudentController extends Controller
     {
         $user = auth()->user();
         $userInfo = $user->userInfo;
-
-        return view('pages.user.home')->with(['user' => $user, 'userInfo' => $userInfo]);
+        $sscHoursPorAcreditar = 240 - $user->totalCertifiedHoursSSC;
+        if($sscHoursPorAcreditar < 0) {
+            $sscHoursPorAcreditar = 0;
+        }
+        return view('pages.user.home')->with(['user' => $user, 'userInfo' => $userInfo, 'horasPorAcreditar' => $sscHoursPorAcreditar]);
     }
 
     /**
