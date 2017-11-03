@@ -173,13 +173,31 @@ class AdministratorController extends Controller
         $studentserviceid = $request->studentId;
         $hours = $request->certifiedHours;
 
-        $studentid = StudentService::select('user_id')->where('id', $studentserviceid)->first();
+        $studentService = StudentService::find($studentserviceid);
 
-        $update = StudentService::where('id', $studentserviceid)->update(['certifiedHours' => $hours]);
+        $studentid = $studentService->user_id;
+        $serviceid = $studentService->service_id;
 
-        if ($update) {
+        $studentService->CertifiedHours = $hours;
+
+        $socialService = SocialService::find($serviceid);
+        $student = Student::find($studentid);
+
+        if($socialService->type == 'ssc') {
+            $student->totalRegisteredHoursSSC -= $studentService->registeredHours;
+            $student->totalCertifiedHoursSSC += $hours;
+        }elseif ($socialService->type == 'ssp'){
+            $student->totalRegisteredHoursSSP -= $studentService->registeredHours;
+            $student->totalCertifiedHoursSSP += $hours;
+        }
+        $student->totalCertifiedHoursSS += $hours;
+        $studentService->registeredHours = 0;
+        $studentService->save();
+        $student->save();
+
+        if ($student) {
             return redirect('/admin/home')->with('success',
-                'Se han acreditado '.$hours." horas para el estudiante con matricula: ".$studentid->user_id);
+                'Se han acreditado '.$hours." horas para el estudiante con matricula: ".$studentid);
         } else {
             return redirect('/admin/home')->with('fail', 'Ha habido un error al registrar las horas. Favor de intentar más tarde.');
         }

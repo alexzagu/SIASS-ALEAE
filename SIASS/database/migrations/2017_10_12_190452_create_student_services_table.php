@@ -19,6 +19,7 @@ class CreateStudentServicesTable extends Migration
             $table->string('service_id');
             $table->string('studentName');
             $table->integer('certifiedHours');
+            $table->integer('registeredHours');
             $table->string('status');
             $table->string('dischargeLetter');
         });
