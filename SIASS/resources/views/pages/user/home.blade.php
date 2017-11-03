@@ -148,13 +148,13 @@
                                         <th class="bg-info">Horas Acreditadas SSP</th>
                                         <td>{{$userInfo->totalCertifiedHoursSSP}}</td>
                                         <th class="bg-info">Horas por Acreditadar SSP</th>
-                                        <td colspan="2">{{240 - $userInfo->totalCertifiedHoursSSP}}</td>
+                                        <td colspan="2">{{$horasPorAcreditar}}</td>
                                     </tr>
                                     <tr>
-                                        <th class="bg-info">Total Acreditadas SSC</th>
+                                        <th class="bg-info">Total Acreditadas SS</th>
                                         <td>{{$userInfo->totalCertifiedHoursSSC + $userInfo->totalCertifiedHoursSSP}}</td>
-                                        <th class="bg-info">Total Acreditadas SSP</th>
-                                        <td colspan="2">{{(240 - $userInfo->totalCertifiedHoursSSC) + (240 - $userInfo->totalCertifiedHoursSSP)}}</td>
+                                        <th class="bg-info">Total por Acreditadas SS</th>
+                                        <td colspan="2">{{480 - $userInfo->totalCertifiedHoursSS}}</td>
                                     </tr>
                                 </table>
                             </div>
