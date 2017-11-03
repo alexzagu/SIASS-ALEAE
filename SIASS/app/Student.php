@@ -26,7 +26,11 @@ class Student extends Model
         'introductionCourseCertified',
         'recCourseStars',
         'recCourseUpload',
-        'recCourseCertified'
+        'recCourseCertified',
+        'isCertified',
+        'certificationDate',
+        'isCertificationEmailSent',
+        'certificationEmailSendDate'
     ];
 
     protected $primaryKey = 'user_id';
