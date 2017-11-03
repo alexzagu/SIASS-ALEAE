@@ -26,7 +26,7 @@
                             <li><a href="/admin/register-student-to-social-service">Registrar a servicio social</a></li>
                             <li><a href="/admin/certify-induction-rec">Acreditar taller de inducción o de REC</a></li>
                             <li><a href="/admin/certify-student-hours">Acreditar horas a alumno</a></li>
-                            <li><a href="/admin/upload-discharge-letter">Registrar carta finiquito</a></li>
+                            <li><a href="/admin/upload-discharge-letter">Registrar carta liberación</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

@@ -25,7 +25,7 @@
                     <div class="row">
                         <div class="col-md-12 ">
 
-                            <h2>Informacion del Admininstrador</h2>
+                            <h2>Información del Admininstrador</h2>
                             <div class="table-responsive">
                                 <table style="width:100%" class="table">
                                     <tr>
@@ -102,7 +102,7 @@
                                         <th>Semestre</th>
                                         <th>Estatus</th>
                                         <th>Servicio Social</th>
-                                        <th>Fecha de Liberación</th>
+                                        <th>Fecha Finiquito</th>
                                     </tr>
                                     <tr>
                                         <td>{{$user->id}}</td>
