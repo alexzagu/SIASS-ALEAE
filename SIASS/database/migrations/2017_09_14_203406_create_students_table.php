@@ -34,6 +34,10 @@ class CreateStudentsTable extends Migration
             $table->dateTime('recCourseStars');
             $table->dateTime('recCourseUpload');
             $table->boolean('recCourseCertified');
+            $table->boolean('isCertified')->default(0);
+            $table->dateTime('certificationDate')->nullable();
+            $table->boolean('isCertificationEmailSent')->default(0);
+            $table->dateTime('certificationEmailSendDate')->nullable();
         });
 
         Schema::table('students', function($table) {

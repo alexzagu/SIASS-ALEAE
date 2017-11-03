@@ -101,6 +101,8 @@
                                         <th>Carrera</th>
                                         <th>Semestre</th>
                                         <th>Estatus</th>
+                                        <th>Servicio Social</th>
+                                        <th>Fecha de Liberación</th>
                                     </tr>
                                     <tr>
                                         <td>{{$user->id}}</td>
@@ -108,6 +110,13 @@
                                         <td>{{$userInfo->major}}</td>
                                         <td>{{$userInfo->semester}}</td>
                                         <td>{{$userInfo->studentStatus}}</td>
+                                        @if($userInfo->isCertified)
+                                            <td>Liberado</td>
+                                            <td>{{Carbon\Carbon::parse($userInfo->certificationDate)->format('d F Y')}}</td>
+                                        @else
+                                            <td>No Liberado</td>
+                                            <td>-----------</td>
+                                        @endif
                                     </tr>
                                 </table>
                             </div>
