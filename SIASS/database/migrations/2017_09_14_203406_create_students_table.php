@@ -17,11 +17,11 @@ class CreateStudentsTable extends Migration
             $table->string('user_id')->unique();
             $table->string('major');
             $table->string('studyPlan');
-            $table->integer('totalCertifiedHoursSSC')->unsigned();
-            $table->integer('totalRegisteredHoursSSC')->unsigned();
-            $table->integer('totalCertifiedHoursSSP')->unsigned();
-            $table->integer('totalRegisteredHoursSSP')->unsigned();
-            $table->integer('totalCertifiedHoursSS')->unsigned();
+            $table->unsignedInteger('totalCertifiedHoursSSC');
+            $table->unsignedInteger('totalRegisteredHoursSSC');
+            $table->unsignedInteger('totalCertifiedHoursSSP');
+            $table->unsignedInteger('totalRegisteredHoursSSP');
+            $table->unsignedInteger('totalCertifiedHoursSS')->storeAs('totalCertifiedHoursSSC + totalCertifiedHoursSSP');
             $table->string('studentStatus');
             $table->integer('semester')->unsigned();
             $table->integer('certifiedUnits')->unsigned();

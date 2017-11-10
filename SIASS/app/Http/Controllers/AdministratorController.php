@@ -153,6 +153,27 @@ class AdministratorController extends Controller
         }
     }
 
+    public function showStudentInfoForm(Request $request) {
+        $id = $request->user_id;
+
+        if ($id) {
+            $student = Student::find($id);
+
+            if ($student) {
+                $user = $student->user;
+                $sscHoursPorAcreditar = 240 - $student->totalCertifiedHoursSSC;
+                if($sscHoursPorAcreditar < 0) {
+                    $sscHoursPorAcreditar = 0;
+                }
+                return view('pages.admin.showStudentInfo')->with(['user' => $user, 'student' => $student, 'horasPorAcreditar' => $sscHoursPorAcreditar]);
+            } else {
+                return redirect()->back()->with(['fail' => 'No se ha encontrado registro de ningún alumno con la matrícula: '.$id.'. Favor de verificar la información e intentar de nuevo.']);
+            }
+        } else {
+            return view('pages.admin.showStudentInfo');
+        }
+    }
+
     public function createHoursCertificationForm()
     {
         $user = auth()->user();
@@ -178,6 +199,10 @@ class AdministratorController extends Controller
 
         $studentService = StudentService::find($studentserviceid);
 
+        if (!$studentService) {
+            return redirect('/admin/home')->with('fail', 'El alumno no está registrado en ese servicio');
+        }
+
         $studentid = $studentService->user_id;
         $serviceid = $studentService->service_id;
 
@@ -193,8 +218,6 @@ class AdministratorController extends Controller
             $student->totalRegisteredHoursSSP -= $studentService->registeredHours;
             $student->totalCertifiedHoursSSP += $hours;
         }
-        $student->totalCertifiedHoursSS += $hours;
-        $studentService->registeredHours = 0;
         $studentService->save();
         $student->save();
 
@@ -224,6 +247,7 @@ class AdministratorController extends Controller
             return view('pages.admin.uploadDischargeLetter');
         }
     }
+
 
     /**
      * Display the specified resource.

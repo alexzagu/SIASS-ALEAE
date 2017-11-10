@@ -55,6 +55,8 @@ Route::get('admin/filter-students', 'AdministratorController@filterStudents');
 
 Route::get('admin/upload-discharge-letter', 'AdministratorController@uploadDischargeLetter')->name('upload-discharge-letter');
 Route::post('admin/upload-discharge-letter', 'DischargeLetterController@store')->name('upload-discharge-letter');
+
+Route::get('/admin/student-info', 'AdministratorController@showStudentInfoForm');
 //------------
 
 //Partner routes

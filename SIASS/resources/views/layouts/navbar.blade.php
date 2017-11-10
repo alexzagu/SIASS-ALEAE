@@ -23,6 +23,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Estudiante<span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            <li><a href="/admin/student-info">Ver información de estudiante</a></li>
                             <li><a href="/admin/register-student-to-social-service">Registrar a servicio social</a></li>
                             <li><a href="/admin/certify-induction-rec">Acreditar taller de inducción o de REC</a></li>
                             <li><a href="/admin/certify-student-hours">Acreditar horas a alumno</a></li>
