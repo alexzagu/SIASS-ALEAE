@@ -57,6 +57,10 @@ Route::get('admin/upload-discharge-letter', 'AdministratorController@uploadDisch
 Route::post('admin/upload-discharge-letter', 'DischargeLetterController@store')->name('upload-discharge-letter');
 
 Route::get('/admin/student-info', 'AdministratorController@showStudentInfoForm');
+
+Route::get('/admin/unsubscribe-partner', 'AdministratorController@unsubscribePartner')->name('unsubscribe-partner');
+
+
 //------------
 
 //Partner routes
@@ -75,6 +79,9 @@ Route::get('partner/certify-student-hours', 'PartnerController@createHoursCertif
 Route::post('partner/certify-student-hours', 'PartnerController@certifyStudentHours')->name('partner-certifies-student-hours');
 
 Route::get('partner/filter-students', 'PartnerController@filterStudents');
+
+Route::delete('partner/delete/{id}', 'PartnerController@destroy')->name('delete-partner');
+Route::post('partner/restore/{id}', 'PartnerController@restore')->name('restore-partner');
 //------------
 
 //Student routes

@@ -160,6 +160,23 @@ class AdministratorController extends Controller
         }
     }
 
+    public function unsubscribePartner(Request $request){
+
+        $id = $request->user_id;
+
+        if ($id) {
+            $partner = Partner::withTrashed()->where('user_id', '=', $id)->first();
+
+            if ($partner) {
+                return view('pages.admin.unsubscribePartner')->with(['partner' => $partner]);
+            } else {
+                return redirect()->back()->with(['fail' => 'No se ha encontrado registro de ningún socio con la clave: '.$id.'. Favor de verificar la información e intentar de nuevo.']);
+            }
+        } else {
+            return view('pages.admin.unsubscribePartner');
+        }
+    }
+
     public function showStudentInfoForm(Request $request) {
         $id = $request->user_id;
 
