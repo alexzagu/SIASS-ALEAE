@@ -18,6 +18,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="/admin/register-partner">Registrar</a></li>
                             <li><a href="/admin/modify-partner">Modificar</a></li>
+                            <li><a href="/admin/unsubscribe-partner">Dar de baja/Dar de alta</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

@@ -10,6 +10,7 @@ use App\Student;
 use App\SocialService;
 use App\StudentService;
 
+
 class PartnerController extends Controller
 {
     /**
@@ -355,6 +356,30 @@ class PartnerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $partner = Partner::find($id);
+        $partner->delete();
+
+       return redirect()->back()->with('success', 'Se ha dado de baja al socio formador');
+
+
     }
+
+    /**
+     * restore the specified resource to storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+
+    public function restore( $id )
+    {
+        $partner = Partner::withTrashed()->where('user_id', '=', $id)->first();
+
+        //Restauramos el registro
+        $partner->restore();
+
+        return redirect()->back()->with('success', 'Se ha dado de alta al socio formador');
+    }
+
+
 }
