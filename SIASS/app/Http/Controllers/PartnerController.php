@@ -279,9 +279,9 @@ class PartnerController extends Controller
 
     public function filterStudents(Request $request)
     {
-        $students = StudentService::select('id', 'studentName')->where('service_id',
+        $studentsServices = StudentService::select('id','user_id','studentName')->where('service_id',
             $request->id)->get();
-        return response()->json($students);
+        return response()->json($studentsServices);
     }
 
     public function certifyStudentHours(Request $request) {
@@ -313,6 +313,32 @@ class PartnerController extends Controller
             return redirect()->back()->with('fail', 'Ha ocurrido un error al registrar las horas. Favor de intentar más tarde.');
         }
     }
+
+    public function dropStudent(Request $request) {
+        $user = auth()->user();
+        $services = SocialService::select('id', 'name')->where('partner_id',
+            $user->id)->get();
+
+        $id = $request->serviceId;
+
+        if ($id) {
+            $studentsServices = StudentService::select('id','user_id','studentName')->where(
+                'service_id',$id)->get();
+            $ssaux = StudentService::where('service_id',$id)->get()->first();
+            $studentid = $ssaux->user_id;
+            $student = Student::find($studentid);
+            //dd($student->deleted_at);
+            if ($studentsServices) {
+                return view('pages.partner.dropStudent')->with(['user' => $user, 'services' => $services, 'students' => $studentsServices, 'delete' => $student]);
+            }
+            else {
+                dd('error');
+            }
+        } else {
+            return view('pages.partner.dropStudent')->with(['user' => $user, 'services' => $services]);
+        }
+    }
+
 
     /**
      * Display the specified resource.
@@ -360,7 +386,6 @@ class PartnerController extends Controller
         $partner->delete();
 
        return redirect()->back()->with('success', 'Se ha dado de baja al socio formador');
-
 
     }
 

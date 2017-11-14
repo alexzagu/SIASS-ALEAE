@@ -60,7 +60,6 @@ Route::get('/admin/student-info', 'AdministratorController@showStudentInfoForm')
 
 Route::get('/admin/unsubscribe-partner', 'AdministratorController@unsubscribePartner')->name('unsubscribe-partner');
 
-
 //------------
 
 //Partner routes
@@ -82,10 +81,15 @@ Route::get('partner/filter-students', 'PartnerController@filterStudents');
 
 Route::delete('partner/delete/{id}', 'PartnerController@destroy')->name('delete-partner');
 Route::post('partner/restore/{id}', 'PartnerController@restore')->name('restore-partner');
+
+Route::get('/partner/drop-student', 'PartnerController@dropStudent')->name('drop-student');
 //------------
 
 //Student routes
 Route::get('student/home', 'StudentController@index');
+
+Route::delete('student/delete/{id}', 'StudentController@destroy')->name('delete-student');
+Route::post('student/restore/{id}', 'StudentController@restore')->name('restore-student');
 //------------
 
 //Discharge letter routes

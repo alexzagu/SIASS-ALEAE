@@ -39,6 +39,7 @@ class CreateStudentsTable extends Migration
             $table->dateTime('certificationDate')->nullable();
             $table->boolean('isCertificationEmailSent')->default(0);
             $table->dateTime('certificationEmailSendDate')->nullable();
+            $table->softDeletes();
         });
 
         Schema::table('students', function($table) {

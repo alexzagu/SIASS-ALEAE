@@ -17,7 +17,7 @@ $(document).ready(function(){
                 }else{
                     op += '<option value ="select" selected disabled>- Seleccionar estudiante -</option>';
                     for(var i=0; i < data.length; i++){
-                        op += '<option value="' + data[i].id+'">'+data[i].studentName + ' - ' + data[i].id+'</option>'
+                        op += '<option value="' + data[i].id+'">'+data[i].user_id + ' - ' + data[i].studentName+'</option>'
                     }
                 }
                 div.find('.student').html("");
