@@ -27,7 +27,7 @@
             @yield('content')
         </div>
         @include('layouts.footer')
-        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
         @yield('custom_js')
     </body>
 </html>

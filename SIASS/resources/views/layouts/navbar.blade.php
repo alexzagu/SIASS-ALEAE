@@ -54,6 +54,7 @@
                         @endif
                     </ul>
                 </li-->
+                <li><a href="/admin/reports">Reportes</a></li>
             </ul>
             @if (auth()->user())
                 <form method="POST" action="{{ route('logout') }}" class="navbar-form navbar-right">
