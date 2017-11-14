@@ -80,8 +80,6 @@ class SocialServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-
         if ($request->edit) {
             return redirect('admin/register-social-service')->withInput();
         }

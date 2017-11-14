@@ -104,6 +104,13 @@ class AdministratorController extends Controller
                 if ($studentService) {
                     $socialService->currentCapability += 1;
                     $socialService->save();
+                    if ($socialService->type == 'SSC') {
+                        $student->totalRegisteredHoursSSC += $socialService->totalHours;
+                    }
+                    elseif ($socialService->type == 'SSP') {
+                        $student->totalRegisteredHoursSSP += $socialService->totalHours;
+                    }
+                    $student->save();
                     return redirect('admin/home')->with('success', 'Se registró el alumno al servicio social con éxito.');
                 }
                 else {
@@ -153,6 +160,27 @@ class AdministratorController extends Controller
         }
     }
 
+    public function showStudentInfoForm(Request $request) {
+        $id = $request->user_id;
+
+        if ($id) {
+            $student = Student::find($id);
+
+            if ($student) {
+                $user = $student->user;
+                $sscHoursPorAcreditar = 240 - $student->totalCertifiedHoursSSC;
+                if($sscHoursPorAcreditar < 0) {
+                    $sscHoursPorAcreditar = 0;
+                }
+                return view('pages.admin.showStudentInfo')->with(['user' => $user, 'student' => $student, 'horasPorAcreditar' => $sscHoursPorAcreditar]);
+            } else {
+                return redirect()->back()->with(['fail' => 'No se ha encontrado registro de ningún alumno con la matrícula: '.$id.'. Favor de verificar la información e intentar de nuevo.']);
+            }
+        } else {
+            return view('pages.admin.showStudentInfo');
+        }
+    }
+
     public function createHoursCertificationForm()
     {
         $user = auth()->user();
@@ -173,38 +201,33 @@ class AdministratorController extends Controller
     }
 
     public function certifyStudentHours(Request $request) {
-        $studentserviceid = $request->studentId;
+        $studentServiceID = $request->studentServiceId;
         $hours = $request->certifiedHours;
 
-        $studentService = StudentService::find($studentserviceid);
+        $studentService = StudentService::find($studentServiceID);
 
-        $studentid = $studentService->user_id;
-        $serviceid = $studentService->service_id;
+        $studentService->certifiedHours = $hours;
+        $studentService->status = 'Completado';
 
-        $studentService->CertifiedHours = $hours;
+        $socialService = $studentService->socialService;
+        $student = $studentService->student;
 
-        $socialService = SocialService::find($serviceid);
-        $student = Student::find($studentid);
-
-        if($socialService->type == 'ssc') {
+        if ($socialService->type == 'SSC') {
             $student->totalRegisteredHoursSSC -= $studentService->registeredHours;
             $student->totalCertifiedHoursSSC += $hours;
-        }elseif ($socialService->type == 'ssp'){
+        }
+        elseif ($socialService->type == 'SSP'){
             $student->totalRegisteredHoursSSP -= $studentService->registeredHours;
             $student->totalCertifiedHoursSSP += $hours;
         }
-        $student->totalCertifiedHoursSS += $hours;
-        $studentService->registeredHours = 0;
-        $studentService->save();
-        $student->save();
 
-        if ($student) {
+        if ($studentService->save() && $student->save()) {
             return redirect('/admin/home')->with('success',
-                'Se han acreditado '.$hours." horas para el estudiante con matricula: ".$studentid);
-        } else {
-            return redirect('/admin/home')->with('fail', 'Ha habido un error al registrar las horas. Favor de intentar más tarde.');
+                'Se han acreditado '.$hours." horas para el estudiante con matrícula: ".$student->user_id);
         }
-
+        else {
+            return redirect()->back()->with('fail', 'Ha ocurrido un error al registrar las horas. Favor de intentar más tarde.');
+        }
     }
 
     public function uploadDischargeLetter(Request $request) {
@@ -224,6 +247,7 @@ class AdministratorController extends Controller
             return view('pages.admin.uploadDischargeLetter');
         }
     }
+
 
     /**
      * Display the specified resource.

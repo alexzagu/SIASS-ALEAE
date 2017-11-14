@@ -95,6 +95,7 @@ class DatabaseSeeder extends Seeder
                         'totalCertifiedHoursSSP' => (int)rand(0, 240),
                         'totalRegisteredHoursSSP' => (int)rand(0, 240),
                         'totalCertifiedHoursSS' => (int)rand(0, 480),
+                        'totalRegisteredHoursSS' => (int)rand(0, 480),
                         'studentStatus' => 'Regular Student',
                         'semester' => 9,
                         'certifiedUnits' => 560,

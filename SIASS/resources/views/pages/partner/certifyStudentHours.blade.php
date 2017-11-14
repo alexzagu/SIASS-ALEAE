@@ -4,7 +4,7 @@
     @include('layouts.navbar')
 @endsection
 
-@section('title', 'SIASS - Certify Student Hours')
+@section('title', 'SIASS - Registrar Horas a Alumno')
 
 @section('content')
 
@@ -13,32 +13,30 @@
         <div class="col-md-12">
             <form action="{{ route('partner-certifies-student-hours') }}" method="POST">
                 {{ csrf_field() }}
-                @if($user->isPartner())
-                    <div class="form-group">
-                        <label for="nameField">Nombre del Proyecto</label>
-                        <select class="form-control service" name="serviceId" id="serviceId" required>
-                            <option value = "">- Select Project -</option>
-                            @foreach($services as $service)
-                                <option value="{{$service->id}}"
-                                        @if(old('service_id') == $service->id)
-                                        selected
-                                        @endif>
-                                    {{$service->name}} - {{$service->id}}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="nameField">Nombre del Alumno</label>
-                        <select class="form-control student" name="studentId" id="studentId" required>
+                <div class="form-group">
+                    <label for="nameField">Nombre del Proyecto</label>
+                    <select class="form-control service" name="serviceId" id="serviceId" required>
+                        <option value = "">- Select Project -</option>
+                        @foreach($services as $service)
+                            <option value="{{$service->id}}"
+                                    @if(old('service_id') == $service->id)
+                                    selected
+                                    @endif>
+                                {{$service->name}} - {{$service->id}}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nameField">Nombre del Alumno</label>
+                    <select class="form-control student" name="studentServiceId" id="studentServiceId" required>
 
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="hoursField">Número de horas a acreditar</label>
-                        <input name="certifiedHours" type="number" class="form-control" id="certifiedHours" value="{{ old('totalHours') }}" placeholder="0"  required>
-                    </div>
-                @endif
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="hoursField">Número de horas a acreditar</label>
+                    <input name="certifiedHours" type="number" class="form-control" id="certifiedHours" value="{{ old('totalHours') }}" placeholder="0"  required>
+                </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Registrar Horas Acreditadas</button>
                 </div>
@@ -50,6 +48,6 @@
 @section('custom_js')
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('js/adminCertifyHours.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/partnerCertifyHours.js') }}"></script>
 
 @endsection

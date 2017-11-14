@@ -22,7 +22,7 @@ class StudentController extends Controller
     {
         $user = auth()->user();
         $userInfo = $user->userInfo;
-        $sscHoursPorAcreditar = 240 - $user->totalCertifiedHoursSSC;
+        $sscHoursPorAcreditar = 240 - $userInfo->totalCertifiedHoursSSC;
         if($sscHoursPorAcreditar < 0) {
             $sscHoursPorAcreditar = 0;
         }
