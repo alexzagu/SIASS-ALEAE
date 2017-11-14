@@ -1,0 +1,86 @@
+<legend>Filtros</legend>
+<div class="form-group col-md-4">
+    <label for="partner_id">Clave de socio formador</label>
+    <input name="partner_id" id="partner_id" class="form-control" type="text">
+
+    <label for="totalHours">Horas posibles para acreditar por proyecto</label>
+    <div class="form-inline">
+        <select name="conditionTotalHours" class="form-control">
+            <option selected value=">=">Mayor o igual a</option>
+            <option value="<=">Menor o igual a</option>
+        </select>
+        <input class="form-control" name="totalHours" id="totalHours" type="number">
+    </div>
+
+    <label for="managerName">Coordinador</label>
+    <input name="managerName" id="managerName" class="form-control" type="text">
+
+    <label for="capability">Cupo total</label>
+    <div class="form-inline">
+        <select name="conditionCapability" class="form-control">
+            <option selected value=">=">Mayor o igual a</option>
+            <option value="<=">Menor o igual a</option>
+        </select>
+        <input class="form-control" name="capability" id="capability" type="number">
+    </div>
+</div>
+
+<div class="form-group col-md-4">
+    <label for="currentCapability">Cupo actual</label>
+    <div class="form-inline">
+        <select name="conditionCurrentCapability" class="form-control">
+            <option selected value=">=">Mayor o igual a</option>
+            <option value="<=">Menor o igual a</option>
+        </select>
+        <input class="form-control" name="currentCapability" id="currentCapability" type="number">
+    </div>
+
+    <label for="startDate">Fecha de inicio de actividades</label>
+    <input name="startDate" id="startDate" class="form-control" type="date">
+
+    <label for="endDate">Fecha de finalización de actividades</label>
+    <input name="endDate" id="endDate" class="form-control" type="date">
+
+    <label for="type">Tipo de servicio</label>
+    <select name="type" class="form-control" id="type">
+        <option selected disabled>Seleccione una opción</option>
+        <option value="SSC">Servicio Social Comunitario - SSC</option>
+        <option value="SSP">Servicio Social Profesional - SSP</option>
+        <option value="ASS">Servicio Social Ciudadano a través de materias - ASS</option>
+        <option value="ACC">Actividad de aprendizaje en materia sin acreditación de horas - ACC</option>
+    </select>
+</div>
+
+<div class="form-group col-md-4">
+    <label for="period">A partir del periodo</label>
+    <div class="form-inline">
+        <select name="period" id="period" class="form-control">
+            <option selected disabled>Seleccione una opción</option>
+            <option value="11">Enero - Mayo</option>
+            <option value="12">Verano</option>
+            <option value="13">Agosto - Diciembre</option>
+        </select>
+        <select name="year" id="year" class="form-control">
+        </select>
+    </div>
+
+    <label for="social_cause">Causa social</label>
+    <select name="social_cause" class="form-control" id="social_cause">
+        <option selected disabled>Seleccione una opción</option>
+        <option value="Ciencia y Tecnología">Ciencia y Tecnología</option>
+        <option value="Desarrollo Integral">Desarrollo Integral</option>
+        <option value="Economía y Emprendimiento">Economía y Emprendimiento</option>
+        <option value="Educación">Educación</option>
+        <option value="Inclusión y Grupos Vulnerables">Inclusión y Grupos Vulnerables</option>
+        <option value="Infraestructura">Infraestructura</option>
+        <option value="Legalidad">Legalidad</option>
+        <option value="Medio Ambiente y Sustentabilidad">Medio Ambiente y Sustentabilidad</option>
+        <option value="Salud y Bienestar">Salud y Bienestar</option>
+        <option value="Profesionalismo Cívico">Profesionalismo Cívico</option>
+    </select>
+
+    <label for="campus">Campus</label>
+    <select name="campus" id="campus" class="form-control">
+        <option selected disabled>Selecciona una opción</option>
+    </select>
+</div>

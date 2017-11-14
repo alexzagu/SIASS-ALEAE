@@ -85,3 +85,8 @@ Route::get('student/home', 'StudentController@index');
 Route::get('letter/download/{file_name}', 'DischargeLetterController@download');
 Route::delete('letter/delete/{file_name}', 'DischargeLetterController@destroy')->name('delete-letter');
 //------------
+
+//Reports routes
+Route::get('admin/reports', 'ReportController@index');
+//Route::post('admin/student-reports-filtered', 'ReportController@filter')->name('student-filters');
+//------------
