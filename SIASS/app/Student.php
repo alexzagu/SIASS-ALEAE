@@ -15,6 +15,7 @@ class Student extends Model
         'totalCertifiedHoursSSP',
         'totalRegisteredHoursSSP',
         'totalCertifiedHoursSS',
+        'totalRegisteredHoursSS',
         'studentStatus',
         'semester',
         'certifiedUnits',

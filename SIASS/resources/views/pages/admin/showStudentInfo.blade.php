@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'SIASS - Ver informacion de alumno')
+@section('title', 'SIASS - Ver información de alumno')
 
 @include('layouts.navbar')
 
@@ -24,7 +24,7 @@
                         <table style="width:100%" class="table table-bordered">
                             <h2>Historial del Alumno en Servicio Social</h2>
                             <tr>
-                                <th>Matricula</th>
+                                <th>Matrícula</th>
                                 <th>Nombre</th>
                                 <th>Carrera</th>
                                 <th>Semestre</th>
@@ -56,8 +56,8 @@
                                 <th>Unidades Acreditadas</th>
                                 <th>Correo</th>
                                 <th>Campus</th>
-                                <th>Tel.Primario</th>
-                                <th>Tel.Secundario</th>
+                                <th>Tel. Primario</th>
+                                <th>Tel. Secundario</th>
                             </tr>
                             <tr>
                                 <td>{{$student->certifiedUnits}}</td>
@@ -70,19 +70,19 @@
                                 <th class="bg-info">Horas Acreditadas SSC</th>
                                 <td>{{$student->totalCertifiedHoursSSC}}</td>
                                 <th class="bg-info">Horas por Acreditadar SSC</th>
-                                <td colspan="2">{{240 - $student->totalCertifiedHoursSSC}}</td>
+                                <td colspan="2">{{$student->totalRegisteredHoursSSC}}</td>
                             </tr>
                             <tr>
                                 <th class="bg-info">Horas Acreditadas SSP</th>
                                 <td>{{$student->totalCertifiedHoursSSP}}</td>
                                 <th class="bg-info">Horas por Acreditadar SSP</th>
-                                <td colspan="2">{{$horasPorAcreditar}}</td>
+                                <td colspan="2">{{$student->totalRegisteredHoursSSP}}</td>
                             </tr>
                             <tr>
                                 <th class="bg-info">Total Acreditadas SS</th>
-                                <td>{{$student->totalCertifiedHoursSSC + $student->totalCertifiedHoursSSP}}</td>
+                                <td>{{$student->totalCertifiedHoursSS}}</td>
                                 <th class="bg-info">Total por Acreditadas SS</th>
-                                <td colspan="2">{{480 - $student->totalCertifiedHoursSS}}</td>
+                                <td colspan="2">{{$student->totalRegisteredHoursSS}}</td>
                             </tr>
                         </table>
                     </div>
@@ -91,7 +91,7 @@
                         <table style="width:100%" class="table table-bordered">
                             <h2>Reporte de Experiencias Ciudadanas (REC)</h2>
                             <tr class="bg-primary">
-                                <th>Perígit odo</th>
+                                <th>Periodo</th>
                                 <th>Fecha de Envío</th>
                                 <th>Fecha de Aplicación</th>
                                 <th>Estatus</th>
@@ -129,10 +129,9 @@
                         </table>
                     </div>
 
-                    <h3>Proyectos y Actividades de aprendizaje ciudadano</h3>
-
                     <div class="table-responsive">
                         <table style="width:100%" class="table table-bordered">
+                            <h2>Proyectos y Actividades de aprendizaje ciudadano</h2>
                             <tr class="bg-primary">
                                 <th>#</th>
                                 <th>Periodo</th>
@@ -141,8 +140,8 @@
                                 <th>Institución/Empresa</th>
                                 <th>Fecha Inicio</th>
                                 <th>Fecha Término</th>
-                                <th>Hrs.Registradas</th>
-                                <th>Hrs.Acreditadas</th>
+                                <th>Hrs. Registradas</th>
+                                <th>Hrs. Acreditadas</th>
                                 <th>Estatus</th>
                                 <th>Carta Finiquito</th>
                             </tr>
@@ -155,7 +154,7 @@
                                     <td>{{ $studentService->socialService->managerName }}</td>
                                     <td>{{ Carbon\Carbon::parse($studentService->socialService->startDate)->format('d F Y') }}</td>
                                     <td>{{ Carbon\Carbon::parse($studentService->socialService->endDate)->format('d F Y') }}</td>
-                                    <td>{{ $studentService->socialService->totalHours }}</td>
+                                    <td>{{ $studentService->registeredHours }}</td>
                                     <td>{{ $studentService->certifiedHours}}</td>
                                     <td>{{ $studentService->status}}</td>
                                     <td>{{ $studentService->dischargeLetter}}</td>

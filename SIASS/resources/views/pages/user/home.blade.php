@@ -24,10 +24,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 ">
-
                             <h2>Información del Admininstrador</h2>
                             <div class="table-responsive">
-                                <table style="width:100%" class="table">
+                                <table style="width:100%" class="table table-bordered">
                                     <tr>
                                         <th>Nombre</th>
                                         <th>Correo Electronico</th>
@@ -36,11 +35,11 @@
                                         <th>Extensión</th>
                                     </tr>
                                     <tr>
-                                        <th>{{$user->name}}</th>
-                                        <th>{{$user->email}}</th>
-                                        <th>{{$admin->department}}</th>
-                                        <th>{{$admin->phone}}</th>
-                                        <th>{{$admin->phoneExtension}}</th>
+                                        <td>{{$user->name}}</td>
+                                        <td>{{$user->email}}</td>
+                                        <td>{{$admin->department}}</td>
+                                        <td>{{$admin->phone}}</td>
+                                        <td>{{$admin->phoneExtension}}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -55,7 +54,7 @@
                         <div class="col-md-12 ">
                             <h2>Mis servicios sociales</h2>
                             <div class="table-responsive">
-                                <table class="table">
+                                <table style="width:100%" class="table table-bordered">
                                     <tr>
                                         <th>Nombre institución</th>
                                         <th>Clave de servicio social</th>
@@ -96,7 +95,7 @@
                                 <table style="width:100%" class="table table-bordered">
                                     <h2>Historial del Alumno en Servicio Social</h2>
                                     <tr>
-                                        <th>Matricula</th>
+                                        <th>Matrícula</th>
                                         <th>Nombre</th>
                                         <th>Carrera</th>
                                         <th>Semestre</th>
@@ -128,8 +127,8 @@
                                         <th>Unidades Acreditadas</th>
                                         <th>Correo</th>
                                         <th>Campus</th>
-                                        <th>Tel.Primario</th>
-                                        <th>Tel.Secundario</th>
+                                        <th>Tel. Primario</th>
+                                        <th>Tel. Secundario</th>
                                     </tr>
                                     <tr>
                                         <td>{{$userInfo->certifiedUnits}}</td>
@@ -142,19 +141,19 @@
                                         <th class="bg-info">Horas Acreditadas SSC</th>
                                         <td>{{$userInfo->totalCertifiedHoursSSC}}</td>
                                         <th class="bg-info">Horas por Acreditadar SSC</th>
-                                        <td colspan="2">{{240 - $userInfo->totalCertifiedHoursSSC}}</td>
+                                        <td colspan="2">{{$userInfo->totalRegisteredHoursSSC}}</td>
                                     </tr>
                                     <tr>
                                         <th class="bg-info">Horas Acreditadas SSP</th>
                                         <td>{{$userInfo->totalCertifiedHoursSSP}}</td>
                                         <th class="bg-info">Horas por Acreditadar SSP</th>
-                                        <td colspan="2">{{$horasPorAcreditar}}</td>
+                                        <td colspan="2">{{$userInfo->totalRegisteredHoursSSP}}</td>
                                     </tr>
                                     <tr>
-                                        <th class="bg-info">Total Acreditadas SS</th>
-                                        <td>{{$userInfo->totalCertifiedHoursSSC + $userInfo->totalCertifiedHoursSSP}}</td>
-                                        <th class="bg-info">Total por Acreditadas SS</th>
-                                        <td colspan="2">{{480 - $userInfo->totalCertifiedHoursSS}}</td>
+                                        <th class="bg-info">Total de Horas Acreditadas SS</th>
+                                        <td>{{$userInfo->totalCertifiedHoursSS}}</td>
+                                        <th class="bg-info">Total de Horas por Acreditadar SS</th>
+                                        <td colspan="2">{{$userInfo->totalRegisteredHoursSS}}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -163,7 +162,7 @@
                                 <table style="width:100%" class="table table-bordered">
                                     <h2>Reporte de Experiencias Ciudadanas (REC)</h2>
                                     <tr class="bg-primary">
-                                        <th>Perígit odo</th>
+                                        <th>Periodo</th>
                                         <th>Fecha de Envío</th>
                                         <th>Fecha de Aplicación</th>
                                         <th>Estatus</th>
@@ -201,10 +200,9 @@
                                 </table>
                             </div>
 
-                            <h3>Proyectos y Actividades de aprendizaje ciudadano</h3>
-
                             <div class="table-responsive">
                                 <table style="width:100%" class="table table-bordered">
+                                    <h2>Proyectos y Actividades de aprendizaje ciudadano</h2>
                                     <tr class="bg-primary">
                                         <th>#</th>
                                         <th>Periodo</th>
@@ -213,8 +211,8 @@
                                         <th>Institución/Empresa</th>
                                         <th>Fecha Inicio</th>
                                         <th>Fecha Término</th>
-                                        <th>Hrs.Registradas</th>
-                                        <th>Hrs.Acreditadas</th>
+                                        <th>Hrs. Registradas</th>
+                                        <th>Hrs. Acreditadas</th>
                                         <th>Estatus</th>
                                         <th>Carta Finiquito</th>
                                     </tr>
@@ -227,7 +225,7 @@
                                             <td>{{ $studentService->socialService->managerName }}</td>
                                             <td>{{ Carbon\Carbon::parse($studentService->socialService->startDate)->format('d F Y') }}</td>
                                             <td>{{ Carbon\Carbon::parse($studentService->socialService->endDate)->format('d F Y') }}</td>
-                                            <td>{{ $studentService->socialService->totalHours }}</td>
+                                            <td>{{ $studentService->registeredHours }}</td>
                                             <td>{{ $studentService->certifiedHours}}</td>
                                             <td>{{ $studentService->status}}</td>
                                             <td>{{ $studentService->dischargeLetter}}</td>

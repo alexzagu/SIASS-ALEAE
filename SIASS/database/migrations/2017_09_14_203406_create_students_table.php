@@ -22,9 +22,10 @@ class CreateStudentsTable extends Migration
             $table->unsignedInteger('totalCertifiedHoursSSP');
             $table->unsignedInteger('totalRegisteredHoursSSP');
             $table->unsignedInteger('totalCertifiedHoursSS')->storeAs('totalCertifiedHoursSSC + totalCertifiedHoursSSP');
+            $table->unsignedInteger('totalRegisteredHoursSS')->storeAs('totalRegisteredHoursSSC + totalRegisteredHoursSSP');
             $table->string('studentStatus');
-            $table->integer('semester')->unsigned();
-            $table->integer('certifiedUnits')->unsigned();
+            $table->unsignedInteger('semester');
+            $table->unsignedInteger('certifiedUnits');
             $table->string('campus');
             $table->string('mainPhone');
             $table->string('secondaryPhone');

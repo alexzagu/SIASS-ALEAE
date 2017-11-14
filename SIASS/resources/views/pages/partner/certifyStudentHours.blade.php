@@ -4,7 +4,7 @@
     @include('layouts.navbar')
 @endsection
 
-@section('title', 'SIASS - Certify Student Hours')
+@section('title', 'SIASS - Registrar Horas a Alumno')
 
 @section('content')
 
@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <label for="nameField">Nombre del Alumno</label>
-                    <select class="form-control student" name="studentId" id="studentId" required>
+                    <select class="form-control student" name="studentServiceId" id="studentServiceId" required>
 
                     </select>
                 </div>
@@ -48,6 +48,6 @@
 @section('custom_js')
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('js/adminCertifyHours.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/partnerCertifyHours.js') }}"></script>
 
 @endsection
