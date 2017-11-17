@@ -13,6 +13,12 @@ class Sensibilization extends Model
     'moral_judgement'
 ];
 
+    protected $primaryKey = 'social_service_id';
+
+    public $incrementing = false;
+
+    protected $keyType = 'string';
+
     public $timestamps = false;
 
     public function social_service() {
