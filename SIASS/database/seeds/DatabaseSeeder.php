@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
 
         $users = User::all();
 
-        $registeredBy = 'A00000001';
+        $registeredBy = 'L00000001';
 
         foreach($users as $user) {
             $role = $user->role;
@@ -90,12 +90,12 @@ class DatabaseSeeder extends Seeder
                         'user_id' => $user->id,
                         'major' => 'ITC',
                         'studyPlan' => 'ITC11',
-                        'totalCertifiedHoursSSC' => (int)rand(0, 480),
-                        'totalRegisteredHoursSSC' => (int)rand(0, 240),
-                        'totalCertifiedHoursSSP' => (int)rand(0, 240),
-                        'totalRegisteredHoursSSP' => (int)rand(0, 240),
-                        'totalCertifiedHoursSS' => (int)rand(0, 480),
-                        'totalRegisteredHoursSS' => (int)rand(0, 480),
+                        'totalCertifiedHoursSSC' => 260,
+                        'totalRegisteredHoursSSC' => 0,
+                        'totalCertifiedHoursSSP' => 100,
+                        'totalRegisteredHoursSSP' => 0,
+                        'totalCertifiedHoursSS' => 360,
+                        'totalRegisteredHoursSS' => 0,
                         'studentStatus' => 'Regular Student',
                         'semester' => 9,
                         'certifiedUnits' => 560,
