@@ -22,11 +22,10 @@ class StudentController extends Controller
     {
         $user = auth()->user();
         $userInfo = $user->userInfo;
-        $sscHoursPorAcreditar = 240 - $userInfo->totalCertifiedHoursSSC;
-        if($sscHoursPorAcreditar < 0) {
-            $sscHoursPorAcreditar = 0;
-        }
-        return view('pages.user.home')->with(['user' => $user, 'userInfo' => $userInfo, 'horasPorAcreditar' => $sscHoursPorAcreditar]);
+        $totalCertifiedHoursSS = $userInfo->totalCertifiedHoursSS;
+        $totalRegisteredHoursSS = $userInfo->totalRegisteredHoursSS;
+        return view('pages.user.home')->with(['user' => $user, 'userInfo' => $userInfo,
+        'totalCertifiedHoursSS' => $totalCertifiedHoursSS, 'totalRegisteredHoursSS' => $totalRegisteredHoursSS]);
     }
 
     /**

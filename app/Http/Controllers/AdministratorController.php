@@ -185,11 +185,10 @@ class AdministratorController extends Controller
 
             if ($student) {
                 $user = $student->user;
-                $sscHoursPorAcreditar = 240 - $student->totalCertifiedHoursSSC;
-                if($sscHoursPorAcreditar < 0) {
-                    $sscHoursPorAcreditar = 0;
-                }
-                return view('pages.admin.showStudentInfo')->with(['user' => $user, 'student' => $student, 'horasPorAcreditar' => $sscHoursPorAcreditar]);
+                $totalCertifiedHoursSS = $student->totalCertifiedHoursSS;
+                $totalRegisteredHoursSS = $student->totalRegisteredHoursSS;
+                return view('pages.admin.showStudentInfo')->with(['user' => $user, 'student' => $student,
+                'totalCertifiedHoursSS' => $totalCertifiedHoursSS, 'totalRegisteredHoursSS' => $totalRegisteredHoursSS]);
             } else {
                 return redirect()->back()->with(['fail' => 'No se ha encontrado registro de ningún alumno con la matrícula: '.$id.'. Favor de verificar la información e intentar de nuevo.']);
             }

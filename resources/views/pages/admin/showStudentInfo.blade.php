@@ -80,9 +80,9 @@
                             </tr>
                             <tr>
                                 <th class="bg-info">Total Acreditadas SS</th>
-                                <td>{{$student->totalCertifiedHoursSS}}</td>
+                                <td>{{totalCertifiedHoursSS}}</td>
                                 <th class="bg-info">Total por Acreditadas SS</th>
-                                <td colspan="2">{{$student->totalRegisteredHoursSS}}</td>
+                                <td colspan="2">{{totalRegisteredHoursSS}}</td>
                             </tr>
                         </table>
                     </div>
