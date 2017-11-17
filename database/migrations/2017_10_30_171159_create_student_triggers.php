@@ -28,15 +28,16 @@ class CreateStudentTriggers extends Migration
 
     public function up()
     {
-        DB::unprepared('
+        DB::unprepared("
         CREATE OR REPLACE FUNCTION updateCertifiedFlagFunction() RETURNS TRIGGER
+            AS '
             BEGIN
                 IF (NEW.totalCertifiedHoursSS >= 480 AND OLD.isCertified = 0) THEN
                     NEW.isCertified := 1;
                     NEW.certificationDate := now();
                 END IF;
-            END;
-        ');
+            END' LANGUAGE 'plpgsql';
+        ");
 
         DB::unprepared('
         CREATE TRIGGER tr_update_certified_flag BEFORE UPDATE ON `students` FOR EACH ROW
