@@ -32,8 +32,8 @@ class CreateStudentTriggers extends Migration
         CREATE OR REPLACE FUNCTION updateCertifiedFlagFunction() RETURNS TRIGGER
             BEGIN
                 IF (NEW.totalCertifiedHoursSS >= 480 AND OLD.isCertified = 0) THEN
-                    SET NEW.isCertified = 1;
-                    SET NEW.certificationDate = now();
+                    NEW.isCertified := 1;
+                    NEW.certificationDate := now();
                 END IF;
             END;
         ');
