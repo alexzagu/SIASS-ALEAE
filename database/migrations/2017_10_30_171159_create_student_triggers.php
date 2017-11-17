@@ -36,12 +36,12 @@ class CreateStudentTriggers extends Migration
                     SET NEW.certificationDate = now();
                 END IF;
             END;
-        ')
+        ');
 
         DB::unprepared('
         CREATE TRIGGER tr_update_certified_flag BEFORE UPDATE ON `students` FOR EACH ROW
             EXECUTE PROCEDURE updateCertifiedFlagFunction();
-        ')
+        ');
     }
 
     /**
