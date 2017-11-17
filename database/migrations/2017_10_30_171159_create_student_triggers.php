@@ -11,6 +11,7 @@ class CreateStudentTriggers extends Migration
      *
      * @return void
      */
+     /*
     public function up()
     {
         DB::unprepared('
@@ -22,6 +23,25 @@ class CreateStudentTriggers extends Migration
                 END IF;
             END
         ');
+    }
+    */
+
+    public function up()
+    {
+        DB::unprepared('
+        CREATE OR REPLACE FUNCTION updateCertifiedFlagFunction() RETURNS TRIGGER
+            BEGIN
+                IF (NEW.totalCertifiedHoursSS >= 480 AND OLD.isCertified = 0) THEN
+                    SET NEW.isCertified = 1;
+                    SET NEW.certificationDate = now();
+                END IF;
+            END;
+        ')
+
+        DB::unprepared('
+        CREATE TRIGGER tr_update_certified_flag BEFORE UPDATE ON `students` FOR EACH ROW
+            EXECUTE PROCEDURE updateCertifiedFlagFunction();
+        ')
     }
 
     /**
