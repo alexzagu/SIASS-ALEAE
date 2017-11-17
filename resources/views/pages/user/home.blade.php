@@ -151,9 +151,9 @@
                                     </tr>
                                     <tr>
                                         <th class="bg-info">Total de Horas Acreditadas SS</th>
-                                        <td>{{totalCertifiedHoursSS}}</td>
+                                        <td>{{$totalCertifiedHoursSS}}</td>
                                         <th class="bg-info">Total de Horas por Acreditadar SS</th>
-                                        <td colspan="2">{{totalRegisteredHoursSS}}</td>
+                                        <td colspan="2">{{$totalRegisteredHoursSS}}</td>
                                     </tr>
                                 </table>
                             </div>
