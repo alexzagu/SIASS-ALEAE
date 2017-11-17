@@ -42,6 +42,7 @@
                     <li class="active"><a href="/partner/register-social-service">Registrar un nuevo proyecto social</a></li>
                     <li class="active"><a href="/partner/register-student-to-social-service">Registrar estudiante a servicio social</a></li>
                     <li class="active"><a href="/partner/certify-student-hours">Acreditar horas a alumno</a></li>
+                    <li class="active"><a href="/partner/drop-student">Dar de baja alumno</a></li>
                 @endif
                 <!--li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@if(auth()->user()){{ auth()->user()->name }}@else Usuario @endif<span class="caret"></span></a>

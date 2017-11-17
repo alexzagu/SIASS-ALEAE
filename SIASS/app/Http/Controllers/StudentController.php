@@ -113,6 +113,23 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student = Student::find($id);
+        $student->delete();
+
+        return redirect()->back()->with('success', 'Se ha dado de baja al alumno');
+    }
+
+    /**
+     * restore the specified resource to storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function restore( $id )
+    {
+        $student = Student::withTrashed()->where('user_id', '=', $id)->first();
+        $student->restore();
+
+        return redirect()->back()->with('success', 'Se ha dado de alta al alumno');
     }
 }
