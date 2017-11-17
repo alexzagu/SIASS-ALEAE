@@ -26,6 +26,7 @@ class CreateStudentTriggers extends Migration
     }
     */
 
+    /*
     public function up()
     {
         DB::unprepared("
@@ -43,15 +44,16 @@ class CreateStudentTriggers extends Migration
         CREATE TRIGGER tr_update_certified_flag AFTER UPDATE ON students FOR EACH ROW
             EXECUTE PROCEDURE updateCertifiedFlagFunction();
         ');
-    }
+    }*/
 
     /**
      * Reverse the migrations.
      *
      * @return void
      */
+     /*
     public function down()
     {
         DB::unprepared('DROP TRIGGER `tr_update_certified_flag`');
-    }
+    }*/
 }

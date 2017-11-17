@@ -15,8 +15,6 @@ class Student extends Model
         'totalRegisteredHoursSSC',
         'totalCertifiedHoursSSP',
         'totalRegisteredHoursSSP',
-        'totalCertifiedHoursSS',
-        'totalRegisteredHoursSS',
         'studentStatus',
         'semester',
         'certifiedUnits',
@@ -51,6 +49,14 @@ class Student extends Model
 
     public function studentServices() {
         return $this->hasMany('App\StudentService', 'user_id');
+    }
+
+    public function totalCertifiedHoursSS() {
+        return $this->totalCertifiedHoursSSC + $this->totalCertifiedHoursSSP;
+    }
+
+    public function totalRegisteredHoursSS() {
+        return $this->totalRegisteredHoursSSC + $this->totalRegisteredHoursSSP;
     }
 
     public $timestamps = false;
