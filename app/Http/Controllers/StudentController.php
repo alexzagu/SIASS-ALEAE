@@ -22,8 +22,8 @@ class StudentController extends Controller
     {
         $user = auth()->user();
         $userInfo = $user->userInfo;
-        $totalCertifiedHoursSS = $userInfo->totalCertifiedHoursSS;
-        $totalRegisteredHoursSS = $userInfo->totalRegisteredHoursSS;
+        $totalCertifiedHoursSS = $userInfo->totalCertifiedHoursSS();
+        $totalRegisteredHoursSS = $userInfo->totalRegisteredHoursSS();
         return view('pages.user.home')->with(['user' => $user, 'userInfo' => $userInfo,
         'totalCertifiedHoursSS' => $totalCertifiedHoursSS, 'totalRegisteredHoursSS' => $totalRegisteredHoursSS]);
     }

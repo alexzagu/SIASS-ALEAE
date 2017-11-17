@@ -185,8 +185,8 @@ class AdministratorController extends Controller
 
             if ($student) {
                 $user = $student->user;
-                $totalCertifiedHoursSS = $student->totalCertifiedHoursSS;
-                $totalRegisteredHoursSS = $student->totalRegisteredHoursSS;
+                $totalCertifiedHoursSS = $student->totalCertifiedHoursSS();
+                $totalRegisteredHoursSS = $student->totalRegisteredHoursSS();
                 return view('pages.admin.showStudentInfo')->with(['user' => $user, 'student' => $student,
                 'totalCertifiedHoursSS' => $totalCertifiedHoursSS, 'totalRegisteredHoursSS' => $totalRegisteredHoursSS]);
             } else {
