@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
 
         $users = User::all();
 
-        $registeredBy = 'A00000001';
+        $registeredBy = 'L00000003';
 
         foreach($users as $user) {
             $role = $user->role;
