@@ -40,7 +40,7 @@ class CreateStudentTriggers extends Migration
         ");
 
         DB::unprepared('
-        CREATE TRIGGER tr_update_certified_flag BEFORE UPDATE ON `students` FOR EACH ROW
+        CREATE TRIGGER tr_update_certified_flag BEFORE UPDATE ON students FOR EACH ROW
             EXECUTE PROCEDURE updateCertifiedFlagFunction();
         ');
     }
