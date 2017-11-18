@@ -238,6 +238,11 @@ class AdministratorController extends Controller
         }
 
         if ($studentService->save() && $student->save()) {
+            if ($student->totalCertifiedHoursSS() >= 480 && $student->isCertified == 0) {
+                $student->isCertified = 1;
+                $student->certificationDate = Carbon::now();
+                $student->save();
+            }
             return redirect('/admin/home')->with('success',
                 'Se han acreditado '.$hours." horas para el estudiante con matrícula: ".$student->user_id);
         }
