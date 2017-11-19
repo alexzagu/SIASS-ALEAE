@@ -8,12 +8,13 @@
 @section('title', 'SIASS - Login')
 
 @section('content')
-    <h1>SIASS</h1>
-    <h3>Sistema Integral de Administración del Servicio Social</h3>
-    <div class="container">
+    <div class="container" id="login-container">
         <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="loginFormContainer">
+            <div class="col-md-12">
+                <h1>SIASS</h1>
+                <h3>Sistema Integral de Administración del Servicio Social</h3>
+                <br>
+                <div class="loginFormContainer center">
                     <form action="{{ route('login') }}" method="POST" class="form-signin">
                         {{ csrf_field() }}
                         <h2 class="form-signin-heading">Iniciar Sesión</h2>
@@ -23,7 +24,7 @@
                         </div>
                         <div class="form-group">
                             <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password"
-                                   required data-toggle="password">
+                                    required data-toggle = 'password'>
                         </div>
                         <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
                     </form>

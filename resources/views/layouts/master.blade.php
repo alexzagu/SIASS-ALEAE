@@ -8,22 +8,24 @@
     <body>
         @yield('navbar')
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+        <div class="container" id="master-container">
+            @if(session('success') !== null || session('fail') !== null)
+                <div class="row" id="master-row">
+                    <div class="col-md-12">
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
 
-                    @if (session('fail'))
-                        <div class="alert alert-danger">
-                            {{ session('fail') }}
-                        </div>
-                    @endif
+                        @if (session('fail'))
+                            <div class="alert alert-danger">
+                                {{ session('fail') }}
+                            </div>
+                        @endif
+                    </div>
                 </div>
-            </div>
+            @endif
             @yield('content')
         </div>
         @include('layouts.footer')
