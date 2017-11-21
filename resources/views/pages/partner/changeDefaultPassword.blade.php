@@ -5,7 +5,6 @@
 @endsection
 
 @section('custom_css')
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 @endsection
 
 @section('title', 'SIASS - Cambiar contraseña default')

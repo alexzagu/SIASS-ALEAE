@@ -79,7 +79,7 @@
                             'No se ha registrado ninguna carta finiquito para este proyecto social.'
                          !!}
                     </td>
-                    <td class="text-center"><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#{{ $student_service->socialService->id }}">Más información</button></td>
+                    <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{ $student_service->socialService->id }}">Más información</button></td>
                 </tr>
                 <div class="modal fade" id="{{ $student_service->socialService->id }}" role="dialog">
                     <div class="modal-dialog">
@@ -102,8 +102,8 @@
                                 <p><strong>Teléfono del coordinador:</strong> {{ $student_service->socialService->managerPhone }}</p>
                                 <p><strong>Cupo total:</strong> {{ $student_service->socialService->capability }}</p>
                                 <p><strong>Cupo actual:</strong> {{ $student_service->socialService->currentCapability }}</p>
-                                <p><strong>Fecha de inicio:</strong> {{ $student_service->socialService->startDate }}</p>
-                                <p><strong>Fecha de terminación:</strong> {{ $student_service->socialService->endDate }}</p>
+                                <p><strong>Fecha de inicio:</strong> {{ Carbon\Carbon::parse($student_service->socialService->startDate)->toFormattedDateString() }}</p>
+                                <p><strong>Fecha de terminación:</strong> {{ Carbon\Carbon::parse($student_service->socialService->endDate)->toFormattedDateString() }}</p>
                                 <p><strong>Causa social:</strong> {{ $student_service->socialService->type }}</p>
                                 <p><strong>Periodo:</strong> {{ $student_service->socialService->period }}</p>
                                 <p><strong>Campus:</strong> {{ $student_service->socialService->campus }}</p>
@@ -118,24 +118,6 @@
             @endforeach
         </table>
     @endif
-    <!--div class="col-md-8 col-md-offset-2">
-        <div class="panel panel-default">
-            <div class="panel-heading">Register</div>
-
-            <div class="panel-body">
-                <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
-                    <input type="hidden" name="student_service_id" value="">
-                    <div class="form-group">
-                        <label for="file" class="col-md-4 control-label">Carta finiquito</label>
-                        <div class="col-md-6">
-                            <input name="file" type="file" class="form-control">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Guardar carta</button>
-                </form>
-            </div>
-        </div>
-    </div-->
 @endsection
 
 @section('custom_js')

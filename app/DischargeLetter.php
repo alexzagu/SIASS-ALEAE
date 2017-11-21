@@ -21,4 +21,6 @@ class DischargeLetter extends Model
     public $timestamps = false;
 
     protected $primaryKey = 'student_service_id';
+
+    protected $keyType = 'string';
 }

@@ -153,15 +153,11 @@ class DischargeLetterController extends Controller
     public function download($file_name) {
         $user = auth()->user();
         if ($user->isAdmin()) {
-            var_dump($file_name);
-
             $letter = DischargeLetter::where('file_name', $file_name)->first();
 
             $file = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($letter->link);
 
             $response = response()->download($file, $letter->file_name, ['Content-Type:' . $letter->MIME]);
-
-            ob_end_clean();
 
             return $response;
         }

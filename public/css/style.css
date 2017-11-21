@@ -56,6 +56,11 @@ body > .container {
 
 .container .text-muted {
     margin: 20px 0;
+    color: #8c8c8c;
+}
+
+.text-muted-footer {
+    margin: 20px 0;
     color: #ffffff;
 }
 
