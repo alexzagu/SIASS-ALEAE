@@ -128,6 +128,14 @@ class PartnerController extends Controller
     {
         $user = auth()->user();
         if ($user->isPartner()) {
+            $userInfo = $user->userInfo;
+
+            $defaultPasswordChanged = $userInfo->defaultPasswordChanged;
+
+            if ($defaultPasswordChanged == 0) {
+                return view('pages.partner.changeDefaultPassword')->with(['user' => $user, 'userInfo' => $userInfo]);
+            }
+
             return view('pages.partner.registerStudentToSocialService');
         }
         else {
@@ -311,10 +319,16 @@ class PartnerController extends Controller
     {
         $user = auth()->user();
         if ($user->isPartner()) {
-            //$services = SocialService::select('id', 'name')->where('partner_id', $user->id);
+            $userInfo = $user->userInfo;
+
+            $defaultPasswordChanged = $userInfo->defaultPasswordChanged;
+
+            if ($defaultPasswordChanged == 0) {
+                return view('pages.partner.changeDefaultPassword')->with(['user' => $user, 'userInfo' => $userInfo]);
+            }
+
             $services = SocialService::select('id', 'name')->where('partner_id',
                 $user->id)->get();
-            //$services = SocialService::all();
             return view('pages.partner.certifyStudentHours')->with(['user' => $user, 'services' => $services]);
         }
         else {
@@ -373,6 +387,14 @@ class PartnerController extends Controller
     public function dropStudent(Request $request) {
         $user = auth()->user();
         if ($user->isPartner()) {
+            $userInfo = $user->userInfo;
+
+            $defaultPasswordChanged = $userInfo->defaultPasswordChanged;
+
+            if ($defaultPasswordChanged == 0) {
+                return view('pages.partner.changeDefaultPassword')->with(['user' => $user, 'userInfo' => $userInfo]);
+            }
+
             $services = SocialService::select('id', 'name')->where('partner_id',
                 $user->id)->get();
 

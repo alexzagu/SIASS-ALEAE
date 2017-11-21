@@ -43,7 +43,6 @@
                     <li class="active"><a href="/partner/register-student-to-social-service">Registrar estudiante a servicio social</a></li>
                     <li class="active"><a href="/partner/certify-student-hours">Acreditar horas a alumno</a></li>
                     <li class="active"><a href="/partner/drop-student">Dar de baja alumno</a></li>
-                    <li><a href="/admin/reports">Reportes</a></li>
                 @endif
             </ul>
             @if (auth()->user())

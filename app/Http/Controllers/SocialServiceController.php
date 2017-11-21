@@ -40,6 +40,15 @@ class SocialServiceController extends Controller
     {
         $user = auth()->user();
         if ($user->isAdmin() || $user->isPartner()) {
+            if ($user->isPartner()) {
+                $userInfo = $user->userInfo;
+
+                $defaultPasswordChanged = $userInfo->defaultPasswordChanged;
+
+                if ($defaultPasswordChanged == 0) {
+                    return view('pages.partner.changeDefaultPassword')->with(['user' => $user, 'userInfo' => $userInfo]);
+                }
+            }
             $partners = Partner::all();
             $periods = Period::orderBy('id', 'desc')->get();
 
