@@ -39,17 +39,15 @@ class SocialServiceController extends Controller
     public function create()
     {
         $user = auth()->user();
+        if ($user->isAdmin() || $user->isPartner()) {
+            $partners = Partner::all();
+            $periods = Period::orderBy('id', 'desc')->get();
 
-        //$partners = DB::table('users')
-            //->join('partners', 'users.id', '=', 'partners.user_id')
-            //->select('users.*', 'partners.partnerName')
-            //->get();
-
-        $partners = Partner::all();
-        $periods = Period::orderBy('id', 'desc')->get();
-
-        return view('pages.partner.registerSocialService')->with(['user' => $user, 'partners' => $partners, 'periods' => $periods]);
-
+            return view('pages.partner.registerSocialService')->with(['user' => $user, 'partners' => $partners, 'periods' => $periods]);
+        }
+        else {
+            return redirect()->back()->with(['fail' => 'La página que solicitó no puede ser accedida.']);
+        }
     }
 
     /**
@@ -62,14 +60,19 @@ class SocialServiceController extends Controller
     public function confirm(Request $request) {
 
         $user = auth()->user();
-        $input = $request->all();
+        if ($user->isAdmin() || $user->isPartner()) {
+            $input = $request->all();
 
-        $sensibilization = $request->sensibilization;
+            $sensibilization = $request->sensibilization;
 
-        if ($sensibilization == null) {
-            return redirect()->back()->withInput()->withErrors(['no_competence_selected' => 'Necesita seleccionar al menos una competencia']);
-        } else {
-            return view('pages.user.confirmSocialService')->with(['user' => $user, 'input' => $input]);
+            if ($sensibilization == null) {
+                return redirect()->back()->withInput()->withErrors(['no_competence_selected' => 'Necesita seleccionar al menos una competencia']);
+            } else {
+                return view('pages.user.confirmSocialService')->with(['user' => $user, 'input' => $input]);
+            }
+        }
+        else {
+            return redirect()->back()->with(['fail' => 'La página que solicitó no puede ser accedida.']);
         }
     }
 
@@ -86,78 +89,81 @@ class SocialServiceController extends Controller
         }
 
         $user = auth()->user();
+        if ($user->isAdmin() || $user->isPartner()) {
+            $id = str_random(11);
 
-        $id = str_random(11);
+            $partnerid = $user -> id;
 
-        $partnerid = $user -> id;
+            $sensibilization = $request->sensibilization;
 
-        $sensibilization = $request->sensibilization;
+            $ethical_recognition = false;
+            $empathy = false;
+            $moral_judgement = false;
 
-        $ethical_recognition = false;
-        $empathy = false;
-        $moral_judgement = false;
+            foreach($sensibilization as $selected) {
+                switch ($selected) {
+                    case 'Reconocimiento ético':
+                        $ethical_recognition = true;
+                        break;
+                    case 'Empatía':
+                        $empathy = true;
+                        break;
+                    case 'Juicio moral':
+                        $moral_judgement = true;
+                        break;
+                }
+            }
 
-        foreach($sensibilization as $selected) {
-            switch ($selected) {
-                case 'Reconocimiento ético':
-                    $ethical_recognition = true;
-                    break;
-                case 'Empatía':
-                    $empathy = true;
-                    break;
-                case 'Juicio moral':
-                    $moral_judgement = true;
-                    break;
+
+            if($user->isAdmin()){
+                $partnerid = $request->get('partner_id');
+            }
+
+            $socialService = SocialService::create([
+                'id' => $id,
+                'partner_id' => $partnerid,
+                'name' => $request->name,
+                'description' => $request->description,
+                'totalHours' => $request->totalHours,
+                'address' => $request->address,
+                'managerName' => $request->managerName,
+                'managerMail' => $request->managerMail,
+                'managerPhone' => $request->managerPhone,
+                'capability' => $request->capability,
+                'currentCapability' => 0,
+                'startDate' => Carbon::parse($request->startDate)->toDateString(),
+                'endDate' => Carbon::parse($request->endDate)->toDateString(),
+                'type' => 'SSC',
+                'social_cause' => $request->social_cause,
+                'period' => $request->period,
+                'campus' => $request->campus
+            ]);
+
+            $sensibilizationRecord = Sensibilization::create([
+                    'social_service_id' => $socialService->id,
+                    'ethical_recognition' => $ethical_recognition,
+                    'empathy' => $empathy,
+                    'moral_judgement' => $moral_judgement
+            ]);
+
+            if ($user->isAdmin()){
+                if ($socialService && $sensibilizationRecord) {
+                    return redirect('admin/home')->with('success', 'Se ha registrado el nuevo servicio social con éxito');
+                } else {
+                    return redirect('admin/home')->with('fail', 'Ha ocurrido un error al registrar el servicio social. Favor de intentar de nuevo');
+                }
+            }
+            else{
+                if ($socialService && $sensibilizationRecord) {
+                    return redirect('/partner/home')->with('success', 'Se ha registrado el nuevo servicio social con éxito');
+                } else {
+                    return redirect('/partner/home')->with('fail', 'Ha ocurrido un error al registrar el servicio social. Favor de intentar de nuevo');
+                }
             }
         }
-
-
-        if($user->isAdmin()){
-            $partnerid = $request->get('partner_id');
+        else {
+            return redirect()->back()->with(['fail' => 'La página que solicitó no puede ser accedida.']);
         }
-
-        $socialService = SocialService::create([
-            'id' => $id,
-            'partner_id' => $partnerid,
-            'name' => $request->name,
-            'description' => $request->description,
-            'totalHours' => $request->totalHours,
-            'address' => $request->address,
-            'managerName' => $request->managerName,
-            'managerMail' => $request->managerMail,
-            'managerPhone' => $request->managerPhone,
-            'capability' => $request->capability,
-            'currentCapability' => 0,
-            'startDate' => Carbon::parse($request->startDate)->toDateString(),
-            'endDate' => Carbon::parse($request->endDate)->toDateString(),
-            'type' => 'SSC',
-            'social_cause' => $request->social_cause,
-            'period' => $request->period,
-            'campus' => $request->campus
-        ]);
-
-        $sensibilizationRecord = Sensibilization::create([
-                'social_service_id' => $socialService->id,
-                'ethical_recognition' => $ethical_recognition,
-                'empathy' => $empathy,
-                'moral_judgement' => $moral_judgement
-        ]);
-
-        if ($user->isAdmin()){
-            if ($socialService && $sensibilizationRecord) {
-                return redirect('admin/home')->with('success', 'Se ha registrado el nuevo servicio social con éxito');
-            } else {
-                return redirect('admin/home')->with('fail', 'Ha ocurrido un error al registrar el servicio social. Favor de intentar de nuevo');
-            }
-        }
-        else{
-            if ($socialService && $sensibilizationRecord) {
-                return redirect('/partner/home')->with('success', 'Se ha registrado el nuevo servicio social con éxito');
-            } else {
-                return redirect('/partner/home')->with('fail', 'Ha ocurrido un error al registrar el servicio social. Favor de intentar de nuevo');
-            }
-        }
-
     }
 
     /**

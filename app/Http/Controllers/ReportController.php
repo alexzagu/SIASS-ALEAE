@@ -9,48 +9,56 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request) {
+        $user = auth()->user();
+        if ($user->isAdmin()) {
+            if (isset($request->category)) {
 
-        //dd($request);
+                $category = $request->category;
 
-        if (isset($request->category)) {
+                $filters = $request->request->all();
 
-            $category = $request->category;
+                switch ($category) {
+                    case 'student':
+                        $query = $this->filterStudent($filters);
 
-            $filters = $request->request->all();
+                        if (count($query) > 0) {
+                            return view('pages.admin.reports')->with(['results' => $query, 'category' => $category]);
+                        } else {
+                            return redirect()->back()->with(['fail' => 'No se ha encontrado ningún registro con los filtros seleccionados.']);
+                        }
 
-            switch ($category) {
-                case 'student':
-                    $query = $this->filterStudent($filters);
+                        break;
+                    case 'partner':
+                        $query = $this->filterPartner($filters);
 
-                    if (count($query) > 0) {
-                        return view('pages.admin.reports')->with(['results' => $query, 'category' => $category]);
-                    } else {
-                        return redirect()->back()->with(['fail' => 'No se ha encontrado ningún registro con los filtros seleccionados.']);
-                    }
+                        if (count($query) > 0) {
+                            return view('pages.admin.reports')->with(['results' => $query, 'category' => $category]);
+                        } else {
+                            return redirect()->back()->with(['fail' => 'No se ha encontrado ningún registro con los filtros seleccionados.']);
+                        }
+                        break;
+                    case 'social_service':
+                        $query = $this->filterSocialService($filters);
 
-                    break;
-                case 'partner':
-                    $query = $this->filterPartner($filters);
-
-                    if (count($query) > 0) {
-                        return view('pages.admin.reports')->with(['results' => $query, 'category' => $category]);
-                    } else {
-                        return redirect()->back()->with(['fail' => 'No se ha encontrado ningún registro con los filtros seleccionados.']);
-                    }
-                    break;
-                case 'social_service':
-                    $query = $this->filterSocialService($filters);
-
-                    if (count($query) > 0) {
-                        return view('pages.admin.reports')->with(['results' => $query, 'category' => $category]);
-                    } else {
-                        return redirect()->back()->with(['fail' => 'No se ha encontrado ningún registro con los filtros seleccionados.']);
-                    }
-                    break;
+                        if (count($query) > 0) {
+                            return view('pages.admin.reports')->with(['results' => $query, 'category' => $category]);
+                        } else {
+                            return redirect()->back()->with(['fail' => 'No se ha encontrado ningún registro con los filtros seleccionados.']);
+                        }
+                        break;
+                }
+            } else {
+                return view('pages.admin.reports');
             }
-        } else {
-            return view('pages.admin.reports');
+        }
+        else {
+            return redirect()->back()->with(['fail' => 'La página que solicitó no puede ser accedida.']);
         }
     }
 

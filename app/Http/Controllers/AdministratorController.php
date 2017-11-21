@@ -319,7 +319,6 @@ class AdministratorController extends Controller
         }
     }
 
-
     /**
      * Display the specified resource.
      *

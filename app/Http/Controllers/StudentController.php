@@ -21,11 +21,16 @@ class StudentController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $userInfo = $user->userInfo;
-        $totalCertifiedHoursSS = $userInfo->totalCertifiedHoursSS();
-        $totalRegisteredHoursSS = $userInfo->totalRegisteredHoursSS();
-        return view('pages.user.home')->with(['user' => $user, 'userInfo' => $userInfo,
-        'totalCertifiedHoursSS' => $totalCertifiedHoursSS, 'totalRegisteredHoursSS' => $totalRegisteredHoursSS]);
+        if ($user->isStudent()) {
+            $userInfo = $user->userInfo;
+            $totalCertifiedHoursSS = $userInfo->totalCertifiedHoursSS();
+            $totalRegisteredHoursSS = $userInfo->totalRegisteredHoursSS();
+            return view('pages.user.home')->with(['user' => $user, 'userInfo' => $userInfo,
+            'totalCertifiedHoursSS' => $totalCertifiedHoursSS, 'totalRegisteredHoursSS' => $totalRegisteredHoursSS]);
+        }
+        else {
+            return redirect()->back()->with(['fail' => 'La página que solicitó no puede ser accedida.']);
+        }
     }
 
     /**
@@ -84,23 +89,28 @@ class StudentController extends Controller
     }
 
     public function updateInductionRec(Request $request, $id) {
+        $user = auth()->user();
+        if ($user->isAdmin()) {
+            $student = Student::find($id);
 
-        $student = Student::find($id);
+            $induction = $request->input('introductionCourseCertified')  == 'on'? 1 : 0;
+            $rec = $request->input('recCourseCertified') == 'on' ? 1 : 0;
 
-        $induction = $request->input('introductionCourseCertified')  == 'on'? 1 : 0;
-        $rec = $request->input('recCourseCertified') == 'on' ? 1 : 0;
+            $data = [
+                'recCourseCertified' => $rec,
+                'introductionCourseCertified' => $induction
+            ];
 
-        $data = [
-            'recCourseCertified' => $rec,
-            'introductionCourseCertified' => $induction
-        ];
+            $updated = $student->fill($data)->save();
 
-        $updated = $student->fill($data)->save();
-
-        if ($updated) {
-            return redirect()->back()->with(['success' => 'La información del alumno '.$student->user->name.' ha sido actualizada con éxito.']);
-        } else {
-            return redirect()->back()->with(['fail' => 'La información del alumno '.$student->user->name.' no ha sido actualizada con éxito. Favor de intentar más tarde.']);
+            if ($updated) {
+                return redirect()->back()->with(['success' => 'La información del alumno '.$student->user->name.' ha sido actualizada con éxito.']);
+            } else {
+                return redirect()->back()->with(['fail' => 'La información del alumno '.$student->user->name.' no ha sido actualizada con éxito. Favor de intentar más tarde.']);
+            }
+        }
+        else {
+            return redirect()->back()->with(['fail' => 'La página que solicitó no puede ser accedida.']);
         }
     }
 
@@ -112,10 +122,16 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        $student = Student::find($id);
-        $student->delete();
+        $user = auth()->user();
+        if ($user->isAdmin()) {
+            $student = Student::find($id);
+            $student->delete();
 
-        return redirect()->back()->with('success', 'Se ha dado de baja al alumno');
+            return redirect()->back()->with('success', 'Se ha dado de baja al alumno.');
+        }
+        else {
+            return redirect()->back()->with(['fail' => 'La página que solicitó no puede ser accedida.']);
+        }
     }
 
     /**
@@ -126,9 +142,15 @@ class StudentController extends Controller
      */
     public function restore( $id )
     {
-        $student = Student::withTrashed()->where('user_id', '=', $id)->first();
-        $student->restore();
+        $user = auth()->user();
+        if ($user->isAdmin()) {
+            $student = Student::withTrashed()->where('user_id', '=', $id)->first();
+            $student->restore();
 
-        return redirect()->back()->with('success', 'Se ha dado de alta al alumno');
+            return redirect()->back()->with('success', 'Se ha dado de alta al alumno.');
+        }
+        else {
+            return redirect()->back()->with(['fail' => 'La página que solicitó no puede ser accedida.']);
+        }
     }
 }

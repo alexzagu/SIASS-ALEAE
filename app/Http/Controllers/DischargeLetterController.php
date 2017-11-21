@@ -45,39 +45,45 @@ class DischargeLetterController extends Controller
      */
     public function store(Request $request)
     {
-        $student_service_id = $request->student_service_id;
+        $user = auth()->user();
+        if ($user->isAdmin()) {
+            $student_service_id = $request->student_service_id;
 
-        if ($request->hasFile('file')) {
+            if ($request->hasFile('file')) {
 
-            $file_name = $request->file('file')->getClientOriginalName();
-            $file = $request->file('file');
+                $file_name = $request->file('file')->getClientOriginalName();
+                $file = $request->file('file');
 
-            $url = $file->store('discharge_letters');
+                $url = $file->store('discharge_letters');
 
-            if ($url) {
+                if ($url) {
 
-                $uploaded_file = DischargeLetter::create([
-                    'student_service_id' => $student_service_id,
-                    'file_name' => $file_name,
-                    'link' => $url,
-                    'MIME' => $file->getMimeType(),
-                    'uploaded_at' => now()
-                ]);
+                    $uploaded_file = DischargeLetter::create([
+                        'student_service_id' => $student_service_id,
+                        'file_name' => $file_name,
+                        'link' => $url,
+                        'MIME' => $file->getMimeType(),
+                        'uploaded_at' => now()
+                    ]);
 
-                $service = StudentService::find($student_service_id)->first();
+                    $service = StudentService::find($student_service_id)->first();
 
-                $service->dischargeLetter = $file_name;
-                $service->save();
+                    $service->dischargeLetter = $file_name;
+                    $service->save();
 
-                if ($uploaded_file) {
-                    return redirect()->back()->with('success', 'La carta finiquito ha sido guardad con éxito');
-                } else {
-                    return redirect()->back()->with('fail', 'Ha habido un problema al guardar la carta finiquito.');
+                    if ($uploaded_file) {
+                        return redirect()->back()->with('success', 'La carta finiquito ha sido guardad con éxito');
+                    } else {
+                        return redirect()->back()->with('fail', 'Ha habido un problema al guardar la carta finiquito.');
+                    }
                 }
-            }
 
-        } else {
-            return redirect()->back()->with('fail', 'No se ha proporcionado ningún archivo para guardar.');
+            } else {
+                return redirect()->back()->with('fail', 'No se ha proporcionado ningún archivo para guardar.');
+            }
+        }
+        else {
+            return redirect()->back()->with(['fail' => 'La página que solicitó no puede ser accedida.']);
         }
     }
 
@@ -123,33 +129,44 @@ class DischargeLetterController extends Controller
      */
     public function destroy($file_name)
     {
-        $file = $discharge_letter = DischargeLetter::where('file_name', $file_name)->first();
+        $user = auth()->user();
+        if ($user->isAdmin()) {
+            $file = $discharge_letter = DischargeLetter::where('file_name', $file_name)->first();
 
-        $file_deleted = Storage::delete($file->link);
-        $student_service = StudentService::find($discharge_letter->student_service_id)->first();
-        $student_service->dischargeLetter = "";
-        $student_service->save();
-        $record_deleted = $file->delete();
+            $file_deleted = Storage::delete($file->link);
+            $student_service = StudentService::find($discharge_letter->student_service_id)->first();
+            $student_service->dischargeLetter = "";
+            $student_service->save();
+            $record_deleted = $file->delete();
 
-        if ($file_deleted && $record_deleted) {
-            return redirect()->back()->with('success', 'La carta finiquito ha sido borrada con éxito');
-        } else {
-            return redirect()->back()->with('fail', 'Ha habido un error al querer eliminar la carta finiquito del sistema.');
+            if ($file_deleted && $record_deleted) {
+                return redirect()->back()->with('success', 'La carta finiquito ha sido borrada con éxito');
+            } else {
+                return redirect()->back()->with('fail', 'Ha habido un error al querer eliminar la carta finiquito del sistema.');
+            }
+        }
+        else {
+            return redirect()->back()->with(['fail' => 'La página que solicitó no puede ser accedida.']);
         }
     }
 
     public function download($file_name) {
+        $user = auth()->user();
+        if ($user->isAdmin()) {
+            var_dump($file_name);
 
-        var_dump($file_name);
+            $letter = DischargeLetter::where('file_name', $file_name)->first();
 
-        $letter = DischargeLetter::where('file_name', $file_name)->first();
+            $file = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($letter->link);
 
-        $file = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($letter->link);
+            $response = response()->download($file, $letter->file_name, ['Content-Type:' . $letter->MIME]);
 
-        $response = response()->download($file, $letter->file_name, ['Content-Type:' . $letter->MIME]);
+            ob_end_clean();
 
-        ob_end_clean();
-
-        return $response;
+            return $response;
+        }
+        else {
+            return redirect()->back()->with(['fail' => 'La página que solicitó no puede ser accedida.']);
+        }
     }
 }
