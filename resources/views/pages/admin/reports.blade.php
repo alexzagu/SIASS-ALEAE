@@ -65,7 +65,7 @@
                     <table class="table">
                         @foreach($results as $result)
                             <tr>
-                                <td>{{ $result->user_id }}</td>
+                                <td>{{ $result->name }}</td>
                             </tr>
                         @endforeach
                     </table>
