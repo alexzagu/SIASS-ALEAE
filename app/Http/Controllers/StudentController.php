@@ -123,7 +123,7 @@ class StudentController extends Controller
     public function destroy($id)
     {
         $user = auth()->user();
-        if ($user->isAdmin()) {
+        if ($user->isPartner()) {
             $student = Student::find($id);
             $student->delete();
 
@@ -143,7 +143,7 @@ class StudentController extends Controller
     public function restore( $id )
     {
         $user = auth()->user();
-        if ($user->isAdmin()) {
+        if ($user->isPartner()) {
             $student = Student::withTrashed()->where('user_id', '=', $id)->first();
             $student->restore();
 
