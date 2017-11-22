@@ -466,9 +466,11 @@ class PartnerController extends Controller
     public function destroy($id)
     {
         $user = auth()->user();
-        if ($user->isPartner()) {
+        if ($user->isAdmin()) {
             $partner = Partner::find($id);
             $partner->delete();
+            $partner_user = User::find($id);
+            $partner_user->delete();
 
             return redirect()->back()->with('success', 'Se ha dado de baja al socio formador');
         }
@@ -484,14 +486,17 @@ class PartnerController extends Controller
      * @return Response
      */
 
-    public function restore( $id )
+    public function restore($id)
     {
         $user = auth()->user();
-        if ($user->isPartner()) {
+        if ($user->isAdmin()) {
             $partner = Partner::withTrashed()->where('user_id', '=', $id)->first();
 
             //Restauramos el registro
             $partner->restore();
+
+            $partner_user = User::withTrashed()->where('id', $partner->user_id)->first();
+            $partner_user->restore();
 
             return redirect()->back()->with('success', 'Se ha dado de alta al socio formador');
         }
