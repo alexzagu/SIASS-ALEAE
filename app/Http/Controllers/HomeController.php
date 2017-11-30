@@ -13,6 +13,11 @@ class HomeController extends Controller
         //$this->middleware('guest');
     }
 
+    /**
+     * Checks if the user is authenticated and if so redirects to home, if not, redirects to login.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request) {
         if(Auth::check())
             return redirect('/user');

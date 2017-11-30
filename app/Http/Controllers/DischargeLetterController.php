@@ -28,7 +28,7 @@ class DischargeLetterController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for uploading a discharge letter.
      *
      * @return \Illuminate\Http\Response
      */
@@ -38,7 +38,7 @@ class DischargeLetterController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Stores the discharge letter of a student if the session belongs to an admininstrator.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -122,9 +122,9 @@ class DischargeLetterController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Destroys the discharge letter of a student if the session belongs to an admininstrator.
      *
-     * @param  int  $id
+     * @param  string  $file_name
      * @return \Illuminate\Http\Response
      */
     public function destroy($file_name)
@@ -150,6 +150,12 @@ class DischargeLetterController extends Controller
         }
     }
 
+    /**
+     * Downloads the discharge letter of a student if the session belongs to an admininstrator.
+     *
+     * @param  string  $file_name
+     * @return \Illuminate\Http\Response
+     */
     public function download($file_name) {
         $user = auth()->user();
         if ($user->isAdmin()) {

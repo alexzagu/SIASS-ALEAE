@@ -14,6 +14,12 @@ class ReportController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Shows the reports form if the session belongs to an administrator.
+     *
+     * @param \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request) {
         $user = auth()->user();
         if ($user->isAdmin()) {
@@ -62,6 +68,12 @@ class ReportController extends Controller
         }
     }
 
+    /**
+     * Returns a set of filtered students.
+     *
+     * @param set  $filters
+     * @return \Illuminate\Http\Response
+     */
     private function filterStudent($filters) {
         $query = Student::all();
 
@@ -104,6 +116,12 @@ class ReportController extends Controller
         return $query;
     }
 
+    /**
+     * Returns a set of filtered partners.
+     *
+     * @param set  $filters
+     * @return \Illuminate\Http\Response
+     */
     private function filterPartner($filters) {
         $query = Partner::all();
 
@@ -114,6 +132,12 @@ class ReportController extends Controller
         return $query;
     }
 
+    /**
+     * Returns a set of filtered social services.
+     *
+     * @param set  $filters
+     * @return \Illuminate\Http\Response
+     */
     private function filterSocialService($filters) {
         $query = SocialService::all();
 

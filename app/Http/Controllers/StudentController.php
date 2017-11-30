@@ -14,7 +14,7 @@ class StudentController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Returns the student's home page if the session belongs to such user type.
      *
      * @return \Illuminate\Http\Response
      */
@@ -88,6 +88,13 @@ class StudentController extends Controller
 
     }
 
+    /**
+     * Update the induction course information of a student if the session belongs to ad administrator.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $id
+     * @return \Illuminate\Http\Response
+     */
     public function updateInductionRec(Request $request, $id) {
         $user = auth()->user();
         if ($user->isAdmin()) {
@@ -115,9 +122,9 @@ class StudentController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Soft delete a student if the session belongs to a partner.
      *
-     * @param  int  $id
+     * @param  string  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -135,9 +142,9 @@ class StudentController extends Controller
     }
 
     /**
-     * restore the specified resource to storage.
+     * Removes the soft delete status from a student if the session belongs to a partner.
      *
-     * @param  int  $id
+     * @param  string  $id
      * @return Response
      */
     public function restore( $id )

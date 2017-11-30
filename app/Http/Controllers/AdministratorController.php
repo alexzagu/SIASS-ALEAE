@@ -17,7 +17,7 @@ class AdministratorController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Returns the admininstrator's home page if the session belongs to such user type.
      *
      * @return \Illuminate\Http\Response
      */
@@ -52,7 +52,7 @@ class AdministratorController extends Controller
     }
 
     /**
-     * Show the form for registering a student to a social service.
+     * Show the form for registering a student to a social service if the session belongs to an administrator.
      *
      * @return \Illuminate\Http\Response
      */
@@ -67,7 +67,7 @@ class AdministratorController extends Controller
     }
 
     /**
-     * Create a new StudentService object and store it.
+     * Create a new StudentService object and store it if the session belongs to an admininstrator.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -138,6 +138,12 @@ class AdministratorController extends Controller
         }
     }
 
+    /**
+     * Certify the induction course of a specific student if the session belongs to an administrator.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function certifyStudentInductionCourse(Request $request) {
         $userAuth = auth()->user();
         if ($userAuth->isAdmin()) {
@@ -160,6 +166,12 @@ class AdministratorController extends Controller
         }
     }
 
+    /**
+     * Returns the form for updating a partner's info if the session belongs to an administrator.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function updatePartnerForm(Request $request){
         $userAuth = auth()->user();
         if ($userAuth->isAdmin()) {
@@ -182,6 +194,12 @@ class AdministratorController extends Controller
         }
     }
 
+    /**
+     * Returns the form for unsubscribing a partner if the session belongs to an administrator.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function unsubscribePartner(Request $request) {
         $userAuth = auth()->user();
         if ($userAuth->isAdmin()) {
@@ -204,6 +222,12 @@ class AdministratorController extends Controller
         }
     }
 
+    /**
+     * Returns the page for displaying a student's info if the session belongs to an administrator.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function showStudentInfoForm(Request $request) {
         $userAuth = auth()->user();
         if ($userAuth->isAdmin()) {
@@ -230,6 +254,11 @@ class AdministratorController extends Controller
         }
     }
 
+    /**
+     * Returns the form for certifying hours to a student if the session belongs to an administrator.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function createHoursCertificationForm()
     {
         $userAuth = auth()->user();
@@ -243,18 +272,36 @@ class AdministratorController extends Controller
         }
     }
 
+    /**
+     * Get a filtered set of social services.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function filterSocialServices(Request $request)
     {
         $services = SocialService::select('id', 'name')->where('partner_id', $request->id)->get();
         return response()->json($services);
     }
 
+    /**
+     * Get a filtered set of students.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function filterStudents(Request $request)
     {
         $students = StudentService::select('id', 'user_id', 'studentName')->where('service_id', $request->id)->get();
         return response()->json($students);
     }
 
+    /**
+     * Certify hours to a student if the session belongs to an administrator.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function certifyStudentHours(Request $request) {
         $userAuth = auth()->user();
         if ($userAuth->isAdmin()) {
@@ -296,6 +343,12 @@ class AdministratorController extends Controller
         }
     }
 
+    /**
+     * Uploads the discharge letter of a specific student if the session belongs to an administrator.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function uploadDischargeLetter(Request $request) {
         $userAuth = auth()->user();
         if ($userAuth->isAdmin()) {
