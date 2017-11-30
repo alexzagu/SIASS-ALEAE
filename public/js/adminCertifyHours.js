@@ -1,9 +1,8 @@
+// Get the filtered social services using ajax and append them to the html
 $(document).ready(function(){
     $(document).on('change', '.partner', function(){
-        //console.log("Partner Change")
 
         var partner_id = $(this).val();
-        //console.log(id)
         var div = $(this).parent().parent();
         var op = " ";
         div.find('.student').html("");
@@ -13,9 +12,6 @@ $(document).ready(function(){
             url: 'filter-social-services',
             data: {'id':partner_id},
             success:function (data) {
-                //console.log('success');
-                //console.log(data);
-                //console.log(data.length)
                 if(data.length <= 0) {
                     op += '<option value="">No Services Registered</option>'
                 }else{
@@ -32,9 +28,10 @@ $(document).ready(function(){
             }
         });
     });
+
+    // Get the filtered students using ajax and append them to the html
     $(document).on('change', '.service', function() {
         var service_id = $(this).val();
-        //console.log(id)
         var div = $(this).parent().parent();
         var op = " ";
         console.log(service_id);

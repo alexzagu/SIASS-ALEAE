@@ -1,3 +1,4 @@
+// Get the filtered students using ajax and append them to the html
 $(document).ready(function(){
     $(document).on('change', '.service', function() {
         var service_id = $(this).val();

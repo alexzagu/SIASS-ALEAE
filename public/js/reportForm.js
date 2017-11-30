@@ -1,3 +1,4 @@
+// Get the filtered set of objecst using ajax.
 $(document).ready(function(){
     let form = $('#searchForm');
     let category = $('#category');
