@@ -44,8 +44,8 @@
                             <td><input type="text" name="partnerAddress" value="{{$partner->partnerAddress}}"></td>
                             <td><input type="email" name="partnerEmail" value="{{$partner->partnerEmail}}"></td>
                             <td><input type="text" name="managerName" value="{{$partner->managerName}}"></td>
-                            <td><input type="email" name="managerMail" value="{{$partner->managerMail}}"></td>
-                            <td><input type="text" name="managerPhone" value="{{$partner->managerPhone}}"></td>
+                            <td><input type="email" name="managerMail" value="{{$partner->managerPhone}}"></td>
+                            <td><input type="text" name="managerPhone" value="{{$partner->managerMail}}"></td>
                         </tr>
                     </table>
                 </div>
