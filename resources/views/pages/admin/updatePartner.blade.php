@@ -36,16 +36,16 @@
                             <th>Dirección de la Asociación</th>
                             <th>Correo de la Asociación</th>
                             <th>Nombre del Encargado</th>
-                            <th>Teléfono del Encargado</th>
                             <th>Correo del Encargado</th>
+                            <th>Teléfono del Encargado</th>
                         </tr>
                         <tr>
                             <td><input type="text" name="partnerName" value="{{$partner->partnerName}}"></td>
                             <td><input type="text" name="partnerAddress" value="{{$partner->partnerAddress}}"></td>
                             <td><input type="email" name="partnerEmail" value="{{$partner->partnerEmail}}"></td>
                             <td><input type="text" name="managerName" value="{{$partner->managerName}}"></td>
-                            <td><input type="email" name="managerMail" value="{{$partner->managerPhone}}"></td>
-                            <td><input type="text" name="managerPhone" value="{{$partner->managerMail}}"></td>
+                            <td><input type="email" name="managerMail" value="{{$partner->managerMail}}"></td>
+                            <td><input type="text" name="managerPhone" value="{{$partner->managerPhone}}"></td>
                         </tr>
                     </table>
                 </div>
