@@ -11,6 +11,11 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Gets the information of the user and redirects according to role.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index() {
         $user = auth()->user();
 

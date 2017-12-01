@@ -32,7 +32,8 @@ class SocialServiceController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new social service if the session belongs to an administrator or a partner.
+     * If it's a partner, it also checks if its password has been changed already.
      *
      * @return \Illuminate\Http\Response
      */
@@ -60,7 +61,7 @@ class SocialServiceController extends Controller
     }
 
     /**
-     * Confirms the information passed on the create form before creating a new entry en database
+     * Confirms the information passed on the create form before creating a new entry en database if the session belongs to an administrator or a partner.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -86,7 +87,7 @@ class SocialServiceController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created social service object if the session belongs to an administrator or a partner.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

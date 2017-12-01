@@ -14,7 +14,7 @@ use Carbon\Carbon;
 class PartnerController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Returns the partner's home page if the session belongs to such user type.
      *
      * @return \Illuminate\Http\Response
      */
@@ -39,7 +39,7 @@ class PartnerController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Creates the form for registering a new partner if the session belongs to an administrator.
      *
      * @return \Illuminate\Http\Response
      */
@@ -55,7 +55,7 @@ class PartnerController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Stores a new partner if the session belongs to an admininstrator.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -120,7 +120,7 @@ class PartnerController extends Controller
     }
 
     /**
-     * Show the form for registering a student to a social service
+     * Show the form for registering a student to a social service if the session belongs to a partner.
      *
      * @return \Illuminate\Http\Response
      */
@@ -144,7 +144,7 @@ class PartnerController extends Controller
     }
 
     /**
-     * Show the form for changing a Partner's default password
+     * Show the form for changing a Partner's default password if the session belongs to a partner.
      *
      * @return \Illuminate\Http\Response
      */
@@ -160,7 +160,7 @@ class PartnerController extends Controller
     }
 
     /**
-     * Changes a Partner's default password
+     * Changes a partner's default password if the session belongs to a partner.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -211,7 +211,7 @@ class PartnerController extends Controller
     }
 
     /**
-     * Create a new StudentService object and store it.
+     * Create a new StudentService object and store it if the session belongs to a partner.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -281,6 +281,13 @@ class PartnerController extends Controller
         }
     }
 
+    /**
+     * Updates the information of a partner if the session belongs to an administrator.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param string $id
+     * @return \Illuminate\Http\Response
+     */
     public function updatePartner(Request $request, $id) {
         $user = auth()->user();
         if ($user->isAdmin()) {
@@ -315,6 +322,11 @@ class PartnerController extends Controller
         }
     }
 
+    /**
+     * Returns the form for certifying hours to a student if the session belongs to an partner and the partner has changed its password.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function createHoursCertificationForm()
     {
         $user = auth()->user();
@@ -336,6 +348,11 @@ class PartnerController extends Controller
         }
     }
 
+    /**
+     * Returns a filtered set of students.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function filterStudents(Request $request)
     {
         $studentsServices = StudentService::select('id','user_id','studentName')->where('service_id',
@@ -343,6 +360,11 @@ class PartnerController extends Controller
         return response()->json($studentsServices);
     }
 
+    /**
+     * Certify hours to a student if the session belongs to an partner.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function certifyStudentHours(Request $request) {
         $user = auth()->user();
         if ($user->isPartner()) {
@@ -384,6 +406,11 @@ class PartnerController extends Controller
         }
     }
 
+    /**
+     * Takes out a student from a social service if the session belongs to an partner.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function dropStudent(Request $request) {
         $user = auth()->user();
         if ($user->isPartner()) {
@@ -406,7 +433,6 @@ class PartnerController extends Controller
                 $ssaux = StudentService::where('service_id',$id)->get()->first();
                 $studentid = $ssaux->user_id;
                 $student = Student::find($studentid);
-                //dd($student->deleted_at);
                 if ($studentsServices) {
                     return view('pages.partner.dropStudent')->with(['user' => $user, 'services' => $services, 'students' => $studentsServices, 'delete' => $student]);
                 }
@@ -458,9 +484,9 @@ class PartnerController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Soft deletes a partner if the session belongs to an administrator.
      *
-     * @param  int  $id
+     * @param  string  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -480,9 +506,9 @@ class PartnerController extends Controller
     }
 
     /**
-     * restore the specified resource to storage.
+     * Removes the soft delete status of a partner if the session belongs to an administrator.
      *
-     * @param  int  $id
+     * @param  string  $id
      * @return Response
      */
 
