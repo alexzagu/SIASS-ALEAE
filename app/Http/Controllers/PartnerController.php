@@ -77,7 +77,7 @@ class PartnerController extends Controller
                 return redirect()->back()->with('fail', 'La contraseña no coincide con la confirmación, favor de verificarla e intentar de nuevo.')->withInput();
             }
 
-            $user = User::create([
+            $newUser = User::create([
                 'id' => $id,
                 'name' => $request->managerName,
                 'email' => $request->managerMail,
@@ -86,29 +86,29 @@ class PartnerController extends Controller
                 'role' => 'partner'
             ]);
 
-            $userPartner = new Partner();
-            $userPartner -> user_id = $user->id;
-            $userPartner -> partnerName = $request->partnerName;
-            $userPartner -> partnerAddress = $request->partnerAddress;
-            $userPartner -> partnerEmail = $request->partnerEmail;
-            $userPartner -> managerName = $request->managerName;
-            $userPartner -> managerMail = $request->managerMail;
-            $userPartner -> managerPhone = $request->managerPhone;
-            $userPartner -> registeredBy = $userAdmin->id;
-            $userPartner -> defaultPasswordChanged = false;
-            $userPartner -> save();
+            $newPartner = Partner::create([
+                'user_id' => $newUser->id,
+                'partnerName' => $request->partnerName,
+                'partnerAddress' => $request->partnerAddress,
+                'partnerEmail' => $request->partnerEmail,
+                'managerName' => $request->managerName,
+                'managerMail' => $request->managerMail,
+                'managerPhone' => $request->managerPhone,
+                'registeredBy' => $user->userInfo->user_id,
+                'defaultPasswordChanged' => 0
+            ]);
 
-            if ($user && $userPartner) {
+            if ($newUser && $newPartner) {
                 return redirect('/admin/home')->with('success',
-                    'El usuario se ha registrado correctamente con los siguientes datos: username:'.$username." password: ".$request->password);
+                    'El usuario se ha registrado correctamente con los siguientes datos: username: '.$username." password: ".$request->password);
             } else {
 
-                if ($user) {
-                    $user->delete();
+                if ($newUser) {
+                    $newUser->delete();
                 }
 
-                if ($userPartner) {
-                    $userPartner->delete();
+                if ($newPartner) {
+                    $newPartner->delete();
                 }
 
                 return redirect('/admin/home')->with('fail', 'Ha habido un error al registrar al socio. Favor de intentar más tarde.');
